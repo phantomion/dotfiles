@@ -100,7 +100,7 @@ ZSH_THEME="nebirhos"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode autojump)
+plugins=(git vi-mode autojump colored-man-pages colorize command-not-found cp extract)
 [[ -s /home/kwstas/.autojump/etc/profile.d/autojump.sh ]] && source /home/kwstas/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
