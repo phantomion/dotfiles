@@ -5,6 +5,8 @@ fv(){fzf | xargs -r nvim ;} #search and edit
 frm(){fzf | xargs /bin/rm ;} #seek and destroy
 fx(){fzf | xargs -r xdg-open; } #search and open
 
+alias cat=ccat
+alias cp=cpv
 alias hy255='cd ~/Desktop/csd/hy255'
 alias hy225='cd ~/Desktop/csd/hy225'
 alias hy118='cd ~/Desktop/csd/hy118'
@@ -12,7 +14,6 @@ alias v=nvim
 alias desktop='cd ~/Desktop'
 alias downloads='cd ~/Downloads'
 alias firefox='firefox &>/dev/null & disown'
-alias open='xdg-open'
 alias shovelknight='sh ~/GOGGames/ShovelKnightTreasureTrove/start.sh &>/dev/null & disown'
 alias vconf='nvim ~/.config/nvim/init.vim'
 alias zshrc='nvim ~/.zshrc'
@@ -28,6 +29,11 @@ alias sus='systemctl suspend'
 alias hib='systemctl hibernate'
 alias i3c='nvim ~/.config/i3/config'
 alias polc='nvim ~/.config/polybar/config'
+
+xdgopen() {
+    xdg-open $* &>/dev/null & disown
+}
+alias open=xdgopen
 
 startAndDisown() {
     $1 &>/dev/null & disown
@@ -100,7 +106,7 @@ ZSH_THEME="nebirhos"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode autojump colored-man-pages colorize command-not-found cp extract)
+plugins=(git vi-mode autojump colored-man-pages colorize cp extract copydir)
 [[ -s /home/kwstas/.autojump/etc/profile.d/autojump.sh ]] && source /home/kwstas/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
