@@ -1,6 +1,5 @@
 ; =======================
 ; | Polybar config file |
-; | Author: not Risorg  |
 ; =======================
 
 [colors]
@@ -161,9 +160,9 @@ label-mode-padding = 2
 label-mode-background = #e60053
 
 label-focused = %icon%
-label-focused-foreground = ${colors.yellow}
+label-focused-foreground = #FF0000
 label-focused-background = ${colors.background}
-label-focused-underline = ${colors.yellow}
+label-focused-underline = #FF0000
 label-focused-padding = 3
 
 label-unfocused = %icon%
