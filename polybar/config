@@ -87,7 +87,9 @@ padding-left = 1
 padding-right = 1
 
 font-0 = Fantasque Sans Mono:style=Regular:pixelsize=12;2
-font-1 = Ubuntu Nerd Font:pixelsize=12;2
+font-1 = Ubuntu Nerd Font:pixelsize=11;2
+font-2 = Noto Sans:pixelsize=11;2
+font-3 = Droid Sans Mono:style=Regular:pixelsize=11;2
 
 ;=== MODULES ============================================
 module-margin-left = 1
@@ -130,7 +132,7 @@ format = <label>
 format-background = ${colors.background}
 format-foreground = ${colors.foreground}
 label = %date% %time%
-label-font = 1
+label-font = 2
 
 ;=======================================================
 [module/i3]
@@ -227,6 +229,7 @@ blacklist-1 = scroll lock
 format = <label-layout> <label-indicator>
 format-spacing = 0
 label-layout = %layout%
+label-layout-font = 4
 label-layout-background = ${colors.background}
 label-layout-foreground = ${colors.green}
 label-indicator = %name%
@@ -267,10 +270,12 @@ battery = BAT1
 adapter = ACAD
 
 label-charging = %percentage%%
+label-charging-font = 2
 label-charging-background = ${colors.background}
 label-charging-foreground = ${colors.green}
 
 label-discharging = %percentage%%
+label-discharging-font = 2
 label-discharging-background = ${colors.background}
 label-discharging-foreground = ${colors.yellow}
 

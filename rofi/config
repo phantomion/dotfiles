@@ -11,7 +11,8 @@ rofi.lines:                          10
 rofi.columns:                        1
 
 "Font to use" Set from: Default
-rofi.font:                           inconsolata 14
+rofi.font:                           droid sans mono regular 12
+!rofi.font:                           inconsolata 14
 
 "Border width" Set from: Default
 rofi.bw:                             1
