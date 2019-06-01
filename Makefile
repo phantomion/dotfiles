@@ -2,7 +2,7 @@ all: i3 nvim poly zsh rofi
 
 i3:
 	@echo "Getting i3 config"
-	@cp -rf ~/.config/i3/config .
+	@cp -rf ~/.config/i3 .
 
 nvim:
 	@echo "Getting neovim config"
@@ -18,4 +18,4 @@ zsh:
 
 rofi:
 	@echo "Getting rofi config"
-	@cp -rf ~/.config/rofi/config
+	@cp -rf ~/.config/rofi .

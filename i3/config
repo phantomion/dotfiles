@@ -101,9 +101,9 @@ bindsym Mod1+Tab workspace back_and_forth
 bindsym F12 exec flameshot gui
 
 # Media volume controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 #Brightness Controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10

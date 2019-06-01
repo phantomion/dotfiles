@@ -35,6 +35,7 @@ set cindent " stricter rules for C programs
 set splitbelow splitright " Splits open at the bottom and right
 set noshowmode " Don't show the indicator in insert mode.
 set completeopt=longest,menuone,noselect " Improve completion menu
+set undofile
 " set whichwrap+=<,>,h,l
 let g:clipboard = {
       \   'name': 'myClipboard',
@@ -48,7 +49,7 @@ let g:clipboard = {
       \   },
       \   'cache_enabled': 1,
       \ }
-set clipboard+=unnamedplus
+set clipboard+=unnamedplus,unnamed
 
 " Set the backup/undo/swap files to be in /tmp
 set backupdir=/tmp//
