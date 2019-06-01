@@ -1,4 +1,4 @@
-all: i3 nvim poly zsh
+all: i3 nvim poly zsh rofi
 
 i3:
 	@echo "Getting i3 config"
@@ -15,3 +15,7 @@ poly:
 zsh:
 	@echo "Getting oh.my.zsh config"
 	@cp -rf ~/.zshrc .
+
+rofi:
+	@echo "Getting rofi config"
+	@cp -rf ~/.config/rofi/config
