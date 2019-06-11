@@ -9,14 +9,21 @@ Plug 'jiangmiao/auto-pairs' " Auto pairs
 Plug 'scrooloose/nerdcommenter' " Smart comments
 Plug 'tpope/vim-surround' " Surround everything
 Plug 'mattn/emmet-vim'  " html help
+Plug 'rust-lang/rust.vim' " rust lang
+Plug 'ctrlpvim/ctrlp.vim' " vim fuzzy finder
 call plug#end()
 
 map <C-n> :NERDTreeToggle<CR>
 let g:lightline = {'colorscheme': 'molokai'}
 let g:ycm_global_ycm_extra_conf='/home/kwstas/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 let g:user_emmet_leader_key=',' " new leader for emmet
+"---------CtrlP----------
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh
 
-"===== EDITOR =====
+"------EDITOR------
 let mapleader="," " Set the map leader to ,
 set hidden
 set nu " Enable line numbers
@@ -44,8 +51,8 @@ let g:clipboard = {
       \      '*': 'xclip',
       \   },
       \   'paste': {
-      \      '+': 'xsel',
-      \      '*': 'xsel',
+      \      '+': '+',
+      \      '*': '*',
       \   },
       \   'cache_enabled': 1,
       \ }
@@ -89,6 +96,7 @@ vnoremap J L
 
 nnoremap <C-J> J
 nnoremap <F2> K
+nnoremap ; :
 
 " Alt+Direction moves 6 spaces.
 nnoremap <A-h> 5h
@@ -114,11 +122,15 @@ autocmd FileType * inoremap ,for for(int i = 0;;i++){<CR><CR>}<Esc>2kf;a
 autocmd FileType * inoremap ,wh while(){<CR><CR>}<Esc>2kf)i
 autocmd FileType * nnoremap ,cm I/*<Esc>A*/<Esc>
 autocmd FileType * inoremap ,br {<CR>}<Esc>O
-autocmd FileType * nnoremap ,o o<ESC>k$
+autocmd FileType * nnoremap ,o o<ESC>k
 
 " html
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+
+" rust
+autocmd BufNewFile,BufRead *.rs set filetype=rust
+autocmd FileType rust nnoremap <F5> :w<CR> :!cargo run<CR>
 
 " C Specific
 autocmd FileType c nnoremap <F5> :w<CR> :!gcc -ansi -pedantic -Wall -g % -o %:r<CR>
