@@ -7,6 +7,7 @@ fx(){fzf | xargs -r xdg-open; } #search and open
 
 alias cat=ccat
 alias cp=cpv
+alias neofetch='neofetch | lolcat'
 alias hy255='cd ~/Desktop/csd/hy255'
 alias hy225='cd ~/Desktop/csd/hy225'
 alias hy118='cd ~/Desktop/csd/hy118'
@@ -29,6 +30,7 @@ alias sus='systemctl suspend'
 alias hib='systemctl hibernate'
 alias i3c='nvim ~/.config/i3/config'
 alias polc='nvim ~/.config/polybar/config'
+alias weather='curl wttr.in'
 
 xdgopen() {
     xdg-open $* &>/dev/null & disown
