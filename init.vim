@@ -5,6 +5,7 @@ Plug 'pangloss/vim-javascript' "Javascript
 Plug 'scrooloose/nerdtree' " File manager
 Plug 'Valloric/YouCompleteMe' " autocomplete
 Plug 'itchyny/lightline.vim' " Status bar
+Plug 'mengelbrecht/lightline-bufferline' " bufferline
 Plug 'jiangmiao/auto-pairs' " Auto pairs
 Plug 'scrooloose/nerdcommenter' " Smart comments
 Plug 'tpope/vim-surround' " Surround everything
@@ -21,7 +22,25 @@ let g:user_emmet_leader_key=',' " new leader for emmet
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso
+
+" Lightline-Bufferline
+set showtabline=1
+let g:lightline.tabline = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type = {'buffers': 'tabsel'}
+let g:lightline#bufferline#show_number  = 2
+let g:lightline#bufferline#min_buffer_count = 2
+nmap ,1 <Plug>lightline#bufferline#go(1)
+nmap ,2 <Plug>lightline#bufferline#go(2)
+nmap ,3 <Plug>lightline#bufferline#go(3)
+nmap ,4 <Plug>lightline#bufferline#go(4)
+nmap ,5 <Plug>lightline#bufferline#go(5)
+nmap ,6 <Plug>lightline#bufferline#go(6)
+nmap ,7 <Plug>lightline#bufferline#go(7)
+nmap ,8 <Plug>lightline#bufferline#go(8)
+nmap ,9 <Plug>lightline#bufferline#go(9)
+nmap ,0 <Plug>lightline#bufferline#go(10)
 
 "------EDITOR------
 let mapleader="," " Set the map leader to ,
