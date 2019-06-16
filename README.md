@@ -1,13 +1,15 @@
 # dotfiles
 
-#neovim config
+# neovim config
 
-#zsh config
+# zsh config
 
-#i3 config
+# i3 config
 
-#polybar config
+# polybar config
 
-#rofi config
+# rofi config
 
-#terminator config
+# terminator config
+
+# vifm config
