@@ -3,10 +3,9 @@
 rmex(){ find $1 -type f -not -name $2 -delete; } #delete all except
 fv(){fzf | xargs -r nvim ;} #search and edit
 frm(){fzf | xargs /bin/rm ;} #seek and destroy
-fx(){fzf | xargs -r xdg-open; } #search and open
+fx(){fzf | xargs -r0 setsid xdgopen; } #search and open
 
 alias cat=ccat
-alias cp=cpv
 alias neofetch='neofetch | lolcat'
 alias hy255='cd ~/Desktop/csd/hy255'
 alias hy225='cd ~/Desktop/csd/hy225'
@@ -23,6 +22,7 @@ alias la='ls -a'
 alias autoremove='sudo pacman -Rcns $(pacman -Qdtq)'
 alias transmission='transmission-gtk &>/dev/null & disown'
 alias vba='visualboyadvance-m &>/dev/null & disown'
+alias mgba='mgba-qt &>/dev/null & disown'
 alias c='clear'
 alias pm='~/pm.sh'
 alias sdn='shutdown now'
@@ -31,6 +31,7 @@ alias hib='systemctl hibernate'
 alias i3c='nvim ~/.config/i3/config'
 alias polc='nvim ~/.config/polybar/config'
 alias weather='curl wttr.in'
+alias xm='xmodmap ~/.Xmodmap'
 
 xdgopen() {
     xdg-open $* &>/dev/null & disown
@@ -41,6 +42,11 @@ startAndDisown() {
     $1 &>/dev/null & disown
 }
 alias s=startAndDisown
+
+cdc() {
+     cd $1;
+     ls -A;
+}
 # Path to your oh-my-zsh installation.
 export ZSH="/home/kwstas/.oh-my-zsh"
 
@@ -141,3 +147,5 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
