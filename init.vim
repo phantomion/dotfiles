@@ -12,17 +12,22 @@ Plug 'tpope/vim-surround' " Surround everything
 Plug 'mattn/emmet-vim'  " html help
 Plug 'rust-lang/rust.vim' " rust lang
 Plug 'ctrlpvim/ctrlp.vim' " vim fuzzy finder
+Plug 'ryanoasis/vim-devicons' " fancy bloat icons
 call plug#end()
 
+" ------------NerdTree-------------
 map <C-n> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.zip$','\.class$','\.o$','\.png$','\.sh$','\.tar.gz$','\.mkv$','\.swp$','\iso$','\.jpg$','\.bin$','\.d$','\.svg$','\.pdf$']
+
 let g:lightline = {'colorscheme': 'molokai'}
 let g:ycm_global_ycm_extra_conf='/home/kwstas/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 let g:user_emmet_leader_key=',' " new leader for emmet
+
 "---------CtrlP----------
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso,*.tar.gz,*.jpg,*.pdf
 
 " Lightline-Bufferline
 set showtabline=1
@@ -31,6 +36,7 @@ let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type = {'buffers': 'tabsel'}
 let g:lightline#bufferline#show_number  = 2
 let g:lightline#bufferline#min_buffer_count = 2
+let g:lightline#bufferline#enable_devicons = 1
 nmap ,1 <Plug>lightline#bufferline#go(1)
 nmap ,2 <Plug>lightline#bufferline#go(2)
 nmap ,3 <Plug>lightline#bufferline#go(3)
@@ -134,6 +140,7 @@ map <C-l> <C-w>l
 autocmd BufWritePre * %s/\s\+$//e  "Strip trailing whitespace on file save
 map <C-s> :w<CR>
 map <C-e> :bn<CR>
+map <C-w> :bp<CR>
 
 " General commands
 autocmd FileType * inoremap ,if if(){<CR><CR>}<Esc>2kf)i
