@@ -74,7 +74,7 @@ wm-restack = i3
 bottom = false
 fixed-center = true
 width = 100%
-height = 26
+height = 23
 offset-x = 0
 offset-y = 0
 background = ${colors.background}
@@ -277,7 +277,7 @@ label-charging-foreground = ${colors.green}
 label-discharging = %percentage%%
 label-discharging-font = 2
 label-discharging-background = ${colors.background}
-label-discharging-foreground = ${colors.yellow}
+label-discharging-foreground = ${colors.magenta}
 
 format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
@@ -308,7 +308,7 @@ mount-0 = /
 
 ; Seconds to sleep between updates
 ; Default: 30
-interval = 30
+interval = 10
 
 ; Display fixed precision values
 ; Default: false

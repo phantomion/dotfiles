@@ -1,4 +1,4 @@
-all: i3 nvim poly zsh rofi terminator vifm dunst
+all: i3 nvim poly zsh rofi alacritty vifm dunst
 	@echo "Getting all configs."
 
 i3:
@@ -21,9 +21,9 @@ rofi:
 	@echo "Getting rofi config."
 	@cp -rf ~/.config/rofi .
 
-terminator:
-	@echo "Getting terminator config."
-	@cp -rf ~/.config/terminator .
+alacritty:
+	@echo "Getting alacritty config."
+	@cp -rf ~/.config/alacritty .
 
 vifm:
 	@echo "Getting vifm config."
