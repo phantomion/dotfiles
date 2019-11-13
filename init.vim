@@ -16,6 +16,8 @@ Plug 'ctrlpvim/ctrlp.vim' " vim fuzzy finder
 Plug 'ryanoasis/vim-devicons' " fancy bloat icons
 Plug 'jaxbot/browserlink.vim' " live preview
 Plug 'tpope/vim-fugitive' " oh well
+Plug 'honza/vim-snippets'
+Plug 'atelierbram/vim-colors_atelier-schemes'
 call plug#end()
 
 " --------------coc.nvim---------------
@@ -26,9 +28,14 @@ inoremap <silent><expr> <TAB>
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+let g:coc_snippet_next = '<TAB>'
+let g:coc_snippet_prev = '<S-TAB>'
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nnoremap <silent> M :call <SID>show_documentation()<CR>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gi <Plug>(coc-implementation)
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -55,6 +62,7 @@ let g:user_emmet_leader_key=',' " new leader for emmet
 "---------CtrlP----------
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso,*.tar.gz,*.jpg,*.pdf
 
@@ -83,6 +91,7 @@ nmap ,0 <Plug>lightline#bufferline#go(10)
 "{{{
 let mapleader="," " Set the map leader to ,
 set hidden
+nmap <leader>rn <Plug>(coc-rename)
 set nu " Enable line numbers
 set relativenumber " Enable relative line numbers
 set background=dark " Set the background theme to dark
@@ -174,24 +183,30 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 autocmd BufWritePre * %s/\s\+$//e  "Strip trailing whitespace on file save
-map <C-s> :w<CR>
+map <C-s> :bd<CR>
 map <C-e> :bn<CR>
 map <C-q> :bp<CR>
 "}}}
 
 " ------Autocommands------
 " {{{
-" General commands
-autocmd FileType c,java,cpp inoremap ,if if(){<CR><CR>}<Esc>2kf)i
-autocmd FileType c,java,cpp inoremap ,for for(int i = 0;;i++){<CR><CR>}<Esc>2kf;a
-autocmd FileType c,java,cpp inoremap ,wh while(){<CR><CR>}<Esc>2kf)i
 autocmd FileType * nnoremap ,cm I/*<Esc>A*/<Esc>
 autocmd FileType * nnoremap ,o o<ESC>k
 autocmd FileType * nnoremap ,O O<ESC>j
+augroup git
+     autocmd FileType * nnoremap <F1> :Gwrite<CR>
+     autocmd FileType * nnoremap <F2> :Gcommit -m ""
+augroup END
 " html
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-autocmd InsertLeave *.css :BLReloadCSS
+augroup web
+     autocmd!
+     autocmd FileType html,css EmmetInstall
+     autocmd InsertLeave *.css :BLReloadCSS
+     autocmd FileType html nnoremap <F3> :!http-server . &<CR><CR>
+     autocmd FileType html nnoremap <F4> :!setsid firefox http://localhost:8080/%<CR><CR>
+     autocmd VimLeave *.html !killall node
+augroup END
 
 " rust
 augroup rust
@@ -203,9 +218,9 @@ augroup END
 " C Specific
 augroup cc
      autocmd!
+     autocmd FileType c nnoremap <F4> :w<CR> :make<CR>
      autocmd FileType c nnoremap <F5> :w<CR> :!gcc -ansi -pedantic -Wall -g % -o %:r<CR>
      autocmd FileType c nnoremap <F6> :!./%:r<CR>
-     autocmd FileType c inoremap ,pr printf("");<Esc>F"i
      autocmd FileType c inoremap ,inpstr char c;<CR>while(c!=EOF){<CR>c=getchar();<CR>}<Esc>O
      autocmd FileType c inoremap ,incl #include <><Esc>i
      autocmd FileType c inoremap ,cm <Esc>A/**/
