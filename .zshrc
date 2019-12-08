@@ -19,7 +19,6 @@ alias shovelknight='sh ~/GOGGames/ShovelKnightTreasureTrove/start.sh &>/dev/null
 alias vconf='nvim ~/.config/nvim/init.vim'
 alias zshrc='nvim ~/.zshrc'
 alias soz='source ~/.zshrc'
-alias la='ls -a'
 alias autoremove='sudo pacman -Rcns $(pacman -Qdtq)'
 alias transmission='transmission-gtk &>/dev/null & disown'
 alias vba='visualboyadvance-m &>/dev/null & disown'
@@ -44,11 +43,6 @@ startAndDisown() {
 }
 alias s=startAndDisown
 
-cdc() {
-     cd $1;
-     ls -A --color=always;
-}
-alias cd=cdc
 # Path to your oh-my-zsh installation.
 export ZSH="/home/kwstas/.oh-my-zsh"
 
@@ -60,5 +54,12 @@ autoload -U compinit && compinit -u
 
 
 source $ZSH/oh-my-zsh.sh
-
+source $HOME/.profile
+alias la='ls -A'
+alias ls='lsd --color always --group-dirs first'
+#alias ls='exa --color=always --group-directories-first'
+     #cd $1;
+     #exa -a --color=always;
+#}
+#alias cd=cdc
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
