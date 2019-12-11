@@ -79,7 +79,7 @@ bindsym $mod+y border pixel 2
 bindsym $mod+n border normal
 
 # Start a terminal
-bindsym $mod+Return exec terminator
+bindsym $mod+Return exec alacritty
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -97,7 +97,7 @@ bindsym $mod+Shift+b exec firefox
 bindsym $mod+d exec rofi -show drun
 bindsym $mod+Shift+f exec terminal -e vifm
 bindsym Mod1+Tab workspace back_and_forth
-bindsym F12 exec flameshot gui
+bindsym F11 exec flameshot gui
 
 # Media volume controls
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
@@ -210,11 +210,11 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id flameshot
 exec --no-startup-id clipit -d
 #exec --no-startup-id kdeconnect-indicator
-exec --no-startup-id xautolock -time 30 #-locker glitchlock
+exec --no-startup-id xautolock -time 20 -locker glitchlock
 #exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id  sh $HOME/.config/polybar/launch.sh
-exec --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:alt_shift_toggle"
+exec --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:lalt_lshift_toggle"
 exec_always --no-startup-id "xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
 exec_always xmodmap ~/.Xmodmap &
 
