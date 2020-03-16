@@ -1,7 +1,7 @@
-all: i3 nvim poly zsh rofi alacritty vifm dunst
+all: i3c nvim polyc zshrc rofic alacrittyc vifmc dunstc
 	@echo "Getting all configs."
 
-i3:
+i3c:
 	@echo "Getting i3 config."
 	@cp ~/.config/i3/config i3/
 
@@ -9,26 +9,26 @@ nvim:
 	@echo "Getting neovim config."
 	@cp ~/.config/nvim/init.vim .
 
-poly:
+polyc:
 	@echo "Getting polybar config."
 	@cp ~/.config/polybar/* polybar/
 
-zsh:
+zshrc:
 	@echo "Getting oh.my.zsh config."
 	@cp ~/.zshrc .
 
-rofi:
+rofic:
 	@echo "Getting rofi config."
 	@cp ~/.config/rofi/config rofi/
 
-alacritty:
+alacrittyc:
 	@echo "Getting alacritty config."
 	@cp ~/.config/alacritty/alacritty.yml alacritty/
 
-vifm:
+vifmc:
 	@echo "Getting vifm config."
 	@cp -rf ~/.config/vifm .
 
-dunst:
+dunstc:
 	@echo "Getting dunst config."
 	@cp ~/.config/dunst/dunstrc dunst/

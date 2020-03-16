@@ -16,6 +16,9 @@ Plug 'ryanoasis/vim-devicons' " fancy bloat icons
 Plug 'jaxbot/browserlink.vim' " live preview
 Plug 'tpope/vim-fugitive' " oh well
 Plug 'honza/vim-snippets'
+Plug 'majutsushi/tagbar'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 " --------------coc.nvim---------------
@@ -52,15 +55,12 @@ set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 
- "------------NerdTree-------------
-"nnoremap <C-n> :NERDTreeToggle<CR>
-"let NERDTreeIgnore = ['\.zip$','\.class$','\.o$','\.png$','\.sh$','\.tar.gz$','\.mkv$','\.swp$','\iso$','\.jpg$','\.bin$','\.d$','\.svg$','\.pdf$']
+ "------------Lightline-------------
 let g:lightline = {'colorscheme': 'molokai'}
+let g:table_mode_corner='|'
 
- "-----------NerdTree Syntax highlight----------------
-"let g:NERDTreeFileExtensionHighlightFullName = 1
-"let g:NERDTreeExactMatchHighlightFullName = 1
-"let g:NERDTreePatternMatchHighlightFullName = 1
+ "------------Vimwiki-------------
+let g:vimwiki_text_ignore_newline = 0
 
 " ---------CtrlP----------
 let g:ctrlp_map = '<c-p>'
@@ -89,6 +89,9 @@ nmap ,7 <Plug>lightline#bufferline#go(7)
 nmap ,8 <Plug>lightline#bufferline#go(8)
 nmap ,9 <Plug>lightline#bufferline#go(9)
 nmap ,0 <Plug>lightline#bufferline#go(10)
+
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+nnoremap <C-m> :TagbarToggle<CR>
 "}}}
 
 "------EDITOR------
@@ -198,9 +201,41 @@ tnoremap <ESC> <C-\><C-n>
 
 " ------Autocommands------
 " {{{
+
+function! Help()
+    echom "Git"
+    echom "F1: Gwrite"
+    echom "F2: Gcommit"
+    if (&ft=='c')
+        echom "C"
+        echom "F4: make"
+        echom "F5: run"
+    endif
+    if (&ft=='html')
+        echom "html"
+        echom "F3: open server"
+        echom "F4: run on localhost"
+    endif
+    if (&ft=='rust')
+        echom "rust"
+        echom "F4: save and run"
+    endif
+    if (&ft=='vimwiki')
+        echom "vimwiki"
+        echom "F3: 2HTML"
+        echom "F4: Create table"
+    endif
+    echom "CocSession"
+    echom "F6: session.load"
+    echom "F7: session.save"
+endfunction
+
 autocmd FileType * nnoremap ,cm I/*<Esc>A*/<Esc>
 autocmd FileType * nnoremap ,o o<ESC>k
 autocmd FileType * nnoremap ,O O<ESC>j
+autocmd FileType * nnoremap <F9> :call Help()<CR>
+autocmd FileType * nnoremap ,cf i/<ESC>70a*<ESC>o<ESC>69a*<ESC>a/<ESC>ko*<ESC>ha
+
 augroup git
     autocmd!
     autocmd FileType * nnoremap <F1> :Gwrite<CR>
@@ -245,4 +280,22 @@ augroup session
     autocmd FileType * nnoremap <F6> :CocCommand session.load<CR>
     autocmd FileType * nnoremap <F7> :CocCommand session.save<CR>
 augroup END
+
+" --------------vimwiki------------
+augroup vimwik
+    autocmd!
+    autocmd FileType vimwiki nnoremap <F3> :Vimwiki2HTMLBrowse<CR>
+    autocmd FileType vimwiki nnoremap <F4> :VimwikiTable<CR>
+    autocmd FileType vimwiki nnoremap <Leader>h1 I=<ESC>A=<ESC>
+    autocmd FileType vimwiki nnoremap <Leader>h2 I==<ESC>A==<ESC>
+    autocmd FileType vimwiki nnoremap <Leader>h3 I===<ESC>A===<ESC>
+    autocmd FileType vimwiki nnoremap <Leader>h4 I====<ESC>A====<ESC>
+    autocmd FileType vimwiki nnoremap <Leader>h5 I=====<ESC>A=====<ESC>
+augroup END
+
+"augroup AutoSaveFolds
+  "autocmd!
+  "autocmd BufWinLeave * mkview
+  "autocmd BufWinEnter * silent loadview
+"augroup END
 " }}}

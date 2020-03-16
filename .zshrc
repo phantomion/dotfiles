@@ -7,6 +7,7 @@ fx(){fzf | xargs -r0 setsid xdgopen; } #search and open
 
 alias cat=ccat
 alias val='v ~/.config/alacritty/alacritty.yml'
+alias xampp='sudo /opt/lampp/manager-linux-x64.run'
 alias neofetch='neofetch | lolcat'
 alias hy255='cd ~/Desktop/csd/hy255'
 alias hy225='cd ~/Desktop/csd/hy225'
@@ -32,6 +33,8 @@ alias i3c='nvim ~/.config/i3/config'
 alias polc='nvim ~/.config/polybar/config'
 alias weather='curl wttr.in'
 alias xm='xmodmap ~/.Xmodmap'
+alias csd3972='ssh csd3972@haroupi.csd.uoc.gr'
+alias alc='nvim ~/.config/alacritty/alacritty.yml'
 
 xdgopen() {
     xdg-open $* &>/dev/null & disown
@@ -55,9 +58,9 @@ autoload -U compinit && compinit -u
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.profile
-alias la='ls -A'
-alias ls='lsd --color always --group-dirs first'
-#alias ls='exa --color=always --group-directories-first'
+alias la='ls -a'
+#alias ls='lsd --color always --group-dirs first'
+alias ls='exa --color=always --group-directories-first'
      #cd $1;
      #exa -a --color=always;
 #}

@@ -4,42 +4,29 @@
 
 [colors]
 
-; Google Dark Theme
-;black      = #1d1f21
-;red        = #cc342b
-;green      = #198844
-;yellow     = #fba922
-;blue       = #3971ed
-;magenta    = #a36ac7
-;cyan       = #3971ed
-;white      = #c5c8c6
-;background = ${colors.black}
-;foreground = #ffffff
-
-; Material
-;black      = #263238
-;red        = #ff9800
-;green      = #8bc34a
-;yellow     = #ffc107
-;blue       = #03a9f4
-;magenta    = #e91e63
-;cyan       = #009688
-;white      = #cfd8dc
-;foreground = #eceff1
-;background = #263238
-
 ; Isotope dark
-black      = #000000
-red        = #ff0000
-green      = #33ff00
-yellow     = #ff0099
-blue       = #0066ff
-magenta    = #cc00ff
-cyan       = #00ffff
-white      = #d0d0d0
-foreground = #d0d0d0
-background = #000000
+;black      = #000000
+;red        = #ff0000
+;green      = #33ff00
+;yellow     = #ff0099
+;blue       = #0066ff
+;magenta    = #cc00ff
+;cyan       = #00ffff
+;white      = #d0d0d0
+;foreground = #d0d0d0
+;background = #000000
 
+; Gotham
+black      = #000000
+red        = #c33027
+green      = #26a98b
+yellow     = #edb54b
+blue       = #0066ff
+magenta    = #e91e63
+cyan       = #33859d
+white      = #98d1ce
+foreground = #98d1ce
+background = #0a0f14
 
 [global/wm]
 margin-top = 0
@@ -95,13 +82,10 @@ font-4 = Droid Sans Mono:style=Regular:pixelsize=10;2
 module-margin-left = 1
 module-margin-right = 1
 module-padding = 1
-;modules-left = cpu memory
-;modules-center = i3
-;modules-right = keyboard battery date
 modules-left = i3
-modules-center =  title
-modules-right = filesystem keyboard battery date
-separator = |
+modules-center =
+modules-right = system-usb-udev info-hackspeed filesystem keyboard battery date
+separator = %{F#c33027}|%{F-}
 locale =
 
 ;=== SYSTEM TRAY CONFIGURATION ================================
@@ -161,14 +145,14 @@ label-mode-padding = 2
 label-mode-background = #e60053
 
 label-focused = %icon%
-label-focused-foreground = #FF0000
+label-focused-foreground = ${colors.red}
 label-focused-background = ${colors.background}
-label-focused-underline = #FF0000
+label-focused-underline = ${colors.red}
 label-focused-padding = 3
 
 label-unfocused = %icon%
 label-unfocused-foreground = ${colors.white}
-label-unfocused-background = ${colors.black}
+label-unfocused-background = ${colors.background}
 label-unfocused-padding = 3
 
 label-visible = %icon%
@@ -179,6 +163,21 @@ label-urgent = %icon%
 label-urgent-foreground = ${colors.red}
 label-urgent-background = ${colors.black}
 label-urgent-padding = 3
+
+;=======================================================
+[module/info-hackspeed]
+type = custom/script
+exec = ~/polybar-scripts/info-hackspeed.sh
+tail = true
+label-font = 3
+
+;=======================================================
+[module/system-usb-udev]
+type = custom/script
+exec = ~/polybar-scripts/system-usb-udev.sh
+tail = true
+click-left = ~/polybar-scripts/system-usb-udev.sh --mount &
+click-right = ~/polybar-scripts/system-usb-udev.sh --unmount &
 
 ;=======================================================
 [module/memory]
@@ -339,7 +338,7 @@ format-unmounted = <label-unmounted>
 ;   %free%
 ;   %used%
 ; Default: %mountpoint% %percentage_free%%
-label-mounted = SSD:%free%/%total%
+label-mounted = %mountpoint%:%free%
 label-mounted-font = 5
 
 ; Available tokens:

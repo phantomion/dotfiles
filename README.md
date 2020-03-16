@@ -10,6 +10,8 @@
 
 # rofi config
 
-# terminator config
+# alacritty config
 
 # vifm config
+
+# dunst config
