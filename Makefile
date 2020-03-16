@@ -32,3 +32,37 @@ vifmc:
 dunstc:
 	@echo "Getting dunst config."
 	@cp ~/.config/dunst/dunstrc dunst/
+
+put: i3p nvimp polyp zshp rofip alacrittyp vifmp dunstp
+	@echo"Put everything in place."
+
+i3p:
+	@echo "Putting i3 config ${HOME}/.config/i3."
+	@cp -r i3/ ${HOME}/.config/
+
+nvimp:
+	@echo "Putting nvim config ${HOME}/.config/nvim."
+	@cp init.vim ${HOME}/.config/nvim/
+
+polyp:
+	@echo "Putting polybar config ${HOME}/.config/polybar."
+	@cp -r polybar/ ${HOME}/.config/
+
+zshp:
+	@echo "Putting zsh config ${HOME}."
+	@cp .zshrc ${HOME}/
+rofip:
+	@echo "Putting rofi config ${HOME}/.config/rofi."
+	@cp -r rofi/ ${HOME}/.config/
+
+alacrittyp:
+	@echo "Putting alacritty config ${HOME}/.config/alacritty."
+	@cp -r alacritty/ ${HOME}/.config/
+
+vifmp:
+	@echo "Putting vifm config ${HOME}/.config/vifm."
+	@cp -r vifm/ ${HOME}/.config/
+
+dunstp:
+	@echo "Putting dunst config ${HOME}/.config/dunst."
+	@cp -r dunst/ ${HOME}/.config/

@@ -26,3 +26,7 @@ Not much to see here.
 
 # dunst config
 Nothing to see here.
+
+# Copying everything to your home
+You can simply `make put` and everything will be put in its rightful place.
+If you want to copy a specific config you should use `make {nvimp, i3p, rofip, polyp, alacrittyp, zshp, vifmp, dunstp}` (eg. `make nvimp`).

@@ -167,17 +167,17 @@ label-urgent-padding = 3
 ;=======================================================
 [module/info-hackspeed]
 type = custom/script
-exec = ~/polybar-scripts/info-hackspeed.sh
+exec = ~/.config/polybar/info-hackspeed.sh
 tail = true
 label-font = 3
 
 ;=======================================================
 [module/system-usb-udev]
 type = custom/script
-exec = ~/polybar-scripts/system-usb-udev.sh
+exec = ~/.config/polybar/system-usb-udev.sh
 tail = true
-click-left = ~/polybar-scripts/system-usb-udev.sh --mount &
-click-right = ~/polybar-scripts/system-usb-udev.sh --unmount &
+click-left = ~/.config/polybar/system-usb-udev.sh --mount &
+click-right = ~/.config/polybar/system-usb-udev.sh --unmount &
 
 ;=======================================================
 [module/memory]
