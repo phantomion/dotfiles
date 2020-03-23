@@ -1,4 +1,4 @@
-all: i3c nvim polyc zshrc rofic alacrittyc vifmc dunstc
+all: i3c nvim polyc zshrc rofic alacrittyc vifmc dunstc starshipc
 	@echo "Getting all configs."
 
 i3c:
@@ -33,7 +33,11 @@ dunstc:
 	@echo "Getting dunst config."
 	@cp ~/.config/dunst/dunstrc dunst/
 
-put: i3p nvimp polyp zshp rofip alacrittyp vifmp dunstp
+starshipc:
+	@echo "Getting starship prompt"
+	@cp ~/.config/starship.toml .
+
+put: i3p nvimp polyp zshp rofip alacrittyp vifmp dunstp starshipp
 	@echo"Put everything in place."
 
 i3p:
@@ -66,3 +70,7 @@ vifmp:
 dunstp:
 	@echo "Putting dunst config ${HOME}/.config/dunst."
 	@cp -r dunst/ ${HOME}/.config/
+
+starshipp:
+	@echo "Putting starship config ${HOME}/.config"
+	@cp starship.toml ${HOME}/.config/

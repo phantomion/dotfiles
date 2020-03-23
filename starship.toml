@@ -1,0 +1,22 @@
+prompt_order=["hostname","character","directory","git_branch","git_status"]
+add_newline = false
+
+[character]
+symbol = "➜"
+style_success = "yellow"
+
+[directory]
+truncation_length = 1
+prefix = ""
+
+[git_branch]
+symbol = ""
+
+[hostname]
+ssh_only = false
+prefix = "🚀"
+style = "bold red"
+
+[rust]
+prefix = ""
+symbol = "🦀"
