@@ -142,7 +142,7 @@ ws-icon-default = 
 
 label-mode = %mode%
 label-mode-padding = 2
-label-mode-background = #e60053
+label-mode-background = ${colors.cyan}
 
 label-focused = %icon%
 label-focused-foreground = ${colors.red}

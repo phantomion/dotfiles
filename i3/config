@@ -53,8 +53,10 @@ for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
-for_window [title="Color picker"] floating enable border normal
-for_window [title="Steam"] floating enable border normal
+for_window [title="Color picker"] floating enable
+for_window [title="Steam"] floating enable
+for_window [title="Transmission"] floating enable border normal
+for_window [class="minesweeper"] floating enable border normal
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -86,25 +88,21 @@ bindsym $mod+Return exec alacritty
 # Kill focused window
 bindsym $mod+Shift+q kill
 
-# Start dmenu launcher
-bindsym $mod+Shift+d exec --no-startup-id dmenu_recency
-
 # Application shortcuts
 bindsym $mod+Ctrl+m exec pavucontrol
-bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+b exec firefox
 bindsym $mod+d exec rofi -show drun
 bindsym $mod+Shift+f exec terminal -e vifm
+bindsym $mod+Ctrl+b exec alacritty -e bmenu
 bindsym Mod1+Tab workspace back_and_forth
 bindsym F11 exec flameshot gui
 
 # Media volume controls
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 
 #Brightness Controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
@@ -175,7 +173,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym l exec --no-startup-id ~/glitchlock/glitchlock
     bindsym s exec --no-startup-id i3exit suspend, mode "default"
     bindsym u exec --no-startup-id i3exit switch_user, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"
@@ -198,8 +196,8 @@ mode "$mode_system" {
 #                Shortcut: <Startup>
 
 # === Sound section - configuration. (Proceed with care) ===
-exec --no-startup-id systemctl enable pulseaudio.service --user
-exec --no-startup-id pulseaudio --start
+#exec --no-startup-id systemctl enable pulseaudio.service --user
+#exec --no-startup-id pulseaudio --start
 exec --no-startup-id volumeicon
 
 # Autostart applications
@@ -212,7 +210,7 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id flameshot
 exec --no-startup-id clipit -d
 #exec --no-startup-id kdeconnect-indicator
-exec --no-startup-id xautolock -time 20 -locker glitchlock
+exec --no-startup-id xautolock -time 20 -locker ~/glitchlock/glitchlock
 #exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id  sh $HOME/.config/polybar/launch.sh
@@ -244,6 +242,7 @@ set $ws7 7:7
 set $ws8 8:8
 
 workspace $ws5 output VGA1
+workspace $ws5 output HDMI1
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1

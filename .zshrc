@@ -6,16 +6,11 @@ frm(){fzf | xargs /bin/rm ;} #seek and destroy
 fx(){fzf | xargs -r0 setsid xdgopen; } #search and open
 
 alias cat=ccat
-alias val='v ~/.config/alacritty/alacritty.yml'
 alias xampp='sudo /opt/lampp/manager-linux-x64.run'
 alias neofetch='neofetch | lolcat'
-alias hy255='cd ~/Desktop/csd/hy255'
-alias hy225='cd ~/Desktop/csd/hy225'
-alias hy118='cd ~/Desktop/csd/hy118'
 alias v=nvim
 alias desktop='cd ~/Desktop'
 alias downloads='cd ~/Downloads'
-alias firefox='firefox &>/dev/null & disown'
 alias shovelknight='sh ~/GOGGames/ShovelKnightTreasureTrove/start.sh &>/dev/null & disown'
 alias vconf='nvim ~/.config/nvim/init.vim'
 alias zshrc='nvim ~/.zshrc'
@@ -26,15 +21,14 @@ alias vba='visualboyadvance-m &>/dev/null & disown'
 alias mgba='mgba-qt &>/dev/null & disown'
 alias c='clear'
 alias pm='~/pm.sh'
-alias sdn='shutdown now'
-alias sus='systemctl suspend'
-alias hib='systemctl hibernate'
 alias i3c='nvim ~/.config/i3/config'
 alias polc='nvim ~/.config/polybar/config'
 alias weather='curl wttr.in'
 alias xm='xmodmap ~/.Xmodmap'
 alias csd3972='ssh csd3972@haroupi.csd.uoc.gr'
 alias alc='nvim ~/.config/alacritty/alacritty.yml'
+alias rofic='nvim ~/.config/rofi/config'
+alias stars='nvim ~/.config/starship.toml'
 
 xdgopen() {
     xdg-open $* &>/dev/null & disown
@@ -61,8 +55,5 @@ source $HOME/.profile
 alias la='ls -a'
 #alias ls='lsd --color always --group-dirs first'
 alias ls='exa --color=always --group-directories-first'
-     #cd $1;
-     #exa -a --color=always;
-#}
-#alias cd=cdc
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+eval "$(starship init zsh)"

@@ -11,8 +11,7 @@ rofi.lines:                          10
 rofi.columns:                        1
 
 "Font to use" Set from: Default
-rofi.font:                           droid sans mono regular 12
-!rofi.font:                           inconsolata 14
+rofi.font:                           roboto mono regular 12
 
 "Border width" Set from: Default
 rofi.bw:                             1
@@ -24,7 +23,7 @@ rofi.location:                       1
 rofi.padding:                        5
 
 "Y-offset relative to location" Set from: Default
-rofi.yoffset:                        26
+rofi.yoffset:                        25
 
 "X-offset relative to location" Set from: Default
 rofi.xoffset:                        0
@@ -418,4 +417,4 @@ rofi.me-accept-entry:                MouseDPrimary
 
 "Accept hovered row with custom action" Set from: Default
 rofi.me-accept-custom:               Control+MouseDPrimary
-rofi.theme: /usr/share/rofi/themes/gruvbox-dark-hard.rasi
+rofi.theme: /usr/share/rofi/themes/Arc-Dark.rasi

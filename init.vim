@@ -91,7 +91,7 @@ nmap ,9 <Plug>lightline#bufferline#go(9)
 nmap ,0 <Plug>lightline#bufferline#go(10)
 
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
-nnoremap <C-m> :TagbarToggle<CR>
+nnoremap <C-b> :TagbarToggle<CR>
 "}}}
 
 "------EDITOR------
@@ -193,7 +193,7 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 autocmd BufWritePre * %s/\s\+$//e  "Strip trailing whitespace on file save
-map <C-s> :bd<CR>
+map <C-s> :bd!<CR>
 map <C-e> :bn<CR>
 map <C-q> :bp<CR>
 tnoremap <ESC> <C-\><C-n>
@@ -254,7 +254,10 @@ augroup END
 augroup rust
     autocmd!
     autocmd BufNewFile,BufRead *.rs set filetype=rust
+    autocmd FileType rust nnoremap <F3> :w<CR> :vsplit term://rustc % && ./%:r<CR>
     autocmd FileType rust nnoremap <F4> :w<CR> :vsplit term://cargo run<CR>
+    autocmd FileType rust nnoremap <F5> :w<CR> :vsplit term://cargo run
+    autocmd FileType rust nnoremap <F6> :w<CR> :vsplit term://cargo test<CR>
 augroup END
 
 " ----------C Specific-----------
@@ -286,6 +289,7 @@ augroup vimwik
     autocmd!
     autocmd FileType vimwiki nnoremap <F3> :Vimwiki2HTMLBrowse<CR>
     autocmd FileType vimwiki nnoremap <F4> :VimwikiTable<CR>
+    autocmd FileType vimwiki nnoremap <F5> :!setsid firefox ~/vimwiki_html/%:r.html<CR><CR>
     autocmd FileType vimwiki nnoremap <Leader>h1 I=<ESC>A=<ESC>
     autocmd FileType vimwiki nnoremap <Leader>h2 I==<ESC>A==<ESC>
     autocmd FileType vimwiki nnoremap <Leader>h3 I===<ESC>A===<ESC>
@@ -293,6 +297,11 @@ augroup vimwik
     autocmd FileType vimwiki nnoremap <Leader>h5 I=====<ESC>A=====<ESC>
 augroup END
 
+augroup remember_folds
+  autocmd!
+  au BufWinLeave ?* mkview 1
+  au BufWinEnter ?* silent! loadview 1
+augroup END
 "augroup AutoSaveFolds
   "autocmd!
   "autocmd BufWinLeave * mkview
