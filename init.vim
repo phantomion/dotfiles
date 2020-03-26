@@ -28,9 +28,15 @@ inoremap <silent><expr> <TAB>
             \ coc#refresh()
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-let g:coc_snippet_next = '<TAB>'
-let g:coc_snippet_prev = '<S-TAB>'
+if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+let g:coc_snippet_next = '<C-l>'
+let g:coc_snippet_prev = '<C-h>'
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nnoremap <silent> M :call <SID>show_documentation()<CR>
@@ -97,11 +103,11 @@ nnoremap <C-b> :TagbarToggle<CR>
 "------EDITOR------
 "{{{
 let mapleader="," " Set the map leader to ,
-set hidden
 set mouse+=a
 nmap <leader>rn <Plug>(coc-rename)
 set nu " Enable line numbers
 set modifiable
+set autoread
 set relativenumber " Enable relative line numbers
 syntax on " Enable syntax highlighting
 colorscheme srcery " Set the colorscheme
@@ -119,7 +125,6 @@ set noshowmode " Don't show the indicator in insert mode.
 set completeopt=longest,menuone,noselect " Improve completion menu
 set undofile
 set foldmethod=indent
-set foldlevelstart=200
 " set whichwrap+=<,>,h,l
 let g:clipboard = {
             \   'name': 'myClipboard',
@@ -229,12 +234,19 @@ function! Help()
     echom "F6: session.load"
     echom "F7: session.save"
 endfunction
+if has('nvim')
+    autocmd TermOpen term://* startinsert
+endif
 
-autocmd FileType * nnoremap ,cm I/*<Esc>A*/<Esc>
-autocmd FileType * nnoremap ,o o<ESC>k
-autocmd FileType * nnoremap ,O O<ESC>j
-autocmd FileType * nnoremap <F9> :call Help()<CR>
-autocmd FileType * nnoremap ,cf i/<ESC>70a*<ESC>o<ESC>69a*<ESC>a/<ESC>ko*<ESC>ha
+augroup general
+    autocmd FileType * nnoremap ,cm I/*<Esc>A*/<Esc>
+    autocmd FileType * nnoremap ,o o<ESC>k
+    autocmd FileType * nnoremap ,O O<ESC>j
+    autocmd FileType * nnoremap <F9> :call Help()<CR>
+    autocmd FileType * nnoremap ,cf i/<ESC>70a*<ESC>o<ESC>69a*<ESC>a/<ESC>ko*<ESC>ha
+    autocmd FileType * nnoremap <F8> :e %<CR>
+    autocmd FocusGained * :checktime
+augroup END
 
 augroup git
     autocmd!
@@ -302,9 +314,4 @@ augroup remember_folds
   au BufWinLeave ?* mkview 1
   au BufWinEnter ?* silent! loadview 1
 augroup END
-"augroup AutoSaveFolds
-  "autocmd!
-  "autocmd BufWinLeave * mkview
-  "autocmd BufWinEnter * silent loadview
-"augroup END
 " }}}

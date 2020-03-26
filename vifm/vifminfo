@@ -21,7 +21,7 @@
 # Bookmarks:
 
 # TUI:
-ar
+al
 q0
 v2
 ov
@@ -30,36 +30,6 @@ l2
 r2
 
 # Left window history (oldest to newest):
-d/home/kwstas/Downloads
-	Stranger.Things.Season.3.S03.720p.NF.WEB-DL.x265-HETeam
-9
-d/home/kwstas/Downloads/Stranger.Things.Season.3.S03.720p.NF.WEB-DL.x265-HETeam
-	Stranger.Things.S03E05.720p.NF.WEB-DL.x265-HETeam.mkv
-5
-d/home/kwstas/Downloads
-	ChannelZeroSeason3Complete720pHDTVx264[i_c]
-2
-d/home/kwstas/Downloads/ChannelZeroSeason3Complete720pHDTVx264[i_c]
-	Channel Zero S03E01 Insidious Onset.srt
-2
-d/home/kwstas/Downloads
-	The.Texas.Chain.Saw.Massacre.1974.1080p.BluRay.H264.AAC-RARBG
-10
-d/home/kwstas/Downloads/The.Texas.Chain.Saw.Massacre.1974.1080p.BluRay.H264.AAC-RARBG
-	The.Texas.Chain.Saw.Massacre.1974.1080p.BluRay.H264.AAC-RARBG.mp4
-4
-d/media/sdb
-	474.JPG
-35
-d/media/sdb2/friends/friends.s01.1080p
-	Friends.S01E22.1080p.mkv
-22
-d/media/sdb2/friends
-	friends.s02.1080p
-2
-d/media/sdb2/friends/friends.s02.1080p
-	Friends.S02E01.1080p.mkv
-1
 d/media/sdb2
 	..
 0
@@ -328,17 +298,41 @@ d/home/kwstas/Documents
 	polybar
 7
 d/home/kwstas/Documents/polybar
-	config
+	launch.sh
+2
+d/home/kwstas/Documents
+	polybar-scripts
+4
+d/home/kwstas
+	Documents
+31
+d/home
+	kwstas
 1
+d/
+	usr
+19
+d/usr
+	share
+9
+d/usr/share
+	rofi
+35
+d/usr/share/rofi
+	themes
+1
+d/usr/share/rofi/themes
+	Arc.rasi
+3
+d/usr/share/rofi
+	themes
+1
+d/usr/share/rofi/themes
+	Arc.rasi
+3
 d
 
 # Right window history (oldest to newest):
-D/usr/share/icons
-	breeze-dark
-6
-D/usr/share/icons/breeze-dark
-	apps
-4
 D/usr/share/icons/breeze-dark/apps
 	22@2x
 4
@@ -633,6 +627,12 @@ D/home/kwstas/.config
 D/home/kwstas/.config/zathura
 	zathurarc
 1
+D/home/kwstas/.config
+	zathura
+19
+D/home/kwstas
+	.config
+4
 D
 
 # Command line history (oldest to newest):
@@ -670,6 +670,7 @@ D
 /network-
 /config
 /docum
+/rofi
 
 # Prompt history (oldest to newest):
 p[TorrentCouch.com].Lucifer.S03E05.720p.BRRip.x264.ESubs.mkv

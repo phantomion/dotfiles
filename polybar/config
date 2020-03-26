@@ -84,7 +84,7 @@ module-margin-right = 1
 module-padding = 1
 modules-left = i3
 modules-center =
-modules-right = system-usb-udev info-hackspeed filesystem keyboard battery date
+modules-right = system-usb-udev updates-arch-combined filesystem keyboard battery date
 separator = %{F#c33027}|%{F-}
 locale =
 
@@ -163,6 +163,13 @@ label-urgent = %icon%
 label-urgent-foreground = ${colors.red}
 label-urgent-background = ${colors.black}
 label-urgent-padding = 3
+
+;=======================================================
+[module/updates-arch-combined]
+type = custom/script
+exec = ~/.config/polybar/updates-arch-combined.sh
+interval = 600
+label-font = 3
 
 ;=======================================================
 [module/info-hackspeed]
