@@ -1,13 +1,14 @@
-all: i3c nvim polyc zshrc rofic alacrittyc vifmc dunstc starshipc
+all: i3c nvimc polyc zshrc rofic alacrittyc vifmc dunstc starshipc
 	@echo "Getting all configs."
 
 i3c:
 	@echo "Getting i3 config."
 	@cp ~/.config/i3/config i3/
 
-nvim:
+nvimc:
 	@echo "Getting neovim config."
-	@cp ~/.config/nvim/init.vim .
+	@cp ~/.config/nvim/init.vim nvim/
+	@cp ~/.config/nvim/coc-settings.json nvim/
 
 polyc:
 	@echo "Getting polybar config."
@@ -27,7 +28,7 @@ alacrittyc:
 
 vifmc:
 	@echo "Getting vifm config."
-	@cp -rf ~/.config/vifm .
+	@cp ~/.config/vifm/* vigm/
 
 dunstc:
 	@echo "Getting dunst config."
@@ -46,7 +47,7 @@ i3p:
 
 nvimp:
 	@echo "Putting nvim config ${HOME}/.config/nvim."
-	@cp init.vim ${HOME}/.config/nvim/
+	@cp -r nvim/ ${HOME}/.config/
 
 polyp:
 	@echo "Putting polybar config ${HOME}/.config/polybar."

@@ -1,0 +1,24 @@
+{
+    "list.source.files.excludePatterns": ["*/tmp/*","*.so","*.swp","*.zip","*.d","*.o","*.bin","*.sh","*.svg","*.mkv","*.png","*.mkv","*.avi","*.mp4","*.iso","*.tar.gz","*.jpg","*.pdf"],
+    "explorer.icon.enableNerdfont": true,
+    "explorer.buffer.showHiddenBuffers": true,
+    "explorer.width": 27,
+    "emmet.includeLanguages": {"jsp": "html"},
+    "snippets.loadFromExtensions": true,
+    "snippets.ultisnips.enable": true,
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c", "cpp", "objc", "objcpp"],
+            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        }
+    },
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "latex.build.onSave": true,
+    "latex.lint.onChange": true
+}

@@ -314,4 +314,8 @@ augroup remember_folds
   au BufWinLeave ?* mkview 1
   au BufWinEnter ?* silent! loadview 1
 augroup END
+
+" CocExtensions coc-css coc-dictionary coc-emmet coc-explorer
+" coc-git coc-highlight coc-html coc-java coc-json coc-lists coc-rls
+" coc-snippets coc-tag coc-template coc-texlab coc-tsserver
 " }}}
