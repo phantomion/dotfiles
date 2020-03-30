@@ -22,7 +22,7 @@ alias autoremove='sudo pacman -Rcns $(pacman -Qdtq)'
 alias transmission='transmission-gtk &>/dev/null & disown'
 alias mgba='mgba-qt &>/dev/null & disown'
 alias c='clear'
-alias pm='~/pm.sh'
+alias pm='~/Documents/dotfiles/pm.sh'
 alias i3c='nvim ~/.config/i3/config'
 alias polc='nvim ~/.config/polybar/config'
 alias weather='curl wttr.in'
@@ -45,12 +45,11 @@ alias s=startAndDisown
 # Path to your oh-my-zsh installation.
 export ZSH="/home/kwstas/.oh-my-zsh"
 
-ZSH_THEME="nebirhos"
+#ZSH_THEME="nebirhos"
 
 plugins=(vi-mode autojump colored-man-pages colorize cp extract zsh-syntax-highlighting)
 [[ -s /home/kwstas/.autojump/etc/profile.d/autojump.sh ]] && source /home/kwstas/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
-#[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.profile

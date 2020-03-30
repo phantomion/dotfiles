@@ -62,7 +62,7 @@ set shortmess+=c
 set signcolumn=yes
 
  "------------Lightline-------------
-let g:lightline = {'colorscheme': 'molokai'}
+let g:lightline = {'colorscheme': 'darcula'}
 let g:table_mode_corner='|'
 
  "------------Vimwiki-------------
@@ -73,7 +73,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso,*.tar.gz,*.jpg,*.pdf
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso,*.tar.gz,*.jpg,*.pdf,*.class,target/*
 
 " -----Lightline-Bufferline-----
 set showtabline=1
@@ -85,16 +85,16 @@ let g:lightline#bufferline#min_buffer_count = 2
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#shorten_path = 0
 let g:lightline#bufferline#unicode_symbols = 1
-nmap ,1 <Plug>lightline#bufferline#go(1)
-nmap ,2 <Plug>lightline#bufferline#go(2)
-nmap ,3 <Plug>lightline#bufferline#go(3)
-nmap ,4 <Plug>lightline#bufferline#go(4)
-nmap ,5 <Plug>lightline#bufferline#go(5)
-nmap ,6 <Plug>lightline#bufferline#go(6)
-nmap ,7 <Plug>lightline#bufferline#go(7)
-nmap ,8 <Plug>lightline#bufferline#go(8)
-nmap ,9 <Plug>lightline#bufferline#go(9)
-nmap ,0 <Plug>lightline#bufferline#go(10)
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 nnoremap <C-b> :TagbarToggle<CR>
@@ -102,7 +102,7 @@ nnoremap <C-b> :TagbarToggle<CR>
 
 "------EDITOR------
 "{{{
-let mapleader="," " Set the map leader to ,
+let mapleader=" " " Set the map leader to <Space>
 set mouse+=a
 nmap <leader>rn <Plug>(coc-rename)
 set nu " Enable line numbers
@@ -125,6 +125,7 @@ set noshowmode " Don't show the indicator in insert mode.
 set completeopt=longest,menuone,noselect " Improve completion menu
 set undofile
 set foldmethod=indent
+set foldlevel=20
 " set whichwrap+=<,>,h,l
 let g:clipboard = {
             \   'name': 'myClipboard',
@@ -193,24 +194,34 @@ nnoremap <A-.> :1winc < <CR>
 "===== KEY REMAPS =====
 
 " General Maps
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 autocmd BufWritePre * %s/\s\+$//e  "Strip trailing whitespace on file save
-map <C-s> :bd!<CR>
-map <C-e> :bn<CR>
-map <C-q> :bp<CR>
+nnoremap <C-s> :bd!<CR>
+nnoremap <C-e> :bn<CR>
+nnoremap <C-q> :bp<CR>
 tnoremap <ESC> <C-\><C-n>
+nnoremap <silent> <Leader>y  :<C-u>CocList -A --normal yank<cr>
 "}}}
 
 " ------Autocommands------
 " {{{
 
+" Easy Install CocExtensions
+function! InstallCoc()
+    CocInstall coc-css coc-dictionary coc-emmet coc-explorer coc-yank
+    CocInstall coc-git coc-highlight coc-html coc-java coc-json coc-lists
+    CocInstall coc-rls coc-snippets coc-tag coc-template coc-texlab coc-tsserver
+endfunction
+
+" Get help
 function! Help()
     echom "Git"
     echom "F1: Gwrite"
     echom "F2: Gcommit"
+    echom "F8: Refresh file"
     if (&ft=='c')
         echom "C"
         echom "F4: make"
@@ -223,12 +234,17 @@ function! Help()
     endif
     if (&ft=='rust')
         echom "rust"
-        echom "F4: save and run"
+        echom "F3: rustc and run"
+        echom "F4: cargo run"
+        echom "F5: cargo run + args"
+        echom "F6: cargo test"
     endif
     if (&ft=='vimwiki')
         echom "vimwiki"
+        echom "<Leader>h1-5 for headers"
         echom "F3: 2HTML"
         echom "F4: Create table"
+        echom "F5: Open HTML"
     endif
     echom "CocSession"
     echom "F6: session.load"
@@ -239,20 +255,22 @@ if has('nvim')
 endif
 
 augroup general
-    autocmd FileType * nnoremap ,cm I/*<Esc>A*/<Esc>
-    autocmd FileType * nnoremap ,o o<ESC>k
-    autocmd FileType * nnoremap ,O O<ESC>j
+    autocmd FileType * nnoremap <Leader>cm I/*<Esc>A*/<Esc>
+    autocmd FileType * nnoremap <Leader>o o<ESC>k
+    autocmd FileType * nnoremap <Leader>O O<ESC>j
     autocmd FileType * nnoremap <F9> :call Help()<CR>
-    autocmd FileType * nnoremap ,cf i/<ESC>70a*<ESC>o<ESC>69a*<ESC>a/<ESC>ko*<ESC>ha
+    autocmd FileType * nnoremap <Leader>cf i/<ESC>70a*<ESC>o<ESC>69a*<ESC>a/<ESC>ko*<ESC>ha
     autocmd FileType * nnoremap <F8> :e %<CR>
     autocmd FocusGained * :checktime
 augroup END
 
+" ------------fugitive--------------
 augroup git
     autocmd!
     autocmd FileType * nnoremap <F1> :Gwrite<CR>
     autocmd FileType * nnoremap <F2> :Gcommit -m ""
 augroup END
+
 " -----------html-------------
 augroup web
     autocmd!
@@ -277,9 +295,9 @@ augroup cc
     autocmd!
     autocmd FileType c nnoremap <F4> :w<CR> :make<CR>
     autocmd FileType c nnoremap <F5> :w<CR> :vsplit term://./%:r<CR>
-    autocmd FileType c inoremap ,inpstr char c;<CR>while(c!=EOF){<CR>c=getchar();<CR>}<Esc>O
-    autocmd FileType c inoremap ,incl #include <><Esc>i
-    autocmd FileType c inoremap ,cm <Esc>A/**/
+    autocmd FileType c inoremap <Leader>inpstr char c;<CR>while(c!=EOF){<CR>c=getchar();<CR>}<Esc>O
+    autocmd FileType c inoremap <Leader>incl #include <><Esc>i
+    autocmd FileType c inoremap <Leader>cm <Esc>A/**/
 augroup END
 
 " --------------vim---------------
@@ -309,13 +327,11 @@ augroup vimwik
     autocmd FileType vimwiki nnoremap <Leader>h5 I=====<ESC>A=====<ESC>
 augroup END
 
+" -------------remember_folds-------------
 augroup remember_folds
   autocmd!
   au BufWinLeave ?* mkview 1
   au BufWinEnter ?* silent! loadview 1
 augroup END
 
-" CocExtensions coc-css coc-dictionary coc-emmet coc-explorer
-" coc-git coc-highlight coc-html coc-java coc-json coc-lists coc-rls
-" coc-snippets coc-tag coc-template coc-texlab coc-tsserver
 " }}}

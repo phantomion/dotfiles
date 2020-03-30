@@ -6,6 +6,7 @@
     "emmet.includeLanguages": {"jsp": "html"},
     "snippets.loadFromExtensions": true,
     "snippets.ultisnips.enable": true,
+    "session.directory": "~/.config/nvim/sessions",
     "languageserver": {
         "ccls": {
             "command": "ccls",
