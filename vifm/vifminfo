@@ -22,7 +22,7 @@
 
 # TUI:
 al
-q0
+q1
 v2
 ov
 m-1
@@ -30,171 +30,117 @@ l2
 r2
 
 # Left window history (oldest to newest):
-d/media/sdb2
-	..
-0
-d/media
-	sdb2
-3
-d/
-	home
+d/home/kwstas/Desktop/csd/hy255
+	Assignment1
+1
+d/home/kwstas/Desktop/csd/hy255/Assignment1
+	translate.c
 4
-d/home
-	kwstas
+d/home/kwstas/Desktop/csd/hy255
+	Assignment6
+6
+d/home/kwstas/Desktop/csd/hy255/Assignment6
+	createdata3.c
+2
+d/home/kwstas/Desktop/csd/hy255
+	Assignment6
+6
+d/home/kwstas/Desktop/csd
+	hy360
+11
+d/home/kwstas/Desktop/csd/hy360
+	360projectasoume
+1
+d/home/kwstas/Desktop/csd
+	hy364
+12
+d/home/kwstas/Desktop/csd/hy364
+	Assignment1
+1
+d/home/kwstas/Desktop/csd/hy364/Assignment1
+	Tablet.png
+5
+d/home/kwstas/Desktop/csd/hy364
+	Assignment1
+1
+d/home/kwstas/Desktop/csd
+	hy364
+12
+d/home/kwstas/Desktop/csd/hy364
+	Assignment1
+1
+d/home/kwstas/Desktop/csd
+	hy345
+9
+d/home/kwstas/Desktop/csd/hy345
+	assignment1
+2
+d/home/kwstas/Desktop/csd/hy345/assignment1
+	cshell.c
+4
+d/home/kwstas/Desktop/csd/hy345
+	assignment1
+2
+d/home/kwstas/Desktop/csd
+	hy345
+9
+d/home/kwstas/Desktop
+	csd
 1
 d/home/kwstas
 	Pictures
-7
-d/home/kwstas/Pictures
-	step82.png
-3
-d/home/kwstas/Desktop/csd/hy335/hw2
-	src
-2
-d/home/kwstas/Desktop/csd/hy335/hw2/src
-	WebClient.java
-2
-d/home/kwstas/Desktop/csd/hy335/hw2
-	panagia.html
 4
-d/home/kwstas/Downloads
-	3.jpg
-13
 d/home/kwstas/Pictures
-	GETafterRemove.png
-1
+	..
+0
 d/home/kwstas
-	Downloads
-3
-d/home/kwstas/Downloads
-	1457440179_monokai.zip
-18
-d/media/sdb2
-	photo_2019-11-11_15-51-43.jpg
-10
-d/home/kwstas/Desktop/csd/hy345/assignment2
-	main.c
+	Desktop
 1
+d/home/kwstas/.config/vifm
+	colors
+1
+d/home/kwstas/.config
+	vifm
+41
+d/home/kwstas
+	Desktop
+1
+d/home/kwstas/Desktop
+	csd
+1
+d/home/kwstas/Desktop/csd
+	hy359
+10
+d/home/kwstas/Desktop/csd/hy359
+	hy359-2019-a5
+6
+d/home/kwstas/Desktop/csd
+	hy345
+9
 d/home/kwstas/Desktop/csd/hy345
 	assignment1
-1
+2
 d/home/kwstas/Desktop/csd/hy345/assignment1
 	README
 2
 d/home/kwstas/Desktop/csd/hy345
 	assignment2
-2
-d/home/kwstas/Desktop/csd/hy345/assignment2
-	Makefile
-1
-d/usr/share/icons/hicolor/22x22/apps
-	75198-nm-applet_icons.tar.gz
-2
-d/home/kwstas/Downloads/nm
-	network-wired-activated.svg
-2
-d/home/kwstas/Downloads
-	nm
+3
+d/home/kwstas/Desktop/csd
+	hy359
 10
-d/home/kwstas/Downloads/nm
-	network-wired-unavailable.svg
+d/home/kwstas/Desktop/csd/hy359
+	hy359-2019-a2
 3
-d/home/kwstas/Downloads/NetworkManager Icons
-	nm-signal-100.png
-5
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3
+d/home/kwstas/Desktop/csd/hy359/hy359-2019-a2
 	logbook
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook
-	src
 2
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src
-	main
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main
-	..
-0
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src
-	main
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook
+d/home/kwstas/Desktop/csd/hy359/hy359-2019-a2/logbook
 	doc
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/doc
-	trips
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook
-	src
 2
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src
-	main
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main
-	webapp
-2
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/webapp
-	WEB-INF
-2
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/webapp/WEB-INF
+d/home/kwstas/Desktop/csd/hy359/hy359-2019-a2/logbook/doc
 	..
 0
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/webapp
-	META-INF
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/webapp/META-INF
-	context.xml
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/webapp
-	WEB-INF
-2
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/webapp/WEB-INF
-	..
-0
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/webapp
-	README
-3
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main
-	java
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/java
-	gr
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/java/gr
-	csd
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/java
-	gr
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main
-	webapp
-2
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/webapp
-	META-INF
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main
-	java
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/java
-	gr
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/java/gr
-	csd
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/java/gr/csd
-	uoc
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/java/gr/csd/uoc
-	cs359
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/java/gr/csd/uoc/cs359
-	winter2019
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/java/gr/csd/uoc/cs359/winter2019
-	logbook
-1
-d/home/kwstas/Desktop/csd/hy359/hy359-2019-a3/logbook/src/main/java/gr/csd/uoc/cs359/winter2019/logbook
-	db
-1
 d/home/kwstas/Desktop/csd/hy359/hy359-2019-a2/logbook
 	face++
 3
@@ -202,155 +148,191 @@ d/home/kwstas/Desktop/csd/hy359/hy359-2019-a2/logbook/face++
 	js
 1
 d/home/kwstas/Desktop/csd/hy359/hy359-2019-a2/logbook/face++/js
-	face.js
-1
+	..
+0
 d/home/kwstas/Desktop/csd/hy359/hy359-2019-a2/logbook/face++
 	js
 1
 d/home/kwstas/Desktop/csd/hy359/hy359-2019-a2/logbook
-	doc
+	js
+4
+d/home/kwstas/Desktop/csd/hy359/hy359-2019-a2/logbook/js
+	..
+0
+d/home/kwstas/Desktop/csd/hy359/hy359-2019-a2/logbook
+	js
+4
+d/home/kwstas/Desktop/csd/hy359/hy359-2019-a2
+	logbook
+2
+d/home/kwstas/Desktop/csd/hy359
+	hy359-2019-a2
+3
+d/home/kwstas/Desktop/csd
+	hy359
+10
+d/home/kwstas/Desktop
+	csd
+1
+d/home/kwstas
+	Pictures
+4
+d/home/kwstas/Pictures
+	nikospsd.png
+10
+d/home/kwstas
+	vimwiki_html
+7
+d/home/kwstas/vimwiki_html
+	ask2.pdf
 2
 d/home/kwstas
-	apache-tomcat-8.0.27
-11
-d/home/kwstas/apache-tomcat-8.0.27
-	bin
-1
+	Downloads
+3
 d/home/kwstas/Downloads
 	Final Fantasy VI Advance (E)(Eternity)
 1
-d/home/kwstas/Downloads/Final Fantasy VI Advance (E)(Eternity)
-	2753 - Final Fantasy VI Advance (E)(Eternity).gba
-1
-d/home/kwstas/Downloads
-	friends
-8
-d/home/kwstas/Downloads/friends
+d/home/kwstas
+	Pictures
+4
+d/home/kwstas/Pictures
+	wallhaven-ymwmek_1366x768.png
+7
+d/home/kwstas
+	vimwiki_html
+7
+d/home/kwstas/vimwiki_html
+	ex08.html
+5
+d/home/kwstas
+	aaa
+5
+d/home/kwstas/aaa
 	..
 0
-d/home/kwstas/Downloads
-	icons
-8
-d/home/kwstas/Downloads/icons
-	apps
-1
-d/home/kwstas/Downloads/icons/apps
-	..
-0
-d/home/kwstas/Downloads/icons
-	apps
-1
-d/home/kwstas/Downloads
-	NetworkManager Icons
+d/home/kwstas
+	vimwiki_html
+7
+d/home/kwstas/vimwiki_html
+	ask3.html
+3
+d/home/kwstas
+	Pictures
+4
+d/home/kwstas/Pictures
+	nikospsd.png
 2
 d/home/kwstas
-	node_modules
-14
-d/home/kwstas/node_modules
+	Desktop
+1
+d/home/kwstas/Desktop
+	csd
+1
+d/home/kwstas
+	Desktop
+1
+d/home/kwstas/Desktop
+	random
+2
+d/home/kwstas/Desktop/random
 	..
 0
+d/home/kwstas/Desktop
+	csd
+1
+d/home/kwstas/Desktop/csd
+	hy359
+10
+d/home/kwstas/Desktop
+	random
+2
+d/home/kwstas/Desktop/random
+	rustlings
+6
+d/home/kwstas/Desktop/random/rustlings
+	..
+0
+d/home/kwstas/Desktop/random
+	rust-by-example
+5
+d/home/kwstas/Desktop/random/rust-by-example
+	..
+0
+d/home/kwstas/Desktop/random
+	Hacking, Security
+2
+d/home/kwstas/Desktop/random/Hacking, Security
+	..
+0
+d/home/kwstas/Desktop/random
+	Hacking, Security
+2
+d/home/kwstas/Desktop/random/Hacking, Security
+	Hack-IT-Security-Through-Penetration-Testing.chm
+16
+d/home/kwstas/Desktop/random
+	rustlings
+6
+d/home/kwstas/Desktop
+	random
+2
 d/home/kwstas
-	glassfish-4.1.1
-11
+	Downloads
+3
+d/home/kwstas/Downloads
+	Telegram Desktop
+4
+d/home/kwstas/Downloads/Telegram Desktop
+	app.java
+7
+d/home/kwstas/Downloads
+	Telegram Desktop
+4
+d/home/kwstas
+	Downloads
+3
 d/home
 	kwstas
 1
 d/home/kwstas
-	Templates
-9
-d/home/kwstas/Templates
+	go
+5
+d/home/kwstas/go
+	pkg
+1
+d/home/kwstas/go/pkg
+	..
+0
+d/home/kwstas/go
+	pkg
+1
+d/home/kwstas
+	vimwiki_html
+6
+d/home/kwstas/vimwiki_html
+	ask3.pdf
+4
+d/home/kwstas
+	..
+0
+d/home
+	kwstas
+1
+d/home/kwstas
+	Documents
+2
+d/home/kwstas/Documents
 	..
 0
 d/home/kwstas
 	Pictures
-7
-d/home/kwstas/Documents/polybar-themes
-	polybar-10
-10
-d/home/kwstas/Documents/polybar-themes/polybar-10
-	fonts
-1
-d/usr/share/fonts
-	100dpi
-2
-d/usr/share/fonts/100dpi
-	..
-0
-d/usr/share/fonts
-	100dpi
-2
-d/usr/share
-	fonts
-35
-d/usr
-	share
-9
-d/
-	home
 4
-d/home
-	kwstas
-1
-d/home/kwstas
-	Documents
-31
-d/home/kwstas/Documents
-	polybar
+d/home/kwstas/Pictures
+	wallhaven-ymwmek_1366x768.png
 7
-d/home/kwstas/Documents/polybar
-	launch.sh
-2
-d/home/kwstas/Documents
-	polybar-scripts
-4
-d/home/kwstas
-	Documents
-31
-d/home
-	kwstas
-1
-d/
-	usr
-19
-d/usr
-	share
-9
-d/usr/share
-	rofi
-35
-d/usr/share/rofi
-	themes
-1
-d/usr/share/rofi/themes
-	Arc.rasi
-3
-d/usr/share/rofi
-	themes
-1
-d/usr/share/rofi/themes
-	Arc.rasi
-3
 d
 
 # Right window history (oldest to newest):
-D/usr/share/icons/breeze-dark/apps
-	22@2x
-4
-D/usr/share/icons/breeze-dark/apps/22@2x
-	kde.svg
-9
-D/usr/share/icons/breeze-dark/apps
-	22
-3
-D/usr/share/icons/breeze-dark/apps/22
-	system-file-manager.svg
-18
-D/usr/share/icons/breeze-dark/apps
-	22
-3
-D/usr/share/icons/breeze-dark
-	icon-theme.cache
-14
 D/usr/share/icons
 	breeze-dark
 6
@@ -632,7 +614,25 @@ D/home/kwstas/.config
 19
 D/home/kwstas
 	.config
-4
+6
+D/home/kwstas/.config
+	vifm
+20
+D/home/kwstas/.config/vifm
+	SETUP
+3
+D/home/kwstas/.config
+	teams
+16
+D/home/kwstas
+	Desktop
+1
+D/home/kwstas/Desktop
+	random
+2
+D/home/kwstas
+	go
+5
 D
 
 # Command line history (oldest to newest):
@@ -642,14 +642,11 @@ D
 :!desktop
 :cd random/
 :cd ~/.config/vifm/
-:colorscheme dracula
-:colorscheme solarized-dark
 :colorscheme darkdesert
 :colorscheme iceberg
 :colorscheme lucius
 :colorscheme near-default
 :colorscheme mc-like
-:colorscheme ph
 :!mv ex45 ex045
 :pane
 :help
@@ -658,12 +655,27 @@ D
 :sp
 :vsp
 :colorscheme reicheltd-light
-:colorscheme matrix
 :colorscheme molokai
 :!mkdir friends
 :h
-:q
+:go
+:cd
+:cd csd
+:cd hy359
 :wq
+:gq
+:pwd
+:cd pwd
+:cd 
+:cd $(pwd)
+:zip
+:mkcd aaa
+:colorscheme dracula
+:colorscheme matrix
+:colorscheme solarized-dark
+:colorscheme ph
+:q
+:mkdir aaaaa
 
 # Search history (oldest to newest):
 /nm-
@@ -671,6 +683,7 @@ D
 /config
 /docum
 /rofi
+/con
 
 # Prompt history (oldest to newest):
 p[TorrentCouch.com].Lucifer.S03E05.720p.BRRip.x264.ESubs.mkv
@@ -694,11 +707,17 @@ pChannelZeroSeason3Complete720pHDTVx264
 p1.jpg
 p2.jpg
 p3.jpg
+phy252
+phy240
+pask2A_3972.pdf
+pask2A_3972.tex
+pneomutt
+pneomuttrc
 
 # Local filter history (oldest to newest):
 
 # Registers:
-""/home/kwstas/.local/share/vifm/Trash/000_config.ini
+""/home/kwstas/.local/share/vifm/Trash/000_aaaaa
 
 # Directory stack (oldest to newest):
 
@@ -749,14 +768,68 @@ t/home/kwstas/.local/share/vifm/Trash/000_wallpaper
 	/home/kwstas/.config/polybar/wallpaper
 t/home/kwstas/.local/share/vifm/Trash/000_config.ini
 	/home/kwstas/.config/polybar/config.ini
+t/home/kwstas/.local/share/vifm/Trash/000_Dead Cells.desktop
+	/home/kwstas/Desktop/Dead Cells.desktop
+t/home/kwstas/.local/share/vifm/Trash/000_steam.desktop
+	/home/kwstas/Desktop/steam.desktop
+t/home/kwstas/.local/share/vifm/Trash/000_postponed
+	/home/kwstas/~/postponed
+t/home/kwstas/.local/share/vifm/Trash/000_~
+	/home/kwstas/~
+t/home/kwstas/.local/share/vifm/Trash/000_1200px-Flag_of_France.svg.png
+	/home/kwstas/Pictures/1200px-Flag_of_France.svg.png
+t/home/kwstas/.local/share/vifm/Trash/000_1200px-Flag_of_Italy.svg.png
+	/home/kwstas/Pictures/1200px-Flag_of_Italy.svg.png
+t/home/kwstas/.local/share/vifm/Trash/000_1280px-Flag_of_Germany.svg.png
+	/home/kwstas/Pictures/1280px-Flag_of_Germany.svg.png
+t/home/kwstas/.local/share/vifm/Trash/000_2000px-Flag_of_Greece.svg.png
+	/home/kwstas/Pictures/2000px-Flag_of_Greece.svg.png
+t/home/kwstas/.local/share/vifm/Trash/000_indians-are-increasingly-renting-cars-instead-of-buying-but-does-it-really-suit-you.jpg
+	/home/kwstas/Pictures/indians-are-increasingly-renting-cars-instead-of-buying-but-does-it-really-suit-you.jpg
+t/home/kwstas/.local/share/vifm/Trash/000_Homepage01_homepage.jpg
+	/home/kwstas/Pictures/Homepage01_homepage.jpg
+t/home/kwstas/.local/share/vifm/Trash/000_Offers01_homepage.jpg
+	/home/kwstas/Pictures/Offers01_homepage.jpg
+t/home/kwstas/.local/share/vifm/Trash/000_i3wm.png
+	/home/kwstas/Pictures/i3wm.png
+t/home/kwstas/.local/share/vifm/Trash/000_snake_game.png
+	/home/kwstas/Pictures/snake_game.png
+t/home/kwstas/.local/share/vifm/Trash/000_ask2.pdf.zip
+	/home/kwstas/vimwiki_html/ask2.pdf.zip
+t/home/kwstas/.local/share/vifm/Trash/000_aaa
+	/home/kwstas/aaa
+t/home/kwstas/.local/share/vifm/Trash/000_Main.class
+	/home/kwstas/Desktop/random/Main.class
+t/home/kwstas/.local/share/vifm/Trash/000_a.class
+	/home/kwstas/Desktop/random/a.class
+t/home/kwstas/.local/share/vifm/Trash/001_a.out
+	/home/kwstas/Desktop/random/a.out
+t/home/kwstas/.local/share/vifm/Trash/000_b.class
+	/home/kwstas/Desktop/random/b.class
+t/home/kwstas/.local/share/vifm/Trash/000_i3config_bcp
+	/home/kwstas/Desktop/random/i3config_bcp
+t/home/kwstas/.local/share/vifm/Trash/000_config
+	/home/kwstas/Desktop/random/config
+t/home/kwstas/.local/share/vifm/Trash/000_index.html
+	/home/kwstas/Desktop/random/index.html
+t/home/kwstas/.local/share/vifm/Trash/000_qq.html
+	/home/kwstas/Desktop/random/qq.html
+t/home/kwstas/.local/share/vifm/Trash/000_qq.java
+	/home/kwstas/Desktop/random/qq.java
+t/home/kwstas/.local/share/vifm/Trash/000_qq2.c
+	/home/kwstas/Desktop/random/qq2.c
+t/home/kwstas/.local/share/vifm/Trash/000_qq.c
+	/home/kwstas/Desktop/random/qq.c
+t/home/kwstas/.local/share/vifm/Trash/000_aaaaa
+	/home/kwstas/aaaaa
 
 # State:
 f
 i1
-[.0
+[.1
 [F
 F
 I1
-].0
+].1
 ]F
 s0

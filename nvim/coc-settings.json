@@ -1,8 +1,9 @@
 {
-    "list.source.files.excludePatterns": ["*/tmp/*","*.so","*.swp","*.zip","*.d","*.o","*.bin","*.sh","*.svg","*.mkv","*.png","*.mkv","*.avi","*.mp4","*.iso","*.tar.gz","*.jpg","*.pdf"],
+    "list.source.files.excludePatterns": ["*/tmp/*","**/target/**","screenshots/**","*.so","*.swp","*.zip","*.d","*.o","*.bin","*.sh","*.svg","*.mkv","*.png","*.mkv","*.avi","*.mp4","*.iso","*.tar.gz","**.jpg","*.pdf"],
     "explorer.icon.enableNerdfont": true,
     "explorer.buffer.showHiddenBuffers": true,
     "explorer.width": 27,
+    "explorer.previewAction.onHover": false,
     "emmet.includeLanguages": {"jsp": "html"},
     "snippets.loadFromExtensions": true,
     "snippets.ultisnips.enable": true,

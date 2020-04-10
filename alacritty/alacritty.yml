@@ -86,7 +86,6 @@ scrolling:
   # Specifying `0` will disable faux scrolling.
 
   # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: false
 
 # Spaces per Tab (changes require restart)
 #
@@ -95,13 +94,12 @@ scrolling:
 # Some applications, like Emacs, rely on knowing about the width of a tab.
 # To prevent unexpected behavior in these applications, it's also required to
 # change the `it` value in terminfo when altering this setting.
-tabspaces: 8
 
 # Font configuration (changes require restart)
 font:
   # Normal (roman) font face
   normal:
-      family: Roboto Mono
+      family: Roboto Mono Nerd Font
       style: Regular
     #family: Droid Sans Mono
     #style: Regular
@@ -129,7 +127,7 @@ font:
     #style: Italic
 
   # Point size
-  size: 7.4
+  size: 7
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -163,34 +161,62 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Tomorrow Night Bright)
+# Colors (Srcery)
 colors:
   # Default colors
   primary:
-    background: '0x1d1f21'
-    foreground: '0xc5c8c6'
+    background: '0x1c1b19'
+    foreground: '0xfce8c3'
 
   # Normal colors
   normal:
-    black:   '0x1d1f21'
-    red:     '0xcc342b'
-    green:   '0x198844'
-    yellow:  '0xfba922'
-    blue:    '0x3971ed'
-    magenta: '0xa36ac7'
-    cyan:    '0x3971ed'
-    white:   '0xc5c8c6'
+    black:   '0x1c1b19'
+    red:     '0xef2f27'
+    green:   '0x519f50'
+    yellow:  '0xfbb829'
+    blue:    '0x2c78bf'
+    magenta: '0xe02c6d'
+    cyan:    '0x0aaeb3'
+    white:   '0xd0bfa1'
 
   # Bright colors
   bright:
-    black:   '0x969896'
-    red:     '0xcc342b'
-    green:   '0x198844'
-    yellow:  '0xfba922'
-    blue:    '0x3971ed'
-    magenta: '0xa36ac7'
-    cyan:    '0x3971ed'
-    white:   '0xffffff'
+    black:   '0x918175'
+    red:     '0xf75341'
+    green:   '0x98bc37'
+    yellow:  '0xfed06e'
+    blue:    '0x68a8e4'
+    magenta: '0xff5c8f'
+    cyan:    '0x53fde9'
+    white:   '0xfce8c3'
+# Colors (Google Dark)
+#colors:
+  ## Default colors
+  #primary:
+    #background: '0x1d1f21'
+    #foreground: '0xc5c8c6'
+
+  ## Normal colors
+  #normal:
+    #black:   '0x1d1f21'
+    #red:     '0xcc342b'
+    #green:   '0x198844'
+    #yellow:  '0xfba922'
+    #blue:    '0x3971ed'
+    #magenta: '0xa36ac7'
+    #cyan:    '0x3971ed'
+    #white:   '0xc5c8c6'
+
+  ## Bright colors
+  #bright:
+    #black:   '0x969896'
+    #red:     '0xcc342b'
+    #green:   '0x198844'
+    #yellow:  '0xfba922'
+    #blue:    '0x3971ed'
+    #magenta: '0xa36ac7'
+    #cyan:    '0x3971ed'
+    #white:   '0xffffff'
 #colors:
   # Default colors
   #primary:
@@ -262,7 +288,7 @@ visual_bell:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.85
+background_opacity: 0.95
 
 # Mouse bindings
 #

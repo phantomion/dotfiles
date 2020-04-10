@@ -20,7 +20,7 @@ new_window pixel 2
 new_float normal
 
 # Font for window titles
-font xft:Roboto Mono Regular 8.5
+font xft:Roboto Mono Nerd Font Regular 8.5
 
 # Hide borders
 hide_edge_borders none
@@ -93,8 +93,9 @@ bindsym $mod+Ctrl+m exec pavucontrol
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
 bindsym $mod+Shift+b exec firefox
+bindsym $mod+Shift+p exec firefox --private-window
 bindsym $mod+d exec rofi -show drun
-bindsym $mod+Shift+f exec terminal -e vifm
+bindsym $mod+Shift+f exec alacritty -e sh ~/.config/vifm/scripts/vifmrun
 bindsym $mod+Ctrl+b exec alacritty -e bmenu
 bindsym Mod1+Tab workspace back_and_forth
 bindsym F11 exec flameshot gui
@@ -102,7 +103,8 @@ bindsym F11 exec flameshot gui
 # Media volume controls
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
+#bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
+bindsym XF86AudioMicMute exec --no-startup-id amixer set Capture toggle
 
 #Brightness Controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
@@ -173,7 +175,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id ~/glitchlock/glitchlock
+    bindsym l exec --no-startup-id GLITCHICON=~/Documents/glitchlock/arch.png ~/Documents/glitchlock/glitchlock, mode "default"
     bindsym s exec --no-startup-id i3exit suspend, mode "default"
     bindsym u exec --no-startup-id i3exit switch_user, mode "default"
     bindsym e exec --no-startup-id i3exit logout, mode "default"
@@ -204,17 +206,14 @@ exec --no-startup-id volumeicon
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore; sleep 1; compton --config ~/.config/compton/compton.conf -b
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+exec --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:lalt_lshift_toggle"
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
 exec --no-startup-id flameshot
 exec --no-startup-id clipit -d
-#exec --no-startup-id kdeconnect-indicator
-exec --no-startup-id xautolock -time 20 -locker ~/glitchlock/glitchlock
-#exec_always --no-startup-id ff-theme-util
+exec --no-startup-id xautolock -time 20 -locker ~/Documents/glitchlock/glitchlock
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id  sh $HOME/.config/polybar/launch.sh
-exec --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:lalt_lshift_toggle"
 exec_always --no-startup-id "xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
 exec_always --no-startup-id xmodmap ~/.Xmodmap &
 

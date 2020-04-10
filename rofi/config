@@ -11,7 +11,7 @@ rofi.lines:                          10
 rofi.columns:                        1
 
 "Font to use" Set from: Default
-rofi.font:                           roboto mono regular 12
+rofi.font:                           roboto mono nerd font regular 12
 
 "Border width" Set from: Default
 rofi.bw:                             1

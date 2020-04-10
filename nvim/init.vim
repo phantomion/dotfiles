@@ -7,11 +7,9 @@ Plug 'pangloss/vim-javascript' " If you're 555 then I'm 666
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " GET THIS OR DIE
 Plug 'itchyny/lightline.vim' " Status bar
 Plug 'mengelbrecht/lightline-bufferline' " bufferline
-Plug 'jiangmiao/auto-pairs' " Auto pairs
 Plug 'scrooloose/nerdcommenter' " Smart comments
 Plug 'tpope/vim-surround' " Surround everything
 Plug 'rust-lang/rust.vim' " rust lang
-Plug 'ctrlpvim/ctrlp.vim' " vim fuzzy finder
 Plug 'ryanoasis/vim-devicons' " fancy bloat icons
 Plug 'jaxbot/browserlink.vim' " live preview
 Plug 'tpope/vim-fugitive' " oh well
@@ -19,6 +17,8 @@ Plug 'honza/vim-snippets'
 Plug 'majutsushi/tagbar'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'vimwiki/vimwiki'
+Plug 'mboughaba/i3config.vim'
+Plug 'jiangmiao/auto-pairs' " Auto pairs
 call plug#end()
 
 " --------------coc.nvim---------------
@@ -29,12 +29,11 @@ inoremap <silent><expr> <TAB>
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 if has('patch8.1.1068')
-  " Use `complete_info` if your (Neo)Vim version supports it.
   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 let g:coc_snippet_next = '<C-l>'
 let g:coc_snippet_prev = '<C-h>'
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -44,7 +43,9 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gi <Plug>(coc-implementation)
+nmap <leader>rn <Plug>(coc-rename)
 nnoremap <C-n> :CocCommand explorer<CR>
+nnoremap <C-p> :CocList --auto-preview --number-select files<CR>
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
         execute 'h '.expand('<cword>')
@@ -61,19 +62,12 @@ set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 
- "------------Lightline-------------
+"------------Lightline-------------
 let g:lightline = {'colorscheme': 'darcula'}
 let g:table_mode_corner='|'
 
- "------------Vimwiki-------------
+"------------Vimwiki-------------
 let g:vimwiki_text_ignore_newline = 0
-
-" ---------CtrlP----------
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso,*.tar.gz,*.jpg,*.pdf,*.class,target/*
 
 " -----Lightline-Bufferline-----
 set showtabline=1
@@ -83,7 +77,7 @@ let g:lightline.component_type = {'buffers': 'tabsel'}
 let g:lightline#bufferline#show_number  = 2
 let g:lightline#bufferline#min_buffer_count = 2
 let g:lightline#bufferline#enable_devicons = 1
-let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#shorten_path = 1
 let g:lightline#bufferline#unicode_symbols = 1
 nmap <Leader>1 <Plug>lightline#bufferline#go(1)
 nmap <Leader>2 <Plug>lightline#bufferline#go(2)
@@ -96,7 +90,6 @@ nmap <Leader>8 <Plug>lightline#bufferline#go(8)
 nmap <Leader>9 <Plug>lightline#bufferline#go(9)
 nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 
-let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 nnoremap <C-b> :TagbarToggle<CR>
 "}}}
 
@@ -104,7 +97,6 @@ nnoremap <C-b> :TagbarToggle<CR>
 "{{{
 let mapleader=" " " Set the map leader to <Space>
 set mouse+=a
-nmap <leader>rn <Plug>(coc-rename)
 set nu " Enable line numbers
 set modifiable
 set autoread
@@ -126,20 +118,9 @@ set completeopt=longest,menuone,noselect " Improve completion menu
 set undofile
 set foldmethod=indent
 set foldlevel=20
-" set whichwrap+=<,>,h,l
-let g:clipboard = {
-            \   'name': 'myClipboard',
-            \   'copy': {
-            \      '+': 'xclip',
-            \      '*': 'xclip',
-            \   },
-            \   'paste': {
-            \      '+': '+',
-            \      '*': '*',
-            \   },
-            \   'cache_enabled': 1,
-            \ }
-set clipboard+=unnamedplus,unnamed
+set inccommand=split
+set clipboard=unnamed
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso,*.tar.gz,*.jpg,*.pdf,*.class,target/*
 
 " Set the backup/undo/swap files to be in /tmp
 set backupdir=/tmp//
@@ -204,16 +185,27 @@ nnoremap <C-e> :bn<CR>
 nnoremap <C-q> :bp<CR>
 tnoremap <ESC> <C-\><C-n>
 nnoremap <silent> <Leader>y  :<C-u>CocList -A --normal yank<cr>
+" Clipboard
+vnoremap <C-c> "+y
+nnoremap <A-v> "+p
 "}}}
 
 " ------Autocommands------
 " {{{
 
 " Easy Install CocExtensions
+" Use :call InstallCoc()
 function! InstallCoc()
     CocInstall coc-css coc-dictionary coc-emmet coc-explorer coc-yank
     CocInstall coc-git coc-highlight coc-html coc-java coc-json coc-lists
     CocInstall coc-rls coc-snippets coc-tag coc-template coc-texlab coc-tsserver
+    CocInstall coc-marketplace
+endfunction
+
+function! Explorer()
+    if (@%=='')
+        CocCommand explorer
+    endif
 endfunction
 
 " Get help
@@ -250,18 +242,19 @@ function! Help()
     echom "F6: session.load"
     echom "F7: session.save"
 endfunction
-if has('nvim')
-    autocmd TermOpen term://* startinsert
-endif
+
+command! Marketplace execute "CocList marketplace"
 
 augroup general
-    autocmd FileType * nnoremap <Leader>cm I/*<Esc>A*/<Esc>
+    autocmd!
+    autocmd TermOpen term://* startinsert
     autocmd FileType * nnoremap <Leader>o o<ESC>k
     autocmd FileType * nnoremap <Leader>O O<ESC>j
     autocmd FileType * nnoremap <F9> :call Help()<CR>
     autocmd FileType * nnoremap <Leader>cf i/<ESC>70a*<ESC>o<ESC>69a*<ESC>a/<ESC>ko*<ESC>ha
     autocmd FileType * nnoremap <F8> :e %<CR>
     autocmd FocusGained * :checktime
+    autocmd VimEnter * :call Explorer()
 augroup END
 
 " ------------fugitive--------------
@@ -295,9 +288,6 @@ augroup cc
     autocmd!
     autocmd FileType c nnoremap <F4> :w<CR> :make<CR>
     autocmd FileType c nnoremap <F5> :w<CR> :vsplit term://./%:r<CR>
-    autocmd FileType c inoremap <Leader>inpstr char c;<CR>while(c!=EOF){<CR>c=getchar();<CR>}<Esc>O
-    autocmd FileType c inoremap <Leader>incl #include <><Esc>i
-    autocmd FileType c inoremap <Leader>cm <Esc>A/**/
 augroup END
 
 " --------------vim---------------
@@ -305,6 +295,7 @@ augroup nvim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
     autocmd FileType vim nnoremap <F5> :source ~/.config/nvim/init.vim<CR>
+    autocmd FileType vim nnoremap <Leader>b :e ~/.config/nvim/coc-settings.json<CR>
 augroup END
 
 " --------------coc session------------
@@ -334,4 +325,16 @@ augroup remember_folds
   au BufWinEnter ?* silent! loadview 1
 augroup END
 
+" -----------i3-syntax------------
+augroup i3syntax
+    autocmd!
+    autocmd BufRead $HOME/.config/i3/config set ft=i3config
+augroup END
+
+" ----------latex----------
+augroup tex
+    autocmd!
+    autocmd FileType tex let b:AutoPairs = AutoPairsDefine({"$": "$"})
+    autocmd FileType tex nnoremap <F3> :!setsid zathura %:r.pdf<CR><CR>
+augroup END
 " }}}

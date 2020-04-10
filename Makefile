@@ -28,7 +28,8 @@ alacrittyc:
 
 vifmc:
 	@echo "Getting vifm config."
-	@cp ~/.config/vifm/* vigm/
+	@cp ~/.config/vifm/vifmrc vifm/
+	@cp ~/.config/vifm/scripts/* vifm/scripts
 
 dunstc:
 	@echo "Getting dunst config."
