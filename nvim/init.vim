@@ -18,9 +18,11 @@ Plug 'majutsushi/tagbar'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'vimwiki/vimwiki'
 Plug 'mboughaba/i3config.vim'
+Plug 'zah/nim.vim'
 Plug 'jiangmiao/auto-pairs' " Auto pairs
 call plug#end()
 
+let mapleader=" " " Set the map leader to <Space>
 " --------------coc.nvim---------------
 inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
@@ -38,14 +40,14 @@ let g:coc_snippet_next = '<C-l>'
 let g:coc_snippet_prev = '<C-h>'
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nnoremap <silent> M :call <SID>show_documentation()<CR>
+nnoremap <silent> <A-m> :call <SID>show_documentation()<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <leader>rn <Plug>(coc-rename)
 nnoremap <C-n> :CocCommand explorer<CR>
-nnoremap <C-p> :CocList --auto-preview --number-select files<CR>
+nnoremap <C-p> :CocList --number-select files<CR>
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
         execute 'h '.expand('<cword>')
@@ -79,6 +81,8 @@ let g:lightline#bufferline#min_buffer_count = 2
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#shorten_path = 1
 let g:lightline#bufferline#unicode_symbols = 1
+let g:lightline#bufferline#clickable = 1
+let g:lightline.component_raw = {'buffers': 1}
 nmap <Leader>1 <Plug>lightline#bufferline#go(1)
 nmap <Leader>2 <Plug>lightline#bufferline#go(2)
 nmap <Leader>3 <Plug>lightline#bufferline#go(3)
@@ -95,7 +99,6 @@ nnoremap <C-b> :TagbarToggle<CR>
 
 "------EDITOR------
 "{{{
-let mapleader=" " " Set the map leader to <Space>
 set mouse+=a
 set nu " Enable line numbers
 set modifiable
@@ -116,8 +119,6 @@ set splitbelow splitright " Splits open at the bottom and right
 set noshowmode " Don't show the indicator in insert mode.
 set completeopt=longest,menuone,noselect " Improve completion menu
 set undofile
-set foldmethod=indent
-set foldlevel=20
 set inccommand=split
 set clipboard=unnamed
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso,*.tar.gz,*.jpg,*.pdf,*.class,target/*
@@ -251,7 +252,6 @@ augroup general
     autocmd FileType * nnoremap <Leader>o o<ESC>k
     autocmd FileType * nnoremap <Leader>O O<ESC>j
     autocmd FileType * nnoremap <F9> :call Help()<CR>
-    autocmd FileType * nnoremap <Leader>cf i/<ESC>70a*<ESC>o<ESC>69a*<ESC>a/<ESC>ko*<ESC>ha
     autocmd FileType * nnoremap <F8> :e %<CR>
     autocmd FocusGained * :checktime
     autocmd VimEnter * :call Explorer()
@@ -261,7 +261,7 @@ augroup END
 augroup git
     autocmd!
     autocmd FileType * nnoremap <F1> :Gwrite<CR>
-    autocmd FileType * nnoremap <F2> :Gcommit -m ""
+    autocmd FileType * nnoremap <F2> :Gcommit -m ""<Left>
 augroup END
 
 " -----------html-------------
@@ -283,6 +283,14 @@ augroup rust
     autocmd FileType rust nnoremap <F6> :w<CR> :vsplit term://cargo test<CR>
 augroup END
 
+augroup nim
+    autocmd!
+    autocmd BufNewFile,BufRead *.nim set filetype=nim
+    autocmd FileType nim nnoremap <F3> :w<CR> :vsplit term://nim c -r %<CR>
+    autocmd FileType nim nnoremap <F4> :w<CR> :vsplit term://nimble run *.nimble<CR>
+    autocmd FileType nim nnoremap <F5> :w<CR> :vsplit term://nimble run
+augroup END
+
 " ----------C Specific-----------
 augroup cc
     autocmd!
@@ -295,7 +303,7 @@ augroup nvim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
     autocmd FileType vim nnoremap <F5> :source ~/.config/nvim/init.vim<CR>
-    autocmd FileType vim nnoremap <Leader>b :e ~/.config/nvim/coc-settings.json<CR>
+    autocmd FileType vim nnoremap <Leader>b :CocConfig<CR>
 augroup END
 
 " --------------coc session------------
@@ -320,9 +328,9 @@ augroup END
 
 " -------------remember_folds-------------
 augroup remember_folds
-  autocmd!
-  au BufWinLeave ?* mkview 1
-  au BufWinEnter ?* silent! loadview 1
+    autocmd!
+    au BufWinLeave ?* mkview 1
+    au BufWinEnter ?* silent! loadview 1
 augroup END
 
 " -----------i3-syntax------------

@@ -16,6 +16,7 @@ style = "cyan"
 
 [git_branch]
 symbol = ""
+prefix = ""
 style = "bold #D82B69"
 
 [hostname]

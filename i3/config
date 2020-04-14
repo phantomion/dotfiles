@@ -90,8 +90,8 @@ bindsym $mod+Shift+q kill
 
 # Application shortcuts
 bindsym $mod+Ctrl+m exec pavucontrol
-bindsym $mod+t exec --no-startup-id pkill compton
-bindsym $mod+Ctrl+t exec --no-startup-id compton -b
+bindsym $mod+t exec --no-startup-id pkill picom
+bindsym $mod+Ctrl+t exec --no-startup-id picom -b
 bindsym $mod+Shift+b exec firefox
 bindsym $mod+Shift+p exec firefox --private-window
 bindsym $mod+d exec rofi -show drun
@@ -204,7 +204,7 @@ exec --no-startup-id volumeicon
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; compton --config ~/.config/compton/compton.conf -b
+exec --no-startup-id nitrogen --restore; sleep 1; picom --config ~/.config/picom/picom.conf -b
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:lalt_lshift_toggle"
 exec --no-startup-id nm-applet
