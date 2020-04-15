@@ -1,4 +1,4 @@
-all: i3c nvimc polyc zshrc rofic alacrittyc vifmc dunstc starshipc
+all: i3c nvimc polyc zshrc rofic alacrittyc vifmc dunstc starshipc profilec
 	@echo "Getting all configs."
 
 i3c:
@@ -17,6 +17,10 @@ polyc:
 zshrc:
 	@echo "Getting oh.my.zsh config."
 	@cp ~/.zshrc .
+
+profilec:
+	@echo "Getting profile config."
+	@cp ~/.profile .
 
 rofic:
 	@echo "Getting rofi config."
@@ -39,7 +43,7 @@ starshipc:
 	@echo "Getting starship prompt"
 	@cp ~/.config/starship.toml .
 
-put: i3p nvimp polyp zshp rofip alacrittyp vifmp dunstp starshipp
+put: i3p nvimp polyp zshp rofip alacrittyp vifmp dunstp starshipp profilep
 	@echo"Put everything in place."
 
 i3p:
@@ -57,6 +61,11 @@ polyp:
 zshp:
 	@echo "Putting zsh config ${HOME}."
 	@cp .zshrc ${HOME}/
+
+profilep:
+	@echo "Putting profile config ${HOME}."
+	@cp .profile ${HOME}/
+
 rofip:
 	@echo "Putting rofi config ${HOME}/.config/rofi."
 	@cp -r rofi/ ${HOME}/.config/
