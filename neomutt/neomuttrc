@@ -1,0 +1,40 @@
+set folder="imaps://mailhost.csd.uoc.gr:993"
+set imap_user = "csd3972"
+set imap_pass = ""
+set smtp_url="smtps://$imap_user:$imap_pass@mailhost.csd.uoc.gr:465"
+
+set spoolfile="+INBOX"
+set record = "+Sent"
+set postponed = "+Drafts"
+set trash = "+Trash"
+mailboxes = +INBOX +Sent +Drafts +Trash
+set sort = "reverse-threads" #mail groups
+set sort_aux = last-date-received
+set my_user="csd3972"
+set realname="csd3972@csd.uoc.gr" #mail to be displayed on recipient
+
+set header_cache="~/.cache/neomutt/neomutt" #cache to load mails faster
+set sleep_time = 0 #speed up folder switch
+set from = "csd3972@csd.uoc.gr"
+set include=yes #include original mail when replying
+set use_from = yes
+set send_charset="utf-8"
+
+bind attach,index g first-entry
+bind attach,index G last-entry
+bind  generic        l select-entry
+bind  index          l display-message
+macro index          h '<change-folder>?'
+bind  index,pager    H display-toggle-weed
+bind  pager          h exit
+bind  pager          j next-line
+bind  pager          k previous-line
+bind  pager          l view-attachments
+bind  attach,compose l view-attach
+bind  attach         h exit
+bind  attach         H display-toggle-weed
+bind  compose        l view-attach
+bind index           za  collapse-thread
+bind index           zA  collapse-all
+bind index,pager B sidebar-toggle-visible
+source lukecolor.muttrc
