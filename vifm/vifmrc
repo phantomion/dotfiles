@@ -263,6 +263,8 @@ nnoremap ,C :!nvim $MYVIFMRC &<cr>
 nnoremap ,w :set wrap!<cr>
 
 nnoremap ; :
+nnoremap <A-j> 5j
+nnoremap <A-k> 5k
 
 " Example of standard two-panel file managers mappings
 nnoremap <f3> :!less %f<cr>

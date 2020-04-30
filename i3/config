@@ -35,17 +35,17 @@ for_window [class="Galculator"] floating enable border pixel 1
 for_window [class="GParted"] floating enable border normal
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-settings"] floating enable
-for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Lxappearance"] floating enable border normal
 for_window [class="Manjaro-hello"] floating enable
 for_window [class="Manjaro Settings Manager"] floating enable border normal
 for_window [title="MuseScore: Play Panel"] floating enable
-for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Nitrogen"] floating enable border normal
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
 for_window [title="About Pale Moon"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="qt5ct"] floating enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
@@ -107,8 +107,8 @@ bindsym F11 exec flameshot gui
 bindsym XF86AudioMicMute exec --no-startup-id amixer set Capture toggle
 
 #Brightness Controls
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
 
 # Change focus
 bindsym $mod+h focus left
@@ -204,7 +204,8 @@ exec --no-startup-id volumeicon
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id nitrogen --restore; sleep 1; picom --config ~/.config/picom/picom.conf -b
+exec --no-startup-id nitrogen --restore --set-auto --random;sleep 1;
+exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id "setxkbmap -model pc105 -layout us,gr -option grp:lalt_lshift_toggle"
 exec --no-startup-id nm-applet
@@ -213,7 +214,7 @@ exec --no-startup-id flameshot
 exec --no-startup-id clipit -d
 exec --no-startup-id xautolock -time 20 -locker ~/Documents/glitchlock/glitchlock
 exec_always --no-startup-id fix_xcursor
-exec_always --no-startup-id  sh $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id sh $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id "xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
 exec_always --no-startup-id xmodmap ~/.Xmodmap &
 

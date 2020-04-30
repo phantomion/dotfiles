@@ -1,25 +1,33 @@
 "===== PLUGINS =====
 "{{{
 call plug#begin('~/.config/nvim/plugged')
-Plug 'Erichain/vim-monokai-pro' " Kalutero sublime theme
+" -----colorschemes-----
+Plug 'Erichain/vim-monokai-pro'
 Plug 'srcery-colors/srcery-vim'
-Plug 'pangloss/vim-javascript' " If you're 555 then I'm 666
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " GET THIS OR DIE
+Plug 'dracula/vim'
+Plug 'chuling/vim-equinusocio-material'
+" -----langs----
+Plug 'rust-lang/rust.vim' " rust lang
+Plug 'pangloss/vim-javascript'
+Plug 'zah/nim.vim'
+" -----QoL-----
+Plug 'tpope/vim-surround' " Surround everything
+Plug 'scrooloose/nerdcommenter' " Smart comments
+Plug 'honza/vim-snippets'
+Plug 'jiangmiao/auto-pairs' " Auto pairs
+Plug 'majutsushi/tagbar'
 Plug 'itchyny/lightline.vim' " Status bar
 Plug 'mengelbrecht/lightline-bufferline' " bufferline
-Plug 'scrooloose/nerdcommenter' " Smart comments
-Plug 'tpope/vim-surround' " Surround everything
-Plug 'rust-lang/rust.vim' " rust lang
-Plug 'ryanoasis/vim-devicons' " fancy bloat icons
+Plug 'vimwiki/vimwiki'
+" -----dev tools----
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " GET THIS OR DIE
 Plug 'jaxbot/browserlink.vim' " live preview
 Plug 'tpope/vim-fugitive' " oh well
-Plug 'honza/vim-snippets'
-Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+" -----misc-----
+Plug 'ryanoasis/vim-devicons' " fancy bloat icons
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'vimwiki/vimwiki'
 Plug 'mboughaba/i3config.vim'
-Plug 'zah/nim.vim'
-Plug 'jiangmiao/auto-pairs' " Auto pairs
 call plug#end()
 
 let mapleader=" " " Set the map leader to <Space>
@@ -64,14 +72,14 @@ set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 
-"------------Lightline-------------
+"------------lightline-------------
 let g:lightline = {'colorscheme': 'darcula'}
 let g:table_mode_corner='|'
 
-"------------Vimwiki-------------
+"------------vimwiki-------------
 let g:vimwiki_text_ignore_newline = 0
 
-" -----Lightline-Bufferline-----
+" -----lightline-bufferline-----
 set showtabline=1
 let g:lightline.tabline = {'left': [['buffers']], 'right': [['close']]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
@@ -83,13 +91,13 @@ let g:lightline#bufferline#shorten_path = 1
 let g:lightline#bufferline#unicode_symbols = 1
 let g:lightline#bufferline#clickable = 1
 let g:lightline.component_raw = {'buffers': 1}
-nmap <Leader>1 <Plug>lightline#bufferline#go(1)
-nmap <Leader>2 <Plug>lightline#bufferline#go(2)
-nmap <Leader>3 <Plug>lightline#bufferline#go(3)
-nmap <Leader>4 <Plug>lightline#bufferline#go(4)
-nmap <Leader>5 <Plug>lightline#bufferline#go(5)
-nmap <Leader>6 <Plug>lightline#bufferline#go(6)
-nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <leader>1 <plug>lightline#bufferline#go(1)
+nmap <leader>2 <plug>lightline#bufferline#go(2)
+nmap <leader>3 <plug>lightline#bufferline#go(3)
+nmap <leader>4 <plug>lightline#bufferline#go(4)
+nmap <leader>5 <plug>lightline#bufferline#go(5)
+nmap <leader>6 <plug>lightline#bufferline#go(6)
+nmap <leader>7 <plug>lightline#bufferline#go(7)
 nmap <Leader>8 <Plug>lightline#bufferline#go(8)
 nmap <Leader>9 <Plug>lightline#bufferline#go(9)
 nmap <Leader>0 <Plug>lightline#bufferline#go(10)
@@ -99,6 +107,13 @@ nnoremap <C-b> :TagbarToggle<CR>
 
 "------EDITOR------
 "{{{
+" Set true colors
+if (has("nvim"))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+if (has("termguicolors"))
+    set termguicolors
+endif
 set mouse+=a
 set nu " Enable line numbers
 set modifiable
@@ -107,7 +122,7 @@ set relativenumber " Enable relative line numbers
 syntax on " Enable syntax highlighting
 colorscheme srcery " Set the colorscheme
 highlight CocErrorFloat ctermfg=white  guifg=white
-highlight Pmenu guifg=white guibg=dark
+"highlight Pmenu guifg=white guibg=dark
 set autoindent " Set code autoindentation
 set cursorline " Highlight current line
 set expandtab " don't use actual tab character (ctrl-v)
@@ -134,14 +149,6 @@ set smartcase " Smart Casing
 set hlsearch " Highlight search results
 set incsearch " Modern search
 set showmatch " Show matching brackets when text indicator is over them
-
-" Set true colors
-if (has("nvim"))
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-if (has("termguicolors"))
-    set termguicolors
-endif
 
 "Wildmode
 set wildmenu
@@ -209,6 +216,42 @@ function! Explorer()
     endif
 endfunction
 
+let g:rust_toggle=0
+function! Rust_toggle()
+    if g:rust_toggle
+        nnoremap <F3> :w<CR> :16split term://rustc % && ./%:r<CR>
+        nnoremap <F4> :w<CR> :16split term://cargo run<CR>
+        nnoremap <F5> :w<CR> :16split term://cargo run
+        nnoremap <F6> :w<CR> :16split term://cargo test<CR>
+        echom "16s"
+        let g:rust_toggle=0
+    else
+        nnoremap <F3> :w<CR> :vsplit term://rustc % && ./%:r<CR>
+        nnoremap <F4> :w<CR> :vsplit term://cargo run<CR>
+        nnoremap <F5> :w<CR> :vsplit term://cargo run
+        nnoremap <F6> :w<CR> :vsplit term://cargo test<CR>
+        echom "vs"
+        let g:rust_toggle=1
+    endif
+endfunction
+
+let g:nim_toggle=0
+function! Nim_toggle()
+    if g:nim_toggle
+        nnoremap <F3> :w<CR> :16split term://nim c -r %<CR>
+        nnoremap <F4> :w<CR> :16split term://nimble run *.nimble<CR>
+        nnoremap <F5> :w<CR> :16split term://nimble run *.nimble
+        echom "16s"
+        let g:nim_toggle=0
+    else
+        nnoremap <F3> :w<CR> :vsplit term://nim c -r %<CR>
+        nnoremap <F4> :w<CR> :vsplit term://nimble run *.nimble<CR>
+        nnoremap <F5> :w<CR> :vsplit term://nimble run *.nimble
+        echom "vs"
+        let g:nim_toggle=1
+    endif
+endfunction
+
 " Get help
 function! Help()
     echom "Git"
@@ -219,25 +262,27 @@ function! Help()
         echom "C"
         echom "F4: make"
         echom "F5: run"
-    endif
-    if (&ft=='html')
+    elseif (&ft=='html')
         echom "html"
         echom "F3: open server"
         echom "F4: run on localhost"
-    endif
-    if (&ft=='rust')
+    elseif (&ft=='rust')
         echom "rust"
         echom "F3: rustc and run"
         echom "F4: cargo run"
         echom "F5: cargo run + args"
         echom "F6: cargo test"
-    endif
-    if (&ft=='vimwiki')
+    elseif (&ft=='vimwiki')
         echom "vimwiki"
         echom "<Leader>h1-5 for headers"
         echom "F3: 2HTML"
         echom "F4: Create table"
         echom "F5: Open HTML"
+    elseif (&ft=='nim')
+        echom "Nim"
+        echom "F3: nim c -r"
+        echom "F4: nimble run"
+        echom "F5: nimble run + args"
     endif
     echom "CocSession"
     echom "F6: session.load"
@@ -255,6 +300,7 @@ augroup general
     autocmd FileType * nnoremap <F8> :e %<CR>
     autocmd FocusGained * :checktime
     autocmd VimEnter * :call Explorer()
+    "autocmd ColorScheme * hi VertSplit ctermfg=bg guifg=bg
 augroup END
 
 " ------------fugitive--------------
@@ -277,25 +323,28 @@ augroup END
 augroup rust
     autocmd!
     autocmd BufNewFile,BufRead *.rs set filetype=rust
-    autocmd FileType rust nnoremap <F3> :w<CR> :vsplit term://rustc % && ./%:r<CR>
-    autocmd FileType rust nnoremap <F4> :w<CR> :vsplit term://cargo run<CR>
-    autocmd FileType rust nnoremap <F5> :w<CR> :vsplit term://cargo run
-    autocmd FileType rust nnoremap <F6> :w<CR> :vsplit term://cargo test<CR>
+    autocmd FileType rust nnoremap <F3> :w<CR> :16split term://rustc % && ./%:r<CR>
+    autocmd FileType rust nnoremap <F4> :w<CR> :16split term://cargo run<CR>
+    autocmd FileType rust nnoremap <F5> :w<CR> :16split term://cargo run
+    autocmd FileType rust nnoremap <F6> :w<CR> :16split term://cargo test<CR>
+    autocmd FileType rust nnoremap <Leader>q :call Rust_toggle()<CR>
 augroup END
 
 augroup nim
     autocmd!
     autocmd BufNewFile,BufRead *.nim set filetype=nim
-    autocmd FileType nim nnoremap <F3> :w<CR> :vsplit term://nim c -r %<CR>
-    autocmd FileType nim nnoremap <F4> :w<CR> :vsplit term://nimble run *.nimble<CR>
-    autocmd FileType nim nnoremap <F5> :w<CR> :vsplit term://nimble run
+    autocmd FileType nim nnoremap <F3> :w<CR> :16split term://nim c -r %<CR>
+    autocmd FileType nim nnoremap <F4> :w<CR> :16split term://nimble run *.nimble<CR>
+    autocmd FileType nim nnoremap <F5> :w<CR> :16split term://nimble run *.nimble
+    autocmd FileType nim nnoremap <Leader>q :call Nim_toggle()<CR>
+    autocmd FileType nim colorscheme dracula
 augroup END
 
 " ----------C Specific-----------
 augroup cc
     autocmd!
     autocmd FileType c nnoremap <F4> :w<CR> :make<CR>
-    autocmd FileType c nnoremap <F5> :w<CR> :vsplit term://./%:r<CR>
+    autocmd FileType c nnoremap <F5> :w<CR> :16split term://./%:r<CR>
 augroup END
 
 " --------------vim---------------
@@ -319,11 +368,11 @@ augroup vimwik
     autocmd FileType vimwiki nnoremap <F3> :Vimwiki2HTMLBrowse<CR>
     autocmd FileType vimwiki nnoremap <F4> :VimwikiTable<CR>
     autocmd FileType vimwiki nnoremap <F5> :!setsid firefox ~/vimwiki_html/%:r.html<CR><CR>
-    autocmd FileType vimwiki nnoremap <Leader>h1 I=<ESC>A=<ESC>
-    autocmd FileType vimwiki nnoremap <Leader>h2 I==<ESC>A==<ESC>
-    autocmd FileType vimwiki nnoremap <Leader>h3 I===<ESC>A===<ESC>
-    autocmd FileType vimwiki nnoremap <Leader>h4 I====<ESC>A====<ESC>
-    autocmd FileType vimwiki nnoremap <Leader>h5 I=====<ESC>A=====<ESC>
+    autocmd FileType vimwiki nnoremap <Leader>h1 I= <ESC>A =<ESC>
+    autocmd FileType vimwiki nnoremap <Leader>h2 I== <ESC>A ==<ESC>
+    autocmd FileType vimwiki nnoremap <Leader>h3 I=== <ESC>A ===<ESC>
+    autocmd FileType vimwiki nnoremap <Leader>h4 I==== <ESC>A ====<ESC>
+    autocmd FileType vimwiki nnoremap <Leader>h5 I===== <ESC>A =====<ESC>
 augroup END
 
 " -------------remember_folds-------------
@@ -344,5 +393,8 @@ augroup tex
     autocmd!
     autocmd FileType tex let b:AutoPairs = AutoPairsDefine({"$": "$"})
     autocmd FileType tex nnoremap <F3> :!setsid zathura %:r.pdf<CR><CR>
+    autocmd FileType tex nnoremap <Leader>lor a$\lor$
+    autocmd FileType tex nnoremap <Leader>land a$\land$
+    autocmd FileType tex nnoremap <Leader>neg a$\neg$
 augroup END
 " }}}

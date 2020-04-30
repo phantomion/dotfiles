@@ -70,5 +70,6 @@ cdls() {
     ls -a;
 }
 alias cd=cdls
+source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 eval "$(starship init zsh)"
