@@ -28,5 +28,4 @@ Not much to see here.
 Nothing to see here.
 
 # Copying everything to your home
-You can simply `make put` and everything will be put in its rightful place.
-If you want to copy a specific config you should use `make {nvimp, i3p, rofip, polyp, alacrittyp, zshp, vifmp, dunstp, starshipp}` (eg. `make nvimp`).
+You can `./confie install dotfiles` to install everything. For more information visit [confie](https://gitlab.com/langhops/confie)
