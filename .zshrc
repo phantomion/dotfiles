@@ -33,6 +33,7 @@ alias stars='nvim ~/.config/starship.toml'
 alias muttc='nvim ~/.config/neomutt/neomuttrc'
 alias vifm='sh ~/.config/vifm/scripts/vifmrun'
 alias nem='neomutt'
+alias ytmp3='youtube-dl -x --audio-format mp3'
 
 xdgopen() {
     xdg-open $* &>/dev/null & disown

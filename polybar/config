@@ -290,7 +290,10 @@ format-discharging = <ramp-capacity> <label-discharging>
 
 poll-interval = 5
 time-format = %H:%M
-label-full = Fully charged
+label-full = 100%
+label-full-font = 2
+label-full-foreground = ${colors.green}
+format-full =  <label-full>
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 

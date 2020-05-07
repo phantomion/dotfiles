@@ -2,14 +2,14 @@
 "{{{
 call plug#begin('~/.config/nvim/plugged')
 " -----colorschemes-----
-Plug 'Erichain/vim-monokai-pro'
+"Plug 'Erichain/vim-monokai-pro'
 Plug 'srcery-colors/srcery-vim'
 Plug 'dracula/vim'
-Plug 'chuling/vim-equinusocio-material'
+"Plug 'chuling/vim-equinusocio-material'
 " -----langs----
-Plug 'rust-lang/rust.vim' " rust lang
-Plug 'pangloss/vim-javascript'
-Plug 'zah/nim.vim'
+Plug 'rust-lang/rust.vim', {'for': 'rust'} " rust lang
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+Plug 'zah/nim.vim', {'for': 'nim'}
 " -----QoL-----
 Plug 'tpope/vim-surround' " Surround everything
 Plug 'scrooloose/nerdcommenter' " Smart comments
@@ -18,15 +18,15 @@ Plug 'jiangmiao/auto-pairs' " Auto pairs
 Plug 'majutsushi/tagbar'
 Plug 'itchyny/lightline.vim' " Status bar
 Plug 'mengelbrecht/lightline-bufferline' " bufferline
-Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki', {'for':'vimwiki'}
+Plug 'frazrepo/vim-rainbow', {'for': 'clojure'}
 " -----dev tools----
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " GET THIS OR DIE
-Plug 'jaxbot/browserlink.vim' " live preview
+Plug 'jaxbot/browserlink.vim', {'for': ['html','css','javascript']} " preview
 Plug 'tpope/vim-fugitive' " oh well
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " -----misc-----
 Plug 'ryanoasis/vim-devicons' " fancy bloat icons
-Plug 'dhruvasagar/vim-table-mode'
 Plug 'mboughaba/i3config.vim'
 call plug#end()
 
@@ -74,7 +74,6 @@ set signcolumn=yes
 
 "------------lightline-------------
 let g:lightline = {'colorscheme': 'darcula'}
-let g:table_mode_corner='|'
 
 "------------vimwiki-------------
 let g:vimwiki_text_ignore_newline = 0
@@ -353,6 +352,14 @@ augroup nvim
     autocmd FileType vim setlocal foldmethod=marker
     autocmd FileType vim nnoremap <F5> :source ~/.config/nvim/init.vim<CR>
     autocmd FileType vim nnoremap <Leader>b :CocConfig<CR>
+augroup END
+
+augroup cloj
+    autocmd!
+    autocmd FileType clojure call rainbow#load()
+    autocmd FileType clojure nnoremap <F3> :FireplaceConnect 127.0.0.1:
+    autocmd FileType clojure nnoremap <Leader>e :%Eval<CR>
+    autocmd FileType clojure vnoremap <Leader>e :Eval<CR>
 augroup END
 
 " --------------coc session------------

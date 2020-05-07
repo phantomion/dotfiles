@@ -276,6 +276,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
 #assign [class="TelegramDesktop"] $ws8
+assign [class="Transmission"] $ws5
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
