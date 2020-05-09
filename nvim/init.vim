@@ -5,7 +5,6 @@ call plug#begin('~/.config/nvim/plugged')
 "Plug 'Erichain/vim-monokai-pro'
 Plug 'srcery-colors/srcery-vim'
 Plug 'dracula/vim'
-"Plug 'chuling/vim-equinusocio-material'
 " -----langs----
 Plug 'rust-lang/rust.vim', {'for': 'rust'} " rust lang
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
@@ -18,7 +17,7 @@ Plug 'jiangmiao/auto-pairs' " Auto pairs
 Plug 'majutsushi/tagbar'
 Plug 'itchyny/lightline.vim' " Status bar
 Plug 'mengelbrecht/lightline-bufferline' " bufferline
-Plug 'vimwiki/vimwiki', {'for':'vimwiki'}
+Plug 'vimwiki/vimwiki'
 Plug 'frazrepo/vim-rainbow', {'for': 'clojure'}
 " -----dev tools----
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " GET THIS OR DIE
@@ -125,6 +124,7 @@ highlight CocErrorFloat ctermfg=white  guifg=white
 set autoindent " Set code autoindentation
 set cursorline " Highlight current line
 set expandtab " don't use actual tab character (ctrl-v)
+set tabstop=4
 set shiftwidth=4 " indenting is 4 spaces
 set autoindent " turns it on
 set smartindent " does the right thing (mostly) in programs
@@ -186,6 +186,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+nnoremap <Leader>w %
 autocmd BufWritePre * %s/\s\+$//e  "Strip trailing whitespace on file save
 nnoremap <C-s> :bd!<CR>
 nnoremap <C-e> :bn<CR>
@@ -360,6 +361,7 @@ augroup cloj
     autocmd FileType clojure nnoremap <F3> :FireplaceConnect 127.0.0.1:
     autocmd FileType clojure nnoremap <Leader>e :%Eval<CR>
     autocmd FileType clojure vnoremap <Leader>e :Eval<CR>
+    autocmd FileType clojure setlocal lisp
 augroup END
 
 " --------------coc session------------

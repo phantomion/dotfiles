@@ -1,21 +1,10 @@
-set folder="imaps://mailhost.csd.uoc.gr:993"
-set imap_user = "csd3972"
-set imap_pass = ""
-set smtp_url="smtps://$imap_user:$imap_pass@mailhost.csd.uoc.gr:465"
+source csd.muttrc
 
-set spoolfile="+INBOX"
-set record = "+Sent"
-set postponed = "+Drafts"
-set trash = "+Trash"
-mailboxes = +INBOX +Sent +Drafts +Trash
-set sort = "reverse-threads" #mail groups
-set sort_aux = last-date-received
-set my_user="csd3972"
-set realname="csd3972@csd.uoc.gr" #mail to be displayed on recipient
-
+macro index <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/csd.muttrc<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/l2kwstasl2.muttrc<enter><change-folder>!<enter>'
+macro index <f4> '<sync-mailbox><enter-command>source ~/.config/neomutt/kyriakoukonstantinos1.muttrc<enter><change-folder>!<enter>'
 set header_cache="~/.cache/neomutt/neomutt" #cache to load mails faster
 set sleep_time = 0 #speed up folder switch
-set from = "csd3972@csd.uoc.gr"
 set include=yes #include original mail when replying
 set use_from = yes
 set send_charset="utf-8"
@@ -37,4 +26,7 @@ bind  compose        l view-attach
 bind index           za  collapse-thread
 bind index           zA  collapse-all
 bind index,pager B sidebar-toggle-visible
+bind index . noop
+macro index .i  "<limit>(~N|~F)<Enter>"  "view new/flag"
+macro index .a  "<limit>~A<Enter>"       "view all"
 source lukecolor.muttrc

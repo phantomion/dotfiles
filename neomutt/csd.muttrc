@@ -1,0 +1,15 @@
+set folder="imaps://mailhost.csd.uoc.gr:993"
+set imap_user = "csd3972"
+set imap_pass = ""
+set smtp_url="smtps://$imap_user:$imap_pass@mailhost.csd.uoc.gr:465"
+
+set spoolfile="+INBOX"
+set record = "+Sent"
+set postponed = "+Drafts"
+set trash = "+Trash"
+mailboxes = +INBOX +Sent +Drafts +Trash
+set sort = "reverse-threads" #mail groups
+set sort_aux = last-date-received
+set my_user="csd3972"
+set realname="csd3972@csd.uoc.gr" #mail to be displayed on recipient
+set from = "csd3972@csd.uoc.gr"
