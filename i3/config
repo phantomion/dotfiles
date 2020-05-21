@@ -56,6 +56,7 @@ for_window [class="Xfburn"] floating enable
 for_window [title="Color picker"] floating enable
 for_window [title="Steam"] floating enable
 for_window [title="Transmission"] floating enable border normal
+for_window [class="openssh-askpass"] floating enable
 for_window [class="minesweeper"] floating enable border normal
 
 # switch to workspace with urgent window automatically

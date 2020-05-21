@@ -22,19 +22,10 @@
         "nim": {
             "command": "nimlsp",
             "filetypes": ["nim"]
-        },
-        "clojure-lsp": {
-            "command": "bash",
-            "args": ["-c", "clojure-lsp"],
-            "filetypes": ["clojure"],
-            "rootPatterns": ["project.clj"],
-            "additionalSchemes": ["jar", "zipfile"],
-            "trace.server": "verbose",
-            "initializationOptions": {
-            }
         }
     },
     "java.errors.incompleteClasspath.severity": "ignore",
     "latex.build.onSave": true,
-    "latex.lint.onChange": true
+    "latex.lint.onChange": true,
+    "yank.enableCompletion": false
 }

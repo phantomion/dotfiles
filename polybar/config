@@ -21,7 +21,7 @@ black      = #0a0f14
 red        = #c33027
 green      = #26a98b
 yellow     = #edb54b
-blue       = #0066ff
+blue       = #195465
 magenta    = #e91e63
 cyan       = #33859d
 white      = #98d1ce
@@ -85,7 +85,7 @@ module-padding = 1
 modules-left = i3
 modules-center =
 modules-right = system-usb-udev updates-arch-combined filesystem keyboard battery date
-separator = %{F#c33027}|%{F-}
+separator = %{F#195465}|%{F-}
 locale =
 
 ;=== SYSTEM TRAY CONFIGURATION ================================
@@ -114,7 +114,7 @@ date-alt = %A, %d %B %Y
 time-alt = %H:%M:%S
 format = <label>
 format-background = ${colors.background}
-format-foreground = ${colors.foreground}
+format-foreground = ${colors.yellow}
 label = %date% | %time%
 label-font = 2
 
@@ -192,9 +192,9 @@ type = internal/memory
 interval = 1
 format =  <label>
 format-background = ${colors.background}
-format-foreground = ${colors.red}
+format-foreground = ${colors.yellow}
 label = %percentage_used%% / %gb_used%
-label-foreground = ${colors.foreground}
+label-foreground = ${colors.yellow}
 
 ;======================================================
 [module/cpu]
@@ -286,7 +286,9 @@ label-discharging-background = ${colors.background}
 label-discharging-foreground = ${colors.magenta}
 
 format-charging = <animation-charging> <label-charging>
+format-charging-foreground = ${colors.green}
 format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-foreground = ${colors.magenta}
 
 poll-interval = 5
 time-format = %H:%M
@@ -294,6 +296,7 @@ label-full = 100%
 label-full-font = 2
 label-full-foreground = ${colors.green}
 format-full =  <label-full>
+format-full-foreground = ${colors.green}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -350,6 +353,7 @@ format-unmounted = <label-unmounted>
 ; Default: %mountpoint% %percentage_free%%
 label-mounted = %mountpoint%:%free%
 label-mounted-font = 5
+label-mounted-foreground = ${colors.red}
 
 ; Available tokens:
 ;   %mountpoint%

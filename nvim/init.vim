@@ -18,12 +18,13 @@ Plug 'majutsushi/tagbar'
 Plug 'itchyny/lightline.vim' " Status bar
 Plug 'mengelbrecht/lightline-bufferline' " bufferline
 Plug 'vimwiki/vimwiki'
+Plug 'guns/vim-clojure-static', {'for': 'clojure'}
 Plug 'frazrepo/vim-rainbow', {'for': 'clojure'}
 " -----dev tools----
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " GET THIS OR DIE
 Plug 'jaxbot/browserlink.vim', {'for': ['html','css','javascript']} " preview
-Plug 'tpope/vim-fugitive' " oh well
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-fugitive' " this should be illegal
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' } " enables clojure development
 " -----misc-----
 Plug 'ryanoasis/vim-devicons' " fancy bloat icons
 Plug 'mboughaba/i3config.vim'
@@ -71,6 +72,15 @@ set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 
+"------------clojure---------------
+function! Omni_clojure()
+    inoremap <silent><expr> <TAB>
+                \ pumvisible() ? "\<C-n>" :
+                \ <SID>check_back_space() ? "\<TAB>" :
+                \ "\<C-X>\<C-O>"
+    inoremap <silent><expr> <c-space> "\<C-X>\<C-O>"
+endfunction
+
 "------------lightline-------------
 let g:lightline = {'colorscheme': 'darcula'}
 
@@ -101,6 +111,11 @@ nmap <Leader>9 <Plug>lightline#bufferline#go(9)
 nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 
 nnoremap <C-b> :TagbarToggle<CR>
+
+"-------clojure-static------
+let g:clojure_fuzzy_indent = 1
+let g:clojure_align_multiline_strings = 1
+let g:clojure_align_subforms = 1
 "}}}
 
 "------EDITOR------
@@ -118,6 +133,7 @@ set modifiable
 set autoread
 set relativenumber " Enable relative line numbers
 syntax on " Enable syntax highlighting
+filetype plugin indent on " Enable plugin indent
 colorscheme srcery " Set the colorscheme
 highlight CocErrorFloat ctermfg=white  guifg=white
 "highlight Pmenu guifg=white guibg=dark
@@ -166,6 +182,7 @@ nnoremap J L
 vnoremap J L
 
 nnoremap ; :
+vnoremap ; :
 inoremap jk <esc>
 
 " Alt+Direction moves 6 spaces.
@@ -186,7 +203,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <Leader>w %
+nnoremap <Leader>q %
+nnoremap <Leader>vw v%
 autocmd BufWritePre * %s/\s\+$//e  "Strip trailing whitespace on file save
 nnoremap <C-s> :bd!<CR>
 nnoremap <C-e> :bn<CR>
@@ -223,7 +241,7 @@ function! Rust_toggle()
         nnoremap <F4> :w<CR> :16split term://cargo run<CR>
         nnoremap <F5> :w<CR> :16split term://cargo run
         nnoremap <F6> :w<CR> :16split term://cargo test<CR>
-        echom "16s"
+        echom "16sp"
         let g:rust_toggle=0
     else
         nnoremap <F3> :w<CR> :vsplit term://rustc % && ./%:r<CR>
@@ -241,7 +259,7 @@ function! Nim_toggle()
         nnoremap <F3> :w<CR> :16split term://nim c -r %<CR>
         nnoremap <F4> :w<CR> :16split term://nimble run *.nimble<CR>
         nnoremap <F5> :w<CR> :16split term://nimble run *.nimble
-        echom "16s"
+        echom "16sp"
         let g:nim_toggle=0
     else
         nnoremap <F3> :w<CR> :vsplit term://nim c -r %<CR>
@@ -308,6 +326,9 @@ augroup git
     autocmd!
     autocmd FileType * nnoremap <F1> :Gwrite<CR>
     autocmd FileType * nnoremap <F2> :Gcommit -m ""<Left>
+    autocmd FileType * nnoremap <Leader>gs :G<CR>
+    autocmd FileType * nnoremap <Leader>gl :GcLog --stat<CR>
+    autocmd FileType * nnoremap <Leader>gp :Gpush<CR>
 augroup END
 
 " -----------html-------------
@@ -361,7 +382,9 @@ augroup cloj
     autocmd FileType clojure nnoremap <F3> :FireplaceConnect 127.0.0.1:
     autocmd FileType clojure nnoremap <Leader>e :%Eval<CR>
     autocmd FileType clojure vnoremap <Leader>e :Eval<CR>
+    autocmd FileType clojure nnoremap <Leader>d :Doc <C-R><C-W><CR>
     autocmd FileType clojure setlocal lisp
+    autocmd FileType clojure call Omni_clojure()
 augroup END
 
 " --------------coc session------------
