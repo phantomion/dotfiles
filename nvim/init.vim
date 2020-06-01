@@ -83,9 +83,34 @@ endfunction
 
 "------------lightline-------------
 let g:lightline = {'colorscheme': 'darcula'}
+let g:lightline.active = {
+            \ 'left': [ [ 'mode', 'paste' ],
+            \           [ 'readonly', 'filename', 'modified', 'branch', 'git'] ],
+            \ 'right': [ [ 'lineinfo' ],
+            \            [ 'percent' ],
+            \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
+let g:lightline.component_function = {'git': 'LightlineGitStatus',
+            \ 'branch': 'LightlineGitBranch'}
+
+function! LightlineGitStatus() abort
+  let status = get(b:, 'coc_git_status', '')
+  " return status
+  return winwidth(0) > 80 ? status : ''
+endfunction
+
+function! LightlineGitBranch() abort
+  let branch = get(g:, 'coc_git_status', '')
+  " return status
+  return winwidth(0) > 80 ? branch : ''
+endfunction
 
 "------------vimwiki-------------
 let g:vimwiki_text_ignore_newline = 0
+let g:vimwiki_list = [{
+            \ 'path': '$HOME/vimwiki_html',
+            \ 'template_path': '$HOME/vimwiki_html/templates',
+            \ 'template_default': 'default',
+            \ 'template_ext': '.html'}]
 
 " -----lightline-bufferline-----
 set showtabline=1
@@ -301,6 +326,11 @@ function! Help()
         echom "F3: nim c -r"
         echom "F4: nimble run"
         echom "F5: nimble run + args"
+    elseif (&ft=='clojure')
+        echom "Clojure"
+        echom "F4: lein run"
+        echom "F5: lein run + args"
+        echom "<Leader>e: eval"
     endif
     echom "CocSession"
     echom "F6: session.load"
@@ -380,6 +410,8 @@ augroup cloj
     autocmd!
     autocmd FileType clojure call rainbow#load()
     autocmd FileType clojure nnoremap <F3> :FireplaceConnect 127.0.0.1:
+    autocmd FileType clojure nnoremap <F4> :16sp term://lein run<CR>
+    autocmd FileType clojure nnoremap <F5> :16sp term://lein run
     autocmd FileType clojure nnoremap <Leader>e :%Eval<CR>
     autocmd FileType clojure vnoremap <Leader>e :Eval<CR>
     autocmd FileType clojure nnoremap <Leader>d :Doc <C-R><C-W><CR>

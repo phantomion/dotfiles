@@ -99,7 +99,8 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-      family: Roboto Mono Nerd Font
+      #family: Roboto Mono Nerd Font
+      family: JetBrains Mono Nerd Font
       style: Regular
     #family: Droid Sans Mono
     #style: Regular

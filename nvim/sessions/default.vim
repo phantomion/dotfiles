@@ -39,20 +39,32 @@ normal! zo
 normal! zo
 78
 normal! zo
-232
+87
 normal! zo
-239
+87
 normal! zo
-258
+93
 normal! zo
-275
+93
 normal! zo
-let s:l = 310 - ((10 * winheight(0) + 23) / 47)
+110
+normal! zo
+110
+normal! zo
+257
+normal! zo
+264
+normal! zo
+283
+normal! zo
+300
+normal! zo
+let s:l = 103 - ((27 * winheight(0) + 22) / 44)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-310
-normal! 025|
+103
+normal! 017|
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
