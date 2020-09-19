@@ -170,6 +170,8 @@ type = custom/script
 exec = ~/.config/polybar/updates-arch-combined.sh
 interval = 600
 label-font = 3
+click-left = alacritty -e sh -c 'echo "Updating pacman" && sudo pacman -Syu' &
+click-right = alacritty -e sh -c 'echo "Updating AUR" && yay -Syu' &
 
 ;=======================================================
 [module/info-hackspeed]

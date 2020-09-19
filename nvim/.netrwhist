@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/kwstas/Desktop/random/clojure/chapter9/hello-drag-and-drop/resources/public/cljs-out/dev'
+let g:netrw_dirhist_6='/home/kwstas/Desktop/random/clojure/chapter9/hello-drag-and-drop/src/hello_drag_and_drop'
 let g:netrw_dirhist_5='/home/kwstas/Desktop/random/clojure/chapter9/hello-clojurescript.core/src/hello_clojurescript'
 let g:netrw_dirhist_4='/home/kwstas/Desktop/csd/hy225/ex13/ex13'
 let g:netrw_dirhist_3='/home/kwstas/Desktop/random/clojure/hello/src/hello'
@@ -8,5 +10,3 @@ let g:netrw_dirhist_1='/home/kwstas/Documents/dotfiles/nvim'
 let g:netrw_dirhist_0='/home/kwstas/Desktop/random/nim/confie/.git'
 let g:netrw_dirhist_9='/home/kwstas/Desktop/random/nim/confie/src'
 let g:netrw_dirhist_8='/home/kwstas/Desktop/random/rust/snake_game/src'
-let g:netrw_dirhist_7='/home/kwstas/.nix-profile'
-let g:netrw_dirhist_6='/home/kwstas/.hplip'

@@ -1,10 +1,14 @@
 {
     "list.source.files.excludePatterns": ["*/tmp/*","**/target/**","screenshots/**","*.so","*.swp","*.zip","*.d","*.o","*.bin","*.sh","*.svg","*.mkv","*.png","*.mkv","*.avi","*.mp4","*.iso","*.tar.gz","**.jpg","*.pdf"],
     "explorer.icon.enableNerdfont": true,
-    "explorer.buffer.showHiddenBuffers": true,
+    "explorer.buffer.showHiddenBuffers": false,
     "explorer.width": 27,
-    "explorer.previewAction.onHover": false,
-    "emmet.includeLanguages": {"jsp": "html"},
+    "explorer.previewAction.onHover": true,
+     "explorer.keyMappings": {
+         "j": "nodeNext",
+         "k": "nodePrev"
+     },
+     "emmet.includeLanguages": {"jsp": "html"},
     "snippets.loadFromExtensions": true,
     "snippets.ultisnips.enable": true,
     "session.directory": "~/.config/nvim/sessions",

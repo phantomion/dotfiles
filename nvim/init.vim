@@ -100,7 +100,7 @@ endfunction
 
 function! LightlineGitBranch() abort
   let branch = get(g:, 'coc_git_status', '')
-  " return status
+  " return branch
   return winwidth(0) > 80 ? branch : ''
 endfunction
 
@@ -120,7 +120,7 @@ let g:lightline.component_type = {'buffers': 'tabsel'}
 let g:lightline#bufferline#show_number  = 2
 let g:lightline#bufferline#min_buffer_count = 2
 let g:lightline#bufferline#enable_devicons = 1
-let g:lightline#bufferline#shorten_path = 1
+let g:lightline#bufferline#shorten_path = 0
 let g:lightline#bufferline#unicode_symbols = 1
 let g:lightline#bufferline#clickable = 1
 let g:lightline.component_raw = {'buffers': 1}
@@ -378,7 +378,7 @@ augroup rust
     autocmd FileType rust nnoremap <F4> :w<CR> :16split term://cargo run<CR>
     autocmd FileType rust nnoremap <F5> :w<CR> :16split term://cargo run
     autocmd FileType rust nnoremap <F6> :w<CR> :16split term://cargo test<CR>
-    autocmd FileType rust nnoremap <Leader>q :call Rust_toggle()<CR>
+    autocmd FileType rust nnoremap <Leader>t :call Rust_toggle()<CR>
 augroup END
 
 augroup nim
@@ -387,7 +387,7 @@ augroup nim
     autocmd FileType nim nnoremap <F3> :w<CR> :16split term://nim c -r %<CR>
     autocmd FileType nim nnoremap <F4> :w<CR> :16split term://nimble run *.nimble<CR>
     autocmd FileType nim nnoremap <F5> :w<CR> :16split term://nimble run *.nimble
-    autocmd FileType nim nnoremap <Leader>q :call Nim_toggle()<CR>
+    autocmd FileType nim nnoremap <Leader>t :call Nim_toggle()<CR>
     autocmd FileType nim colorscheme dracula
 augroup END
 
