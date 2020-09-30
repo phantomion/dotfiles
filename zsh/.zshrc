@@ -1,9 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 rmex(){ find $1 -type f -not -name $2 -delete; } #delete all except
-fv(){fzf | xargs -r nvim ;} #search and edit
-frm(){fzf | xargs /bin/rm ;} #seek and destroy
-fx(){fzf | xargs -r0 setsid xdgopen; } #search and open
 iv() {
     vimiv $1 &>/dev/null & disown
 }
@@ -73,5 +70,4 @@ cdls() {
 alias cd=cdls
 source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-eval "$(gh completion -s zsh)"
 eval "$(starship init zsh)"

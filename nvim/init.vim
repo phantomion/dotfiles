@@ -301,7 +301,7 @@ function! Help()
     echom "F1: Gwrite"
     echom "F2: Gcommit"
     echom "F8: Refresh file"
-    if (&ft=='c')
+    if (&ft=='c' || &ft=='cpp')
         echom "C"
         echom "F4: make"
         echom "F5: run"
@@ -394,8 +394,8 @@ augroup END
 " ----------C Specific-----------
 augroup cc
     autocmd!
-    autocmd FileType c nnoremap <F4> :w<CR> :make<CR>
-    autocmd FileType c nnoremap <F5> :w<CR> :16split term://./%:r<CR>
+    autocmd FileType c,cpp nnoremap <F4> :w<CR> :make<CR>
+    autocmd FileType c,cpp nnoremap <F5> :w<CR> :16split term://./%:r<CR>
 augroup END
 
 " --------------vim---------------

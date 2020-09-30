@@ -1,29 +1,30 @@
-prompt_order=["hostname","character","cmd_duration","directory","git_branch","git_status"]
+format = """\
+        $hostname\
+        $character\
+        $cmd_duration\
+        $directory\
+        $git_branch\
+        $git_status\
+        """
 add_newline = false
 
 [character]
-symbol = "➜"
-error_symbol = "✗"
-use_symbol_for_status = true
-style_success = "yellow"
-style_failure = "yellow"
-vicmd_symbol = ""
+success_symbol = "[➜](yellow)"
+error_symbol = "[✗](yellow)"
+vicmd_symbol = "[](yellow)"
+format=" $symbol "
 
 [directory]
 truncation_length = 1
-prefix = ""
-style = "cyan"
+format = "[$path](cyan) "
 
 [git_branch]
 symbol = ""
-prefix = ""
-style = "bold #D82B69"
+format = " [$symbol$branch](bold #D82B69) "
 
 [hostname]
 ssh_only = false
-prefix = "@"
-style = "red"
+format = "[@$hostname](red)"
 
 [rust]
-prefix = ""
-symbol = "🦀"
+format = "$symbol "

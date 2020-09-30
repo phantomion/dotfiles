@@ -2,16 +2,16 @@ let SessionLoad = 1
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/Documents/dotfiles
+cd ~/
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 confie.cfg
+badd +0 .config/starship.toml
 argglobal
 %argdel
-$argadd confie.cfg
-edit confie.cfg
+$argadd .config/starship.toml
+edit .config/starship.toml
 set splitbelow splitright
 wincmd t
 set winminheight=0
@@ -28,12 +28,12 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 64 - ((43 * winheight(0) + 22) / 44)
+let s:l = 27 - ((26 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-64
-normal! 034|
+27
+normal! 012|
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
