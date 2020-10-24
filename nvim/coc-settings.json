@@ -1,5 +1,5 @@
 {
-    "list.source.files.excludePatterns": ["*/tmp/*","**/target/**","screenshots/**","*.so","*.swp","*.zip","*.d","*.o","*.bin","*.sh","*.svg","*.mkv","*.png","*.mkv","*.avi","*.mp4","*.iso","*.tar.gz","**.jpg","*.pdf"],
+    "list.source.files.excludePatterns": ["*/tmp/*","**/target/**","screenshots/**","*.so","*.swp","*.zip","*.d","*.o","*.bin","*.sh","*.svg","*.mkv","*.png","*.mkv","*.avi","*.mp4","*.iso","*.tar.gz","*.jpg","*.pdf"],
     "explorer.icon.enableNerdfont": true,
     "explorer.buffer.showHiddenBuffers": false,
     "explorer.width": 27,
@@ -13,16 +13,6 @@
     "snippets.ultisnips.enable": true,
     "session.directory": "~/.config/nvim/sessions",
     "languageserver": {
-        "ccls": {
-            "command": "ccls",
-            "filetypes": ["c", "cpp", "objc", "objcpp"],
-            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/ccls"
-                }
-            }
-        },
         "nim": {
             "command": "nimlsp",
             "filetypes": ["nim"]

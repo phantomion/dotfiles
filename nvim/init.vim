@@ -1,14 +1,12 @@
-"===== PLUGINS =====
+"======Plugins======
 "{{{
 call plug#begin('~/.config/nvim/plugged')
 " -----colorschemes-----
-"Plug 'Erichain/vim-monokai-pro'
+Plug 'Erichain/vim-monokai-pro'
 Plug 'srcery-colors/srcery-vim'
 Plug 'dracula/vim'
 " -----langs----
-Plug 'rust-lang/rust.vim', {'for': 'rust'} " rust lang
-Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'zah/nim.vim', {'for': 'nim'}
+Plug 'sheerun/vim-polyglot' " One for all
 " -----QoL-----
 Plug 'tpope/vim-surround' " Surround everything
 Plug 'scrooloose/nerdcommenter' " Smart comments
@@ -18,16 +16,16 @@ Plug 'majutsushi/tagbar'
 Plug 'itchyny/lightline.vim' " Status bar
 Plug 'mengelbrecht/lightline-bufferline' " bufferline
 Plug 'vimwiki/vimwiki'
-Plug 'guns/vim-clojure-static', {'for': 'clojure'}
 Plug 'frazrepo/vim-rainbow', {'for': 'clojure'}
 " -----dev tools----
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " GET THIS OR DIE
 Plug 'jaxbot/browserlink.vim', {'for': ['html','css','javascript']} " preview
 Plug 'tpope/vim-fugitive' " this should be illegal
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' } " enables clojure development
+Plug 'tpope/vim-rhubarb'
 " -----misc-----
-Plug 'ryanoasis/vim-devicons' " fancy bloat icons
-Plug 'mboughaba/i3config.vim'
+Plug 'ron-rs/ron.vim', {'for': 'ron'}
+Plug 'ryanoasis/vim-devicons' " fancy bloat icons, always load last
 call plug#end()
 
 let mapleader=" " " Set the map leader to <Space>
@@ -38,11 +36,9 @@ inoremap <silent><expr> <TAB>
             \ coc#refresh()
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-if has('patch8.1.1068')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
+" Use enter to select autocomplete choice. If none select first.
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
 let g:coc_snippet_next = '<C-l>'
 let g:coc_snippet_prev = '<C-h>'
@@ -54,13 +50,20 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <leader>rn <Plug>(coc-rename)
+nnoremap <leader>prn :CocSearch <C-R>=expand("<cword>")<CR><CR>
+nnoremap <nowait><expr> <C-f> coc#util#has_float() ? coc#util#float_scroll(1) : ""
+nnoremap <nowait><expr> <C-c> coc#util#has_float() ? coc#util#float_scroll(0) : ""
+nnoremap <leader>qf  <Plug>(coc-fix-current)
 nnoremap <C-n> :CocCommand explorer<CR>
 nnoremap <C-p> :CocList --number-select files<CR>
+nnoremap <silent><leader>m :CocList marketplace<CR>
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
         execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
     else
-        call CocAction('doHover')
+        execute '!' . &keywordprg . " " . expand('<cword>')
     endif
 endfunction
 function! s:check_back_space() abort
@@ -124,16 +127,16 @@ let g:lightline#bufferline#shorten_path = 0
 let g:lightline#bufferline#unicode_symbols = 1
 let g:lightline#bufferline#clickable = 1
 let g:lightline.component_raw = {'buffers': 1}
-nmap <leader>1 <plug>lightline#bufferline#go(1)
-nmap <leader>2 <plug>lightline#bufferline#go(2)
-nmap <leader>3 <plug>lightline#bufferline#go(3)
-nmap <leader>4 <plug>lightline#bufferline#go(4)
-nmap <leader>5 <plug>lightline#bufferline#go(5)
-nmap <leader>6 <plug>lightline#bufferline#go(6)
-nmap <leader>7 <plug>lightline#bufferline#go(7)
-nmap <Leader>8 <Plug>lightline#bufferline#go(8)
-nmap <Leader>9 <Plug>lightline#bufferline#go(9)
-nmap <Leader>0 <Plug>lightline#bufferline#go(10)
+nmap <silent><leader>1 <plug>lightline#bufferline#go(1);call lightline#update()<CR>
+nmap <silent><leader>2 <plug>lightline#bufferline#go(2);call lightline#update()<CR>
+nmap <silent><leader>3 <plug>lightline#bufferline#go(3);call lightline#update()<CR>
+nmap <silent><leader>4 <plug>lightline#bufferline#go(4);call lightline#update()<CR>
+nmap <silent><leader>5 <plug>lightline#bufferline#go(5);call lightline#update()<CR>
+nmap <silent><leader>6 <plug>lightline#bufferline#go(6);call lightline#update()<CR>
+nmap <silent><leader>7 <plug>lightline#bufferline#go(7);call lightline#update()<CR>
+nmap <silent><Leader>8 <Plug>lightline#bufferline#go(8);call lightline#update()<CR>
+nmap <silent><Leader>9 <Plug>lightline#bufferline#go(9);call lightline#update()<CR>
+nmap <silent><Leader>0 <Plug>lightline#bufferline#go(10);call lightline#update()<CR>
 
 nnoremap <C-b> :TagbarToggle<CR>
 
@@ -143,7 +146,7 @@ let g:clojure_align_multiline_strings = 1
 let g:clojure_align_subforms = 1
 "}}}
 
-"------EDITOR------
+"=======Editor=======
 "{{{
 " Set true colors
 if (has("nvim"))
@@ -161,7 +164,6 @@ syntax on " Enable syntax highlighting
 filetype plugin indent on " Enable plugin indent
 colorscheme srcery " Set the colorscheme
 highlight CocErrorFloat ctermfg=white  guifg=white
-"highlight Pmenu guifg=white guibg=dark
 set autoindent " Set code autoindentation
 set cursorline " Highlight current line
 set expandtab " don't use actual tab character (ctrl-v)
@@ -176,6 +178,8 @@ set completeopt=longest,menuone,noselect " Improve completion menu
 set undofile
 set inccommand=split
 set clipboard=unnamed
+set nobackup
+set nowritebackup
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso,*.tar.gz,*.jpg,*.pdf,*.class,target/*
 
 " Set the backup/undo/swap files to be in /tmp
@@ -231,17 +235,18 @@ nnoremap <C-l> <C-w>l
 nnoremap <Leader>q %
 nnoremap <Leader>vw v%
 autocmd BufWritePre * %s/\s\+$//e  "Strip trailing whitespace on file save
-nnoremap <C-s> :bd!<CR>
-nnoremap <C-e> :bn<CR>
-nnoremap <C-q> :bp<CR>
+nnoremap <silent><C-s> :bd!<CR>:call lightline#update()<CR>
+nnoremap <silent><C-e> :bn<CR>:call lightline#update()<CR>
+nnoremap <silent><C-q> :bp<CR>:call lightline#update()<CR>
 tnoremap <ESC> <C-\><C-n>
 nnoremap <silent> <Leader>y  :<C-u>CocList -A --normal yank<cr>
+inoremap <C-l> <Right>
 " Clipboard
 vnoremap <C-c> "+y
 nnoremap <A-v> "+p
 "}}}
 
-" ------Autocommands------
+"=======Autocommands=======
 " {{{
 
 " Easy Install CocExtensions
@@ -249,8 +254,8 @@ nnoremap <A-v> "+p
 function! InstallCoc()
     CocInstall coc-css coc-dictionary coc-emmet coc-explorer coc-yank
     CocInstall coc-git coc-highlight coc-html coc-java coc-json coc-lists
-    CocInstall coc-rls coc-snippets coc-tag coc-template coc-texlab coc-tsserver
-    CocInstall coc-marketplace
+    CocInstall coc-rust-analyzer coc-snippets coc-tag coc-template
+    CocInstall coc-marketplace coc-texlab coc-tsserver coc-clangd
 endfunction
 
 function! Explorer()
@@ -348,7 +353,6 @@ augroup general
     autocmd FileType * nnoremap <F8> :e %<CR>
     autocmd FocusGained * :checktime
     autocmd VimEnter * :call Explorer()
-    "autocmd ColorScheme * hi VertSplit ctermfg=bg guifg=bg
 augroup END
 
 " ------------fugitive--------------
@@ -388,13 +392,13 @@ augroup nim
     autocmd FileType nim nnoremap <F4> :w<CR> :16split term://nimble run *.nimble<CR>
     autocmd FileType nim nnoremap <F5> :w<CR> :16split term://nimble run *.nimble
     autocmd FileType nim nnoremap <Leader>t :call Nim_toggle()<CR>
-    autocmd FileType nim colorscheme dracula
+    "autocmd FileType nim colorscheme dracula
 augroup END
 
 " ----------C Specific-----------
 augroup cc
     autocmd!
-    autocmd FileType c,cpp nnoremap <F4> :w<CR> :make<CR>
+    autocmd FileType c,cpp nnoremap <F4> :w<CR> :16split term://make<CR>
     autocmd FileType c,cpp nnoremap <F5> :w<CR> :16split term://./%:r<CR>
 augroup END
 
