@@ -20,7 +20,7 @@ format = "[$path](cyan) "
 
 [git_branch]
 symbol = ""
-format = " [$symbol$branch](bold #D82B69) "
+format = "[$symbol$branch](bold #D82B69) "
 
 [hostname]
 ssh_only = false
