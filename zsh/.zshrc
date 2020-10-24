@@ -1,5 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 rmex(){ find $1 -type f -not -name $2 -delete; } #delete all except
 iv() {
     vimiv $1 &>/dev/null & disown
@@ -23,7 +21,6 @@ alias i3c='nvim ~/.config/i3/config'
 alias polc='nvim ~/.config/polybar/config'
 alias weather='curl wttr.in'
 alias xm='xmodmap ~/.Xmodmap'
-alias csd3972='ssh csd3972@haroupi.csd.uoc.gr'
 alias alc='nvim ~/.config/alacritty/alacritty.yml'
 alias rofic='nvim ~/.config/rofi/config'
 alias stars='nvim ~/.config/starship.toml'
@@ -31,6 +28,14 @@ alias muttc='nvim ~/.config/neomutt/neomuttrc'
 alias vifm='sh ~/.config/vifm/scripts/vifmrun'
 alias nem='neomutt'
 alias ytmp3='youtube-dl -x --audio-format mp3'
+
+csd3972() {
+    ssh csd3972@$1.csd.uoc.gr
+}
+
+csdscp() {
+    scp -r $2 csd3972@$1.csd.uoc.gr:$3
+}
 
 xdgopen() {
     xdg-open $* &>/dev/null & disown
@@ -43,9 +48,9 @@ startAndDisown() {
 alias s=startAndDisown
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/kwstas/.config/oh-my-zsh"
+export ZSH="$HOME/.config/oh-my-zsh"
 plugins=(vi-mode autojump colored-man-pages colorize cp extract zsh-syntax-highlighting)
-[[ -s /home/kwstas/.autojump/etc/profile.d/autojump.sh ]] && source /home/kwstas/.autojump/etc/profile.d/autojump.sh
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
 source $ZSH/oh-my-zsh.sh
