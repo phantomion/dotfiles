@@ -1,14 +1,6 @@
 {
     "list.source.files.excludePatterns": ["*/tmp/*","**/target/**","screenshots/**","*.so","*.swp","*.zip","*.d","*.o","*.bin","*.sh","*.svg","*.mkv","*.png","*.mkv","*.avi","*.mp4","*.iso","*.tar.gz","*.jpg","*.pdf"],
-    "explorer.icon.enableNerdfont": true,
-    "explorer.buffer.showHiddenBuffers": false,
-    "explorer.width": 27,
-    "explorer.previewAction.onHover": true,
-     "explorer.keyMappings": {
-         "j": "nodeNext",
-         "k": "nodePrev"
-     },
-     "emmet.includeLanguages": {"jsp": "html"},
+    "emmet.includeLanguages": {"jsp": "html"},
     "snippets.loadFromExtensions": true,
     "snippets.ultisnips.enable": true,
     "session.directory": "~/.config/nvim/sessions",
@@ -16,10 +8,21 @@
         "nim": {
             "command": "nimlsp",
             "filetypes": ["nim"]
+        },
+        "clojure-lsp": {
+            "command": "bash",
+            "args": ["-c", "clojure-lsp"],
+            "filetypes": ["clojure"],
+            "rootPatterns": ["project.clj"],
+            "additionalSchemes": ["jar", "zipfile"],
+            "trace.server": "verbose",
+            "initializationOptions": {
+            }
         }
     },
     "java.errors.incompleteClasspath.severity": "ignore",
     "latex.build.onSave": true,
     "latex.lint.onChange": true,
-    "yank.enableCompletion": false
+    "yank.enableCompletion": false,
+    "suggest.timeout": 15000
 }
