@@ -22,3 +22,4 @@ export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 export SSH_ASKPASS="/usr/bin/lxqt-openssh-askpass"
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 export PATH="/usr/lib/jvm/java-8-openjdk/bin:$PATH"
+export QT_QPA_PLATFORMTHEME=qt5ct

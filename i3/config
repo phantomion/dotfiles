@@ -23,7 +23,7 @@ new_float normal
 font xft:Roboto Mono Nerd Font Regular 8.5
 
 # Hide borders
-hide_edge_borders none
+hide_edge_borders smart
 
 
 # Open specific applications in floating mode
@@ -57,7 +57,8 @@ for_window [title="Color picker"] floating enable
 for_window [title="Steam"] floating enable
 for_window [title="Transmission"] floating enable border normal
 for_window [class="openssh-askpass"] floating enable
-for_window [class="minesweeper"] floating enable border normal
+for_window [title="About Mozilla Firefox"] floating enable
+for_window [title="Minesweeper"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus

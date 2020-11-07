@@ -3,7 +3,6 @@ iv() {
     vimiv $1 &>/dev/null & disown
 }
 
-alias cat=ccat
 alias xampp='sudo /opt/lampp/manager-linux-x64.run'
 alias neofetchl='neofetch | lolcat'
 alias v=nvim
