@@ -11,23 +11,37 @@ Plug 'sheerun/vim-polyglot' " One for all
 Plug 'tpope/vim-surround' " Surround everything
 Plug 'scrooloose/nerdcommenter' " Smart comments
 Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
 Plug 'jiangmiao/auto-pairs' " Auto pairs
-"Plug 'itchyny/lightline.vim' " Status bar
 Plug 'vimwiki/vimwiki'
-Plug 'frazrepo/vim-rainbow', {'for': 'clojure'}
+Plug 'luochen1990/rainbow', {'for': 'clojure'}
 Plug 'Yggdroot/indentLine', {'for': 'nim'}
 Plug 'easymotion/vim-easymotion'
 Plug 'romgrk/barbar.nvim' " Best bufferline
 Plug 'glepnir/galaxyline.nvim'
+Plug 'farmergreg/vim-lastplace'
 " -----------dev tools---------
 Plug 'majutsushi/tagbar' " too good to be true
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " GET THIS OR DIE
 Plug 'jaxbot/browserlink.vim', {'for': ['html','css','javascript']} " preview
-Plug 'tpope/vim-fugitive' " this should be illegal
-Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' } " enables clojure development
 Plug 'kyazdani42/nvim-tree.lua'
+" -------------git------------
+Plug 'tpope/vim-fugitive' " this should be illegal
+Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-rhubarb'
+"-------nvim-lsp(now)---------
+Plug 'neovim/nvim-lspconfig' " Someday this will be the best
+Plug 'nvim-lua/diagnostic-nvim'
+Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-lua/lsp_extensions.nvim'
+Plug 'steelsojka/completion-buffers'
+"-----------telescope---------
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/telescope.nvim'
+"------------lsputils---------
+Plug 'RishabhRD/popfix'
+Plug 'RishabhRD/nvim-lsputils'
 " ------------misc------------
 Plug 'ron-rs/ron.vim', {'for': 'ron'}
 Plug 'nvim-treesitter/nvim-treesitter'
@@ -35,54 +49,11 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
+colorscheme srcery " Set the colorscheme
 let mapleader=" " " Set the map leader to <Space>
 if (has("termguicolors"))
     set termguicolors
 endif
-lua require('mygalaxyline')
-" --------------coc.nvim---------------
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" Use enter to select autocomplete choice. If none select first.
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
-let g:coc_snippet_next = '<C-l>'
-let g:coc_snippet_prev = '<C-h>'
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nnoremap <silent> <A-m> :call <SID>show_documentation()<CR>
-nmap <silent><leader>gd <Plug>(coc-definition)
-nmap <silent><leader>gy <Plug>(coc-type-definition)
-nmap <silent><leader>gr <Plug>(coc-references)
-nmap <silent><leader>gi <Plug>(coc-implementation)
-nmap <leader>rn <Plug>(coc-rename)
-nnoremap <leader>prn :CocSearch <C-R>=expand("<cword>")<CR><CR>
-nnoremap <nowait><expr> <C-f> coc#util#has_float() ? coc#util#float_scroll(1) : ""
-nnoremap <nowait><expr> <C-c> coc#util#has_float() ? coc#util#float_scroll(0) : ""
-"nnoremap <leader>qf <Plug>(coc-fix-current)
-nnoremap <C-p> :CocList --number-select files<CR>
-nnoremap <silent><leader>m :CocList marketplace<CR>
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    elseif (coc#rpc#ready())
-        call CocActionAsync('doHover')
-    else
-        execute '!' . &keywordprg . " " . expand('<cword>')
-    endif
-endfunction
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-set hidden
-set updatetime=100
-set shortmess+=c
 
 "--------------LuaTree-------------
 nnoremap <silent><C-n> :LuaTreeToggle<CR>
@@ -97,15 +68,51 @@ let g:lua_tree_ignore = ['.git', 'node_modules', '.cache', 'target', '.o']
 "-----------LuaColorizer-----------
 lua require'colorizer'.setup()
 
+"------------galaxyline------------
+lua require('mygalaxyline')
+
+"------------lspconfig-------------
+lua require('lsps')
+let g:completion_enable_auto_paren = 1
+lua require('telescope').setup({defaults = {file_sorter = require('telescope.sorters').get_fzy_sorter}})
+nnoremap <silent><leader>gd :lua vim.lsp.buf.definition()<CR>
+nnoremap <silent><leader>gi :lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent><leader>gh :lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent><leader>gr :lua vim.lsp.buf.references()<CR>
+nnoremap <silent><leader>rn :lua vim.lsp.buf.rename()<CR>
+nnoremap <silent><A-m> :call <SID>show_documentation()<CR>
+nnoremap <silent><leader>ga :lua vim.lsp.buf.code_action()<CR>
+imap <silent><tab> <Plug>(completion_smart_tab)
+imap <silent><s-tab> <Plug>(completion_smart_s_tab)
+imap <silent> <c-space> <Plug>(completion_trigger)
+nnoremap <silent><C-p> :lua require'telescope.builtin'.git_files{}<CR>
+nnoremap <silent><Leader>pp :lua require'telescope.builtin'.find_files{}<CR>
+nnoremap <silent><leader>pw :lua require'telescope.builtin'.grep_string { search = vim.fn.expand("<cword>") }<CR><CR>
+nnoremap <silent><leader>] :NextDiagnosticCycle<CR>
+nnoremap <silent><leader>[ :PrevDiagnosticCycle<CR>
+nnoremap <silent><leader>dg :OpenDiagnostic<CR>
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        :lua vim.lsp.buf.hover()
+    endif
+endfunction
+
+"-------------snippets-------------
+let g:completion_auto_change_source = 1
+let g:completion_enable_snippet = 'UltiSnips'
+let g:completion_chain_complete_list = [
+    \{'complete_items': ['buffers', 'snippet', 'lsp', 'path']},
+    \{'mode': '<c-p>'},
+    \{'mode': '<c-n>'}
+\]
+let g:UltiSnipsExpandTrigger="<CR>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+
 "------------treesitter------------
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",  -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  highlight = {
-    enable = true,              -- false will disable the whole extension
-  },
-}
-EOF
+lua require('treesit')
 
 "------------clojure---------------
 function! Omni_clojure()
@@ -114,27 +121,6 @@ function! Omni_clojure()
                 \ <SID>check_back_space() ? "\<TAB>" :
                 \ "\<C-X>\<C-O>"
     inoremap <silent><expr> <c-space> "\<C-X>\<C-O>"
-endfunction
-
-"------------lightline-------------
-let g:lightline = {'colorscheme': 'darcula'}
-let g:lightline.active = {
-            \ 'left': [[ 'mode', 'paste' ],
-            \          [ 'readonly', 'filename', 'modified'],
-            \          ['branch', 'git']] }
-let g:lightline.component_function = {'git': 'LightlineGitStatus',
-            \ 'branch': 'LightlineGitBranch'}
-
-function! LightlineGitStatus() abort
-  let status = get(b:, 'coc_git_status', '')
-  " return status
-  return winwidth(0) > 80 ? status : ''
-endfunction
-
-function! LightlineGitBranch() abort
-  let branch = get(g:, 'coc_git_status', '')
-  " return branch
-  return winwidth(0) > 80 ? branch : ''
 endfunction
 
 "------------vimwiki-------------
@@ -176,7 +162,10 @@ let g:clojure_align_multiline_strings = 1
 let g:clojure_align_subforms = 1
 
 let g:indentLine_char = '|'
-
+let g:rainbow_active = 1
+let g:sessions_dir = '$HOME/.config/nvim/sessions'
+"---------signify-----------
+let g:signify_sign_change = '~'
 
 "--------easymotion---------
 nmap <leader><leader> <Plug>(easymotion-prefix)
@@ -191,6 +180,9 @@ let g:EasyMotion_use_smartsign_us = 1 " US layout
 if (has("nvim"))
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
+set hidden
+set updatetime=50
+set shortmess+=c
 set mouse+=a
 set nu " Enable line numbers
 set modifiable
@@ -198,8 +190,15 @@ set autoread
 set relativenumber " Enable relative line numbers
 syntax on " Enable syntax highlighting
 filetype plugin indent on " Enable plugin indent
-colorscheme srcery " Set the colorscheme
-highlight CocErrorFloat ctermfg=white  guifg=white
+highlight LuaTreeFolderIcon guifg=#488847
+highlight LspDiagnosticsWarning guifg=#ff922b
+highlight LspDiagnosticsError guifg=#C33027
+highlight LspDiagnosticsHint guifg=#15aabf
+highlight LspDiagnosticsInformation guifg=#fab005
+highlight! link LspDiagnosticsUnderlineError CocErrorHighlight
+highlight! link LspDiagnosticsUnderlineHint CocHintHighlight
+highlight! link LspDiagnosticsUnderlineInformation CocInfoHighlight
+highlight! link LspDiagnosticsUnderlineWarning CocWarningHighlight
 set autoindent " Set code autoindentation
 set cursorline " Highlight current line
 set expandtab " don't use actual tab character (ctrl-v)
@@ -274,7 +273,6 @@ nnoremap <leader>q %
 nnoremap <leader>vw v%
 autocmd BufWritePre * %s/\s\+$//e  "Strip trailing whitespace on file save
 tnoremap <ESC> <C-\><C-n>
-nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 inoremap <C-l> <Right>
 " Clipboard
 vnoremap <C-c> "+y
@@ -287,10 +285,9 @@ nnoremap <A-v> "+p
 " Easy Install CocExtensions
 " Use :call InstallCoc()
 function! InstallCoc()
-    CocInstall coc-css coc-dictionary coc-emmet coc-yank
-    CocInstall coc-git coc-highlight coc-html coc-java coc-json coc-lists
-    CocInstall coc-rust-analyzer coc-snippets coc-tag coc-template
-    CocInstall coc-marketplace coc-texlab coc-tsserver coc-clangd
+    CocInstall coc-json coc-lists
+    CocInstall coc-snippets
+    CocInstall coc-marketplace
 endfunction
 
 let g:rust_toggle=0
@@ -298,15 +295,13 @@ function! Rust_toggle()
     if g:rust_toggle
         nnoremap <F3> :w<CR> :16split term://rustc % && ./%:r<CR>
         nnoremap <F4> :w<CR> :16split term://cargo run<CR>
-        nnoremap <F5> :w<CR> :16split term://cargo run
-        nnoremap <F6> :w<CR> :16split term://cargo test<CR>
+        nnoremap <F5> :w<CR> :16split term://cargo run --
         echom "16sp"
         let g:rust_toggle=0
     else
         nnoremap <F3> :w<CR> :vsplit term://rustc % && ./%:r<CR>
         nnoremap <F4> :w<CR> :vsplit term://cargo run<CR>
-        nnoremap <F5> :w<CR> :vsplit term://cargo run
-        nnoremap <F6> :w<CR> :vsplit term://cargo test<CR>
+        nnoremap <F5> :w<CR> :vsplit term://cargo run --
         echom "vs"
         let g:rust_toggle=1
     endif
@@ -383,6 +378,7 @@ augroup general
     autocmd FileType * nnoremap <F9> :call Help()<CR>
     autocmd FileType * nnoremap <F8> :e %<CR>
     autocmd FocusGained * :checktime
+    autocmd Filetype vim nnoremap <Leader>nv <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim/lua" }<CR>
 augroup END
 
 " ------------fugitive--------------
@@ -410,8 +406,7 @@ augroup rust
     autocmd BufNewFile,BufRead *.rs set filetype=rust
     autocmd FileType rust nnoremap <F3> :w<CR> :16split term://rustc % && ./%:r<CR>
     autocmd FileType rust nnoremap <F4> :w<CR> :16split term://cargo run<CR>
-    autocmd FileType rust nnoremap <F5> :w<CR> :16split term://cargo run
-    autocmd FileType rust nnoremap <F6> :w<CR> :16split term://cargo test<CR>
+    autocmd FileType rust nnoremap <F5> :w<CR> :16split term://cargo run --
     autocmd FileType rust nnoremap <leader><F4> :w<CR> :16split term://cargo run --target x86_64-unknown-linux-musl<CR>
     autocmd FileType rust nnoremap <leader>t :call Rust_toggle()<CR>
     autocmd FileType rust nnoremap <silent><leader>. a-><space>
@@ -445,7 +440,6 @@ augroup END
 
 augroup cloj
     autocmd!
-    autocmd FileType clojure call rainbow#load()
     autocmd FileType clojure nnoremap <F3> :FireplaceConnect 127.0.0.1:
     autocmd FileType clojure nnoremap <F4> :16sp term://lein run<CR>
     autocmd FileType clojure nnoremap <F5> :16sp term://lein run
@@ -456,11 +450,11 @@ augroup cloj
     "autocmd FileType clojure call Omni_clojure()
 augroup END
 
-" --------------coc session------------
+" --------------session------------
 augroup session
     autocmd!
-    autocmd FileType * nnoremap <F6> :CocCommand session.load<CR>
-    autocmd FileType * nnoremap <F7> :CocCommand session.save<CR>
+    exec 'nnoremap <F6> :mks! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
+    exec 'nnoremap <F7> :so ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
 augroup END
 
 " --------------vimwiki------------
@@ -476,11 +470,10 @@ augroup vimwik
     autocmd FileType vimwiki nnoremap <leader>h5 I===== <ESC>A =====<ESC>
 augroup END
 
-" -------------remember_folds-------------
-augroup remember_folds
+"------------highlight_yank--------------
+augroup highlight_yank
     autocmd!
-    au BufWinLeave ?* mkview 1
-    au BufWinEnter ?* silent! loadview 1
+    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=500}
 augroup END
 
 " -----------i3-syntax------------
