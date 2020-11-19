@@ -1,53 +1,6 @@
 "======Plugins======
 "{{{
-call plug#begin('~/.config/nvim/plugged')
-" -------colorschemes--------
-Plug 'Erichain/vim-monokai-pro'
-Plug 'srcery-colors/srcery-vim'
-Plug 'dracula/vim'
-" -----------langs-----------
-Plug 'sheerun/vim-polyglot' " One for all
-" ------------QoL------------
-Plug 'tpope/vim-surround' " Surround everything
-Plug 'scrooloose/nerdcommenter' " Smart comments
-Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
-Plug 'jiangmiao/auto-pairs' " Auto pairs
-Plug 'vimwiki/vimwiki'
-Plug 'luochen1990/rainbow', {'for': 'clojure'}
-Plug 'Yggdroot/indentLine', {'for': 'nim'}
-Plug 'easymotion/vim-easymotion'
-Plug 'romgrk/barbar.nvim' " Best bufferline
-Plug 'glepnir/galaxyline.nvim'
-Plug 'farmergreg/vim-lastplace'
-" -----------dev tools---------
-Plug 'majutsushi/tagbar' " too good to be true
-Plug 'jaxbot/browserlink.vim', {'for': ['html','css','javascript']} " preview
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' } " enables clojure development
-Plug 'kyazdani42/nvim-tree.lua'
-" -------------git------------
-Plug 'tpope/vim-fugitive' " this should be illegal
-Plug 'mhinz/vim-signify'
-Plug 'tpope/vim-rhubarb'
-"-------nvim-lsp(now)---------
-Plug 'neovim/nvim-lspconfig' " Someday this will be the best
-Plug 'nvim-lua/diagnostic-nvim'
-Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-lua/lsp_extensions.nvim'
-Plug 'steelsojka/completion-buffers'
-"-----------telescope---------
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/telescope.nvim'
-"------------lsputils---------
-Plug 'RishabhRD/popfix'
-Plug 'RishabhRD/nvim-lsputils'
-" ------------misc------------
-Plug 'ron-rs/ron.vim', {'for': 'ron'}
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'norcalli/nvim-colorizer.lua'
-call plug#end()
+lua require('plugins')
 
 colorscheme srcery " Set the colorscheme
 let mapleader=" " " Set the map leader to <Space>
@@ -88,6 +41,7 @@ imap <silent> <c-space> <Plug>(completion_trigger)
 nnoremap <silent><C-p> :lua require'telescope.builtin'.git_files{}<CR>
 nnoremap <silent><Leader>pp :lua require'telescope.builtin'.find_files{}<CR>
 nnoremap <silent><leader>pw :lua require'telescope.builtin'.grep_string { search = vim.fn.expand("<cword>") }<CR><CR>
+nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 nnoremap <silent><leader>] :NextDiagnosticCycle<CR>
 nnoremap <silent><leader>[ :PrevDiagnosticCycle<CR>
 nnoremap <silent><leader>dg :OpenDiagnostic<CR>
@@ -103,28 +57,23 @@ endfunction
 let g:completion_auto_change_source = 1
 let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_chain_complete_list = [
-    \{'complete_items': ['buffers', 'snippet', 'lsp', 'path']},
+    \{'complete_items': ['lsp', 'snippet']},
+    \{'complete_items': ['buffers', 'path']},
     \{'mode': '<c-p>'},
     \{'mode': '<c-n>'}
 \]
-let g:UltiSnipsExpandTrigger="<CR>"
-let g:UltiSnipsJumpForwardTrigger="<c-l>"
-let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+imap <c-j> <Plug>(completion_next_source)
+imap <c-k> <Plug>(completion_prev_source)
+let g:UltiSnipsExpandTrigger = "<CR>"
+let g:UltiSnipsJumpForwardTrigger = "<c-l>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
 
 "------------treesitter------------
 lua require('treesit')
 
-"------------clojure---------------
-function! Omni_clojure()
-    inoremap <silent><expr> <TAB>
-                \ pumvisible() ? "\<C-n>" :
-                \ <SID>check_back_space() ? "\<TAB>" :
-                \ "\<C-X>\<C-O>"
-    inoremap <silent><expr> <c-space> "\<C-X>\<C-O>"
-endfunction
-
 "------------vimwiki-------------
 let g:vimwiki_text_ignore_newline = 0
+let g:vimwiki_table_mappings = 0
 let g:vimwiki_list = [{
             \ 'path': '$HOME/vimwiki_html',
             \ 'template_path': '$HOME/vimwiki_html/templates',
@@ -132,7 +81,6 @@ let g:vimwiki_list = [{
             \ 'template_ext': '.html'}]
 
 " -----barbar.nvim-----
-set showtabline=1
 nnoremap <silent><C-s> :BufferClose<CR>
 nnoremap <silent><C-e> :BufferNext<CR>
 nnoremap <silent><C-q> :BufferPrevious<CR>
@@ -149,6 +97,34 @@ nmap <silent><leader>0 :BufferLast<CR>
 
 "----------tagbar------------
 nnoremap <C-b> :TagbarToggle<CR>
+
+" Debugger remaps
+fun! GotoWindow(id)
+    call win_gotoid(a:id)
+    MaximizerToggle
+endfun
+let g:vimspector_install_gadgets = ['vscode-cpptools', 'CodeLLDB' ]
+nnoremap <leader>m :MaximizerToggle!<CR>
+nnoremap <leader>dd :call vimspector#Launch()<CR>
+nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
+nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
+nnoremap <leader>de :call vimspector#Reset()<CR>
+
+nnoremap <leader>dcc :call vimspector#ClearLineBreakpoint()<CR>
+
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>d_ <Plug>VimspectorRestart
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+
+nmap <leader>drc <Plug>VimspectorRunToCursor
+nmap <leader>dbb <Plug>VimspectorToggleBreakpoint
+nmap <leader>dbc <Plug>VimspectorToggleConditionalBreakpoint
 
 "---------polyglot-----------
 "------------cpp-------------
@@ -188,6 +164,7 @@ set nu " Enable line numbers
 set modifiable
 set autoread
 set relativenumber " Enable relative line numbers
+set nowrap
 syntax on " Enable syntax highlighting
 filetype plugin indent on " Enable plugin indent
 highlight LuaTreeFolderIcon guifg=#488847
@@ -209,7 +186,7 @@ set smartindent " does the right thing (mostly) in programs
 set cindent " stricter rules for C programs
 set splitbelow splitright " Splits open at the bottom and right
 set noshowmode " Don't show the indicator in insert mode.
-set completeopt=longest,menuone,noselect " Improve completion menu
+set completeopt=noinsert,menuone,noselect " Improve completion menu
 set undofile
 set inccommand=split
 set clipboard=unnamed
@@ -219,6 +196,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.
 set so=17
 set ttimeoutlen=0
 set signcolumn=number
+set colorcolumn=80
 
 " Set the backup/undo/swap files to be in /tmp
 set backupdir=/tmp//
@@ -231,10 +209,6 @@ set smartcase " Smart Casing
 set hlsearch " Highlight search results
 set incsearch " Modern search
 set showmatch " Show matching brackets when text indicator is over them
-
-"Wildmode
-set wildmenu
-set wildmode=list:longest,full
 
 " H and L navigate to start or end of line
 nnoremap H ^
@@ -281,15 +255,6 @@ nnoremap <A-v> "+p
 
 "=======Autocommands=======
 " {{{
-
-" Easy Install CocExtensions
-" Use :call InstallCoc()
-function! InstallCoc()
-    CocInstall coc-json coc-lists
-    CocInstall coc-snippets
-    CocInstall coc-marketplace
-endfunction
-
 let g:rust_toggle=0
 function! Rust_toggle()
     if g:rust_toggle
@@ -362,23 +327,23 @@ function! Help()
         echom "<leader>e: eval"
         echom "<leader>d: doc"
     endif
-    echom "CocSession"
+    echom "Session"
     echom "F6: session.load"
     echom "F7: session.save"
 endfunction
 
-command! Marketplace execute "CocList marketplace"
-
 augroup general
     autocmd!
     autocmd TermOpen term://* startinsert
-    autocmd FileType * nnoremap <leader>o o<ESC>k
-    autocmd FileType * nnoremap <leader>O O<ESC>j
-    autocmd FileType * nnoremap <silent><leader>- :CocRestart<CR>
-    autocmd FileType * nnoremap <F9> :call Help()<CR>
-    autocmd FileType * nnoremap <F8> :e %<CR>
+    autocmd FileType * nnoremap <silent><leader>o o<ESC>k
+    autocmd FileType * nnoremap <silent><leader>O O<ESC>j
+    autocmd FileType * nnoremap <silent><F9> :call Help()<CR>
+    autocmd FileType * nnoremap <silent><F8> :e %<CR>
     autocmd FocusGained * :checktime
-    autocmd Filetype vim nnoremap <Leader>nv <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim/lua" }<CR>
+    autocmd Filetype vim nnoremap <silent><leader>nv <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim" }<CR>
+    autocmd BufEnter * lua require'completion'.on_attach()
+    autocmd FileType * nnoremap <silent><leader>rr :w<CR>:e<CR>:TSBufEnable highlight<CR>
+    autocmd FileType * nnoremap <silent><leader>tt :term<CR>
 augroup END
 
 " ------------fugitive--------------
@@ -435,7 +400,6 @@ augroup nvim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
     autocmd FileType vim nnoremap <F5> :source ~/.config/nvim/init.vim<CR>
-    autocmd FileType vim nnoremap <leader>b :CocConfig<CR>
 augroup END
 
 augroup cloj

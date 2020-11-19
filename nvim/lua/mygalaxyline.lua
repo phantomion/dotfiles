@@ -41,7 +41,7 @@ gls.left[2] = {
                 cv = colors.red,ce=colors.red, r = colors.cyan,rm = colors.cyan, ['r?'] = colors.cyan,
             ['!']  = colors.red,t = colors.red}
             local mode = {n = 'NORMAL', i = 'INSERT',v = 'VISUAL',[''] = 'V-LINE',V= 'VISUAL',
-                c = 'COMMAND',no = 'ELSE2',s = 'ELSE3',S='ELSE4',
+                c = 'COMMAND',no = 'ELSE2',s = 'SELECT',S='SELECT',
                 [''] = 'ELSE5',ic = 'ELSE6',R = 'REPLACE',Rv = 'ELSE7',
                 cv = 'ELSE8',ce='ELSE10', r = 'REPLACE',rm = 'ELSE11', ['r?'] = 'ELSE12',
             ['!']  = 'SEARCH',t = 'TERMINAL'}

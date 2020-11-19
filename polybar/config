@@ -72,7 +72,7 @@ module-margin-right = 1
 module-padding = 1
 modules-left = i3 bspwm
 modules-center =
-modules-right = system-usb-udev updates-arch-combined filesystem keyboard battery date
+modules-right = updates-arch-combined filesystem keyboard battery date
 separator = %{F#195465}|%{F-}
 locale =
 
@@ -122,7 +122,7 @@ module-margin-right = 1
 module-padding = 1
 modules-left = i3 bspwm
 modules-center =
-modules-right = system-usb-udev updates-arch-combined filesystem keyboard battery date
+modules-right = updates-arch-combined filesystem keyboard battery date
 separator = %{F#195465}|%{F-}
 locale =
 enable-ipc = false
@@ -257,14 +257,6 @@ type = custom/script
 exec = ~/.config/polybar/info-hackspeed.sh
 tail = true
 label-font = 3
-
-;=======================================================
-[module/system-usb-udev]
-type = custom/script
-exec = ~/.config/polybar/system-usb-udev.sh
-tail = true
-click-left = ~/.config/polybar/system-usb-udev.sh --mount &
-click-right = ~/.config/polybar/system-usb-udev.sh --unmount &
 
 ;=======================================================
 [module/memory]
