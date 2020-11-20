@@ -119,6 +119,33 @@ gls.left[9] = {
         highlight = {colors.red,colors.line_bg},
     }
 }
+--gls.left[10] = {
+  --LeftEnd = {
+    --provider = function() return '' end,
+    --separator = '',
+    --separator_highlight = {colors.bg,colors.line_bg},
+    --highlight = {colors.line_bg,colors.line_bg}
+  --}
+--}
+--rls.left[11] = {
+  --DiagnosticError = {
+    --provider = 'DiagnosticError',
+    --icon = '  ',
+    --highlight = {colors.red,colors.bg}
+  --}
+--}
+--gls.left[12] = {
+  --Space = {
+    --provider = function () return ' ' end
+  --}
+--}
+--gls.left[13] = {
+  --DiagnosticWarn = {
+    --provider = 'DiagnosticWarn',
+    --icon = '  ',
+    --highlight = {colors.blue,colors.bg},
+  --}
+--}
 
 gls.right[1]= {
     FileFormat = {

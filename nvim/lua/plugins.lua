@@ -1,5 +1,4 @@
-vim.cmd [[packadd packer.nvim]]
---vim._update_package_paths()
+vim.api.nvim_command('packadd packer.nvim')
 
 return require('packer').startup(function()
     use {'wbthomason/packer.nvim', opt = true}
@@ -18,8 +17,18 @@ return require('packer').startup(function()
     use 'SirVer/ultisnips'
     use 'jiangmiao/auto-pairs' -- Auto pairs
     use 'vimwiki/vimwiki'
-    use {'luochen1990/rainbow', ft = 'clojure'}
-    use {'Yggdroot/indentLine', ft = 'nim'}
+    use {
+        'luochen1990/rainbow',
+        ft = {'clojure'},
+        --config = 'vim.cmd[[RainbowToggleOff]]',
+        --cmd = 'RainbowToggleOff'
+        setup = function() vim.g.rainbow_active = 1 end
+    }
+    use {
+        'Yggdroot/indentLine',
+        ft = {'nim'},
+        setup = function() vim.g.indentLine_char = '|' end
+    }
     use 'easymotion/vim-easymotion'
     use 'romgrk/barbar.nvim' -- Best bufferline
     use 'glepnir/galaxyline.nvim'
