@@ -1,7 +1,7 @@
 # dotfiles
 
 This is what my i3 looks like
-![i3 screenshot](https://raw.github.com/phantomion/dotfiles/master/i3wm.png)
+![i3 screenshot](https://raw.github.com/phantomion/dotfiles/main/i3wm.png)
 
 ## neovim config
 Neovim config based on nvim_lsp and good support for languages like C/C++ and rust. Also, vimwiki is there because it's great.
