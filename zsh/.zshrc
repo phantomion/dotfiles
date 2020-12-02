@@ -48,7 +48,7 @@ alias s=startAndDisown
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/oh-my-zsh"
-plugins=(vi-mode autojump colored-man-pages colorize cp extract zsh-syntax-highlighting)
+plugins=(vi-mode autojump colored-man-pages cp extract zsh-syntax-highlighting)
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 
@@ -73,5 +73,4 @@ cdls() {
 }
 alias cd=cdls
 source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 eval "$(starship init zsh)"
