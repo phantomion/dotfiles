@@ -12,9 +12,9 @@ endif
 "--------------LuaTree-------------
 nnoremap <silent><C-n> :LuaTreeToggle<CR>
 let g:lua_tree_bindings = {
-    \ 'edit': ['h','l'],
-    \ 'cd': '<CR>',
-    \}
+            \ 'edit': ['h','l'],
+            \ 'cd': '<CR>',
+            \}
 let g:lua_tree_width = 27
 let g:lua_tree_indent_markers = 1
 let g:lua_tree_ignore = ['.git', 'node_modules', '.cache', 'target', '.o']
@@ -30,7 +30,7 @@ lua require('lsps')
 source $HOME/.config/nvim/lsps.vim
 
 "------------treesitter------------
-lua require('treesit')
+lua require('misc')
 
 "------------vimwiki-------------
 let g:vimwiki_text_ignore_newline = 0
@@ -84,6 +84,7 @@ let g:signify_sign_change = '~'
 nmap <leader><leader> <Plug>(easymotion-prefix)
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_smartsign_us = 1 " US layout
+let g:AutoPairsFlyMode = 1
 
 "}}}
 
@@ -132,7 +133,7 @@ set nowritebackup
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso,*.tar.gz,*.jpg,*.pdf,*.class,target/*
 set so=17
 set ttimeoutlen=0
-set signcolumn=number
+set signcolumn=yes
 set colorcolumn=80
 
 " Set the backup/undo/swap files to be in /tmp
@@ -185,6 +186,7 @@ nnoremap <leader>vw v%
 autocmd BufWritePre * %s/\s\+$//e  "Strip trailing whitespace on file save
 tnoremap <ESC> <C-\><C-n>
 inoremap <C-l> <Right>
+nnoremap <silent><leader>tt :<c-u>exe v:count1 . "ToggleTerm"<CR>
 " Clipboard
 vnoremap <C-c> "+y
 nnoremap <A-v> "+p

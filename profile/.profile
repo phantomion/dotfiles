@@ -24,4 +24,5 @@ export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 export PATH="/usr/lib/jvm/java-8-openjdk/bin:$PATH"
 export QT_QPA_PLATFORMTHEME=qt5ct
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-#export PATH="/usr/bin:/usr/local/bin:$PATH"
+#export MANPAGER='nvim +Man!'
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"

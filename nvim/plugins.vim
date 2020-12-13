@@ -1,8 +1,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
 " -------colorschemes--------
-"Plug 'Erichain/vim-monokai-pro'
 Plug 'srcery-colors/srcery-vim'
-"Plug 'dracula/vim'
 Plug 'christianchiarulli/nvcode-color-schemes.vim'
 Plug 'glepnir/zephyr-nvim'
 " -----------langs-----------
@@ -47,4 +45,5 @@ Plug 'ron-rs/ron.vim', {'for': 'ron'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'akinsho/nvim-toggleterm.lua'
 call plug#end()

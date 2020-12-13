@@ -86,7 +86,6 @@ augroup general
     autocmd Filetype vim nnoremap <silent><leader>nv <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim" }<CR>
     autocmd BufEnter * lua require'completion'.on_attach()
     autocmd FileType * nnoremap <silent><leader>rr :w<CR>:e<CR>:TSBufEnable highlight<CR>
-    autocmd FileType * nnoremap <silent><leader>tt :term<CR>
     "autocmd BufWritePost plugins.lua PackerCompile
 augroup END
 
@@ -115,7 +114,7 @@ augroup rust
     autocmd BufNewFile,BufRead *.rs set filetype=rust
     autocmd FileType rust nnoremap <F3> :w<CR> :16split term://rustc % && ./%:r<CR>
     autocmd FileType rust nnoremap <F4> :w<CR> :16split term://cargo run<CR>
-    autocmd FileType rust nnoremap <F5> :w<CR> :16split term://cargo run --
+    autocmd FileType rust nnoremap <F5> :w<CR> :16split term://cargo run --<Space>
     autocmd FileType rust nnoremap <leader><F4> :w<CR> :16split term://cargo run --target x86_64-unknown-linux-musl<CR>
     autocmd FileType rust nnoremap <leader>t :call Rust_toggle()<CR>
     autocmd FileType rust nnoremap <silent><leader>. a-><space>
@@ -155,7 +154,7 @@ augroup cloj
     autocmd FileType clojure nnoremap <F5> :16sp term://lein run
     autocmd FileType clojure nnoremap <leader>e :%Eval<CR>
     autocmd FileType clojure vnoremap <leader>e :Eval<CR>
-    autocmd FileType clojure nnoremap <leader>d :Doc <C-R><C-W><CR>
+    autocmd FileType clojure nnoremap <leader>dd :Doc <C-R><C-W><CR>
     autocmd FileType clojure setlocal lisp
     "autocmd FileType clojure call Omni_clojure()
 augroup END

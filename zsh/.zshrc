@@ -48,7 +48,7 @@ alias s=startAndDisown
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/oh-my-zsh"
-plugins=(vi-mode autojump colored-man-pages cp extract zsh-syntax-highlighting)
+plugins=(vi-mode autojump cp extract zsh-syntax-highlighting)
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 

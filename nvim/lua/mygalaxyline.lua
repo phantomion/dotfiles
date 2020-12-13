@@ -4,7 +4,7 @@ gl.short_line_list = {'LuaTree','vista','dbui'}
 
 local colors = {
     bg = '#323232',
-    line_bg = '#323232',
+    line_bg = '#363650',
     fg = '#c0c0c0',
 
     yellow = '#fabd2f',
@@ -99,7 +99,7 @@ gls.left[7] = {
     DiffAdd = {
         provider = 'DiffAdd',
         condition = checkwidth,
-        icon = ' ',
+        icon = '  ',
         highlight = {colors.green,colors.line_bg},
     }
 }
@@ -120,30 +120,31 @@ gls.left[9] = {
     }
 }
 gls.left[10] = {
+  DiagnosticError = {
+    provider = 'DiagnosticError',
+    icon = '   ',
+    highlight = {colors.red,colors.line_bg}
+  }
+}
+gls.left[11] = {
+  DiagnosticWarn = {
+    provider = 'DiagnosticWarn',
+    icon = '   ',
+    highlight = {colors.blue,colors.line_bg},
+  }
+}
+gls.left[12] = {
   LeftEnd = {
     provider = function() return '' end,
     separator = '',
     separator_highlight = {colors.bg,colors.line_bg},
-    highlight = {colors.line_bg,colors.line_bg}
-  }
-}
-gls.left[11] = {
-  DiagnosticError = {
-    provider = 'DiagnosticError',
-    icon = '  ',
-    highlight = {colors.red,colors.bg}
-  }
-}
-gls.left[12] = {
-  Space = {
-    provider = function () return ' ' end
+    highlight = {colors.bg,colors.line_bg}
   }
 }
 gls.left[13] = {
-  DiagnosticWarn = {
-    provider = 'DiagnosticWarn',
-    icon = '  ',
-    highlight = {colors.blue,colors.bg},
+  Space = {
+    provider = function () return ' ' end,
+    highlight = {colors.fg,colors.bg},
   }
 }
 

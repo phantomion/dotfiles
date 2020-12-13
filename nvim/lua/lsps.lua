@@ -10,7 +10,7 @@ require'lspconfig'.rust_analyzer.setup{on_attach=on_attach_vim}
 require'lspconfig'.clangd.setup{on_attach=on_attach_vim}
 require'lspconfig'.clojure_lsp.setup{on_attach=on_attach_vim}
 require'lspconfig'.nimls.setup{on_attach=on_attach_vim}
-require'lspconfig'.bashls.setup{on_attach=on_attach_vim}
+--require'lspconfig'.bashls.setup{on_attach=on_attach_vim}
 require'lspconfig'.elixirls.setup{on_attach=on_attach_vim}
 require('nlua.lsp.nvim').setup(require('lspconfig'), {
         on_attach = on_attach_vim,

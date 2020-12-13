@@ -4,12 +4,13 @@ This is what my i3 looks like
 ![i3 screenshot](https://raw.github.com/phantomion/dotfiles/main/i3wm.png)
 
 ## neovim config
-Neovim config based on nvim_lsp and good support for languages like C/C++ and rust. Also, vimwiki is there because it's great.
+Neovim config based on `nvim_lsp` and good support for languages like C/C++ and rust. Also, vimwiki is there because it's great.
 
-Note:Requires nightly neovim.
+Note:Requires [neovim nightly](https://github.com/neovim/neovim/releases/tag/nightly).
 
 ## zsh config
-Zsh config based on oh-my-zsh. Includes plugins like autojump, syntax-highlight, git and aliases I find useful and you may do so too.
+Zsh config based on oh-my-zsh. Includes plugins like `autojump`, `syntax-highlight` and aliases I find useful and you may do so too.
+Rquires [starship](https://github.com/starship/starship), which is included and is as shown in the screenshot above.
 
 ## i3 config
 Config is always under construction.
