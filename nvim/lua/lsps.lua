@@ -10,14 +10,43 @@ require'lspconfig'.rust_analyzer.setup{on_attach=on_attach_vim}
 require'lspconfig'.clangd.setup{on_attach=on_attach_vim}
 require'lspconfig'.clojure_lsp.setup{on_attach=on_attach_vim}
 require'lspconfig'.nimls.setup{on_attach=on_attach_vim}
---require'lspconfig'.bashls.setup{on_attach=on_attach_vim}
 require'lspconfig'.elixirls.setup{on_attach=on_attach_vim}
-require('nlua.lsp.nvim').setup(require('lspconfig'), {
-        on_attach = on_attach_vim,
-        globals = {
-            "Color", "c", "Group", "g", "s",
+require'lspconfig'.vuels.setup{
+    on_attach=on_attach_vim;
+    settings = {
+        vetur = {
+            completion = {
+                autoImport = true;
+                useScaffoldSnippets = true;
+            }
         }
-    })
+    }
+}
+require'lspconfig'.texlab.setup{
+    on_attach=on_attach_vim;
+    settings = {
+        latex = {
+            build = {
+                args = { "-lualatex", "-interaction=nonstopmode", "-synctex=1", "%f" };
+                executable = "latexmk";
+                onSave = true;
+            },
+            lint = {
+                onChange = true
+            }
+        }
+    }
+}
+require'lspconfig'.tsserver.setup{on_attach=on_attach_vim}
+require'lspconfig'.pyls.setup{on_attach=on_attach_vim}
+require'lspconfig'.hls.setup{on_attach=on_attach_vim}
+--require'lspconfig'.jedi_language_server.setup{on_attach=on_attach_vim}
+--require('nlua.lsp.nvim').setup(require('lspconfig'), {
+    --on_attach = on_attach_vim,
+    --globals = {
+        --"Color", "c", "Group", "g", "s",
+    --}
+--})
 
 local actions = require('telescope.actions')
 require'telescope'.setup{
@@ -32,29 +61,39 @@ require'telescope'.setup{
                 ["<Down>"] = actions.move_selection_next,
                 ["<Up>"] = actions.move_selection_previous,
 
-                ["<CR>"] = actions.goto_file_selection_edit + actions.center,
-                ["<TAB>"] = actions.goto_file_selection_edit + actions.center,
-                ["<C-x>"] = actions.goto_file_selection_split,
-                ["<C-v>"] = actions.goto_file_selection_vsplit,
-                ["<C-t>"] = actions.goto_file_selection_tabedit,
+                ["<CR>"] = actions.select_default + actions.center,
+                ["<C-x>"] = actions.select_horizontal,
+                ["<C-v>"] = actions.select_vertical,
+                ["<C-t>"] = actions.select_tab,
 
                 ["<C-u>"] = actions.preview_scrolling_up,
                 ["<C-d>"] = actions.preview_scrolling_down,
 
-                -- TODO: When we implement multi-select, you can turn this back on :)
-            -- ["<Tab>"] = actions.add_selection,
-        },
+                ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+                ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+                ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                ["<C-l>"] = actions.complete_tag
+            },
 
-        n = {
-            ["<esc>"] = actions.close,
-            ["<CR>"] = actions.goto_file_selection_edit + actions.center,
-            ["<C-x>"] = actions.goto_file_selection_split,
-            ["<C-v>"] = actions.goto_file_selection_vsplit,
-            ["<C-t>"] = actions.goto_file_selection_tabedit,
+            n = {
+                ["<esc>"] = actions.close,
+                ["<CR>"] = actions.select_default + actions.center,
+                ["<C-x>"] = actions.select_horizontal,
+                ["<C-v>"] = actions.select_vertical,
+                ["<C-t>"] = actions.select_tab,
 
-            -- TODO: This would be weird if we switch the ordering.
+                ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+                ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+                ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+                ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+
+                -- TODO: This would be weird if we switch the ordering.
                 ["j"] = actions.move_selection_next,
                 ["k"] = actions.move_selection_previous,
+                ["H"] = actions.move_to_top,
+                ["M"] = actions.move_to_middle,
+                ["L"] = actions.move_to_bottom,
 
                 ["<Down>"] = actions.move_selection_next,
                 ["<Up>"] = actions.move_selection_previous,
@@ -78,12 +117,12 @@ vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handle
 
 --new diagnostic
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
-    underline = true,
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = false,
+        underline = true,
 
-    signs = true,
+        signs = true,
 
-    update_in_insert = false,
-  }
+        update_in_insert = false,
+    }
 )

@@ -1,6 +1,6 @@
 export EDITOR="nvim"
 export BROWSER="firefox"
-export PATH=/home/kwstas/.nimble/bin:$PATH
+export PATH=$HOME/.nimble/bin:$PATH
 export EXA_COLORS="di=35"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -18,11 +18,9 @@ export PATH="$GEM_HOME/ruby/2.7.0/bin:$PATH"
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
-#export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 export SSH_ASKPASS="/usr/bin/lxqt-openssh-askpass"
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 export PATH="/usr/lib/jvm/java-8-openjdk/bin:$PATH"
 export QT_QPA_PLATFORMTHEME=qt5ct
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-#export MANPAGER='nvim +Man!'
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"

@@ -3,6 +3,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'srcery-colors/srcery-vim'
 Plug 'christianchiarulli/nvcode-color-schemes.vim'
 Plug 'glepnir/zephyr-nvim'
+Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 " -----------langs-----------
 Plug 'sheerun/vim-polyglot' " One for all
 " ------------QoL------------
@@ -12,7 +13,7 @@ Plug 'honza/vim-snippets' " needed for C/C++ snippets for some reason
 Plug 'SirVer/ultisnips'
 Plug 'jiangmiao/auto-pairs' " Auto pairs
 Plug 'vimwiki/vimwiki'
-Plug 'luochen1990/rainbow', {'for': 'clojure'}
+Plug 'p00f/nvim-ts-rainbow', {'for': 'clojure'}
 Plug 'Yggdroot/indentLine', {'for': 'nim'}
 Plug 'easymotion/vim-easymotion'
 Plug 'romgrk/barbar.nvim' " Best bufferline
@@ -37,6 +38,7 @@ Plug 'tjdevries/nlua.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'windwp/nvim-spectre'
 "------------lsputils---------
 Plug 'RishabhRD/popfix'
 Plug 'RishabhRD/nvim-lsputils'

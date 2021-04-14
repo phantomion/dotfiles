@@ -137,7 +137,8 @@ augroup cc
     autocmd FileType c,cpp nnoremap <F3> :w<CR> :16split term://make<CR>
     autocmd FileType c,cpp nnoremap <leader><F3> :w<CR> :16split term://make -B<CR>
     autocmd FileType c,cpp nnoremap <F4> :w<CR> :16split term://make run<CR>
-    autocmd FileType c,cpp nnoremap <F5> :w<CR> :16split term://./%:r<CR>
+    autocmd FileType c,cpp nnoremap <F5> :w<CR> :16split term://make run ARGS=
+    autocmd FileType c,cpp nnoremap <F6> :w<CR> :16split term://./%:r<CR>
 augroup END
 
 " --------------vim---------------

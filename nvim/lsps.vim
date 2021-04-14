@@ -5,6 +5,8 @@ nnoremap <silent><leader>gi :lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent><leader>gh :lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent><leader>gr :lua vim.lsp.buf.references()<CR>
 nnoremap <silent><leader>rn :lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>prn viw:lua require('spectre').open_visual()<CR>
+nnoremap <leader>S :lua require('spectre').open()<CR>
 nnoremap <silent><A-m> :call <SID>show_documentation()<CR>
 nnoremap <silent><leader>ga :lua vim.lsp.buf.code_action()<CR>
 imap <silent><tab> <Plug>(completion_smart_tab)

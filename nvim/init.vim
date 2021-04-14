@@ -10,14 +10,13 @@ if (has("termguicolors"))
 endif
 
 "--------------LuaTree-------------
-nnoremap <silent><C-n> :LuaTreeToggle<CR>
-let g:lua_tree_bindings = {
-            \ 'edit': ['h','l'],
-            \ 'cd': '<CR>',
-            \}
-let g:lua_tree_width = 27
-let g:lua_tree_indent_markers = 1
-let g:lua_tree_ignore = ['.git', 'node_modules', '.cache', 'target', '.o']
+nnoremap <silent><C-n> :NvimTreeToggle<CR>
+let g:nvim_tree_width = 27
+let g:nvim_tree_indent_markers = 1
+let g:nvim_tree_ignore = ['.git', 'node_modules', '.cache', 'target', '.o', 'bin']
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_disable_netrw = 0
+let g:nvim_tree_hijack_netrw = 0
 
 "-----------LuaColorizer-----------
 lua require'colorizer'.setup()
@@ -84,7 +83,6 @@ let g:signify_sign_change = '~'
 nmap <leader><leader> <Plug>(easymotion-prefix)
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_smartsign_us = 1 " US layout
-let g:AutoPairsFlyMode = 1
 
 "}}}
 
@@ -153,12 +151,13 @@ nnoremap H ^
 vnoremap H ^
 nnoremap L $
 vnoremap L $
-
-" J and K navigate to start or end of screen
-nnoremap K H
-vnoremap K H
-nnoremap J L
-vnoremap J L
+nnoremap w W
+nnoremap W w
+nnoremap e E
+nnoremap E e
+nnoremap b B
+nnoremap B b
+nnoremap ' ;
 
 nnoremap ; :
 vnoremap ; :

@@ -3,6 +3,7 @@ iv() {
     vimiv $1 &>/dev/null & disown
 }
 
+alias delroute='sudo ip route del default dev ppp0'
 alias xampp='sudo /opt/lampp/manager-linux-x64.run'
 alias neofetchl='neofetch | lolcat'
 alias v=nvim
@@ -74,3 +75,4 @@ cdls() {
 alias cd=cdls
 source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 eval "$(starship init zsh)"
+[ -f "/home/kwstas/.ghcup/env" ] && source "/home/kwstas/.ghcup/env" # ghcup-env
