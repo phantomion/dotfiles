@@ -103,15 +103,6 @@ set relativenumber " Enable relative line numbers
 set nowrap
 syntax on " Enable syntax highlighting
 filetype plugin indent on " Enable plugin indent
-highlight LuaTreeFolderIcon guifg=#488847
-highlight LspDiagnosticsDefaultWarning guifg=#ff922b
-highlight LspDiagnosticsDefaultError guifg=#C33027
-highlight LspDiagnosticsDefaultHint guifg=#15aabf
-highlight LspDiagnosticsDefaultInformation guifg=#fab005
-"highlight! link LspDiagnosticsUnderlineError CocErrorHighlight
-"highlight! link LspDiagnosticsUnderlineHint CocHintHighlight
-"highlight! link LspDiagnosticsUnderlineInformation CocInfoHighlight
-"highlight! link LspDiagnosticsUnderlineWarning CocWarningHighlight
 set autoindent " Set code autoindentation
 set cursorline " Highlight current line
 set expandtab " don't use actual tab character (ctrl-v)
@@ -158,6 +149,7 @@ nnoremap E e
 nnoremap b B
 nnoremap B b
 nnoremap ' ;
+nnoremap Y y$
 
 nnoremap ; :
 vnoremap ; :
@@ -189,6 +181,21 @@ nnoremap <silent><leader>tt :<c-u>exe v:count1 . "ToggleTerm"<CR>
 " Clipboard
 vnoremap <C-c> "+y
 nnoremap <A-v> "+p
+
+highlight LuaTreeFolderIcon guifg=#488847
+highlight LspDiagnosticsDefaultWarning guifg=#ff922b
+highlight LspDiagnosticsDefaultError guifg=#C33027
+highlight LspDiagnosticsDefaultHint guifg=#15aabf
+highlight LspDiagnosticsDefaultInformation guifg=#fab005
+sign define LspDiagnosticsSignError text=⮾ texthl=LspDiagnosticsSignError linehl= numhl=
+sign define LspDiagnosticsSignWarning text=⚠ texthl=LspDiagnosticsSignWarning linehl= numhl=
+sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=
+sign define LspDiagnosticsSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=
+"highlight! link LspDiagnosticsUnderlineError CocErrorHighlight
+"highlight! link LspDiagnosticsUnderlineHint CocHintHighlight
+"highlight! link LspDiagnosticsUnderlineInformation CocInfoHighlight
+"highlight! link LspDiagnosticsUnderlineWarning CocWarningHighlight
+
 "}}}
 
 "=======Autocommands=======
