@@ -9,9 +9,6 @@ nnoremap <leader>prn viw:lua require('spectre').open_visual()<CR>
 nnoremap <leader>S :lua require('spectre').open()<CR>
 nnoremap <silent><A-m> :call <SID>show_documentation()<CR>
 nnoremap <silent><leader>ga :lua vim.lsp.buf.code_action()<CR>
-imap <silent><tab> <Plug>(completion_smart_tab)
-imap <silent><s-tab> <Plug>(completion_smart_s_tab)
-imap <silent> <c-space> <Plug>(completion_trigger)
 nnoremap <silent><C-p> :lua require'telescope.builtin'.git_files{}<CR>
 nnoremap <silent><Leader>pp :lua require'telescope.builtin'.find_files{}<CR>
 nnoremap <silent><leader>pw :lua require'telescope.builtin'.grep_string { search = vim.fn.expand("<cword>") }<CR><CR>
@@ -27,17 +24,38 @@ function! s:show_documentation()
     endif
 endfunction
 
-"-------------snippets-------------
-let g:completion_auto_change_source = 1
-let g:completion_enable_snippet = 'UltiSnips'
-let g:completion_chain_complete_list = [
-    \{'complete_items': ['lsp', 'snippet']},
-    \{'complete_items': ['buffers', 'path']},
-    \{'mode': '<c-p>'},
-    \{'mode': '<c-n>'}
-\]
-imap <c-j> <Plug>(completion_next_source)
-imap <c-k> <Plug>(completion_prev_source)
-let g:UltiSnipsExpandTrigger = "<CR>"
-let g:UltiSnipsJumpForwardTrigger = "<c-l>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
+"-------------Compe && Snippets-------------
+"let g:UltiSnipsExpandTrigger = " "
+"let g:UltiSnipsJumpForwardTrigger = "<c-l>"
+"let g:UltiSnipsJumpBackwardTrigger = "<c-h>"
+"
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+let g:compe = {}
+let g:compe.enabled = v:true
+let g:compe.autocomplete = v:true
+let g:compe.debug = v:false
+let g:compe.min_length = 1
+let g:compe.preselect = 'enable'
+let g:compe.throttle_time = 80
+let g:compe.source_timeout = 200
+let g:compe.incomplete_delay = 400
+let g:compe.max_abbr_width = 1000
+let g:compe.max_kind_width = 1000
+let g:compe.max_menu_width = 1000000
+let g:compe.documentation = v:true
+
+let g:compe.source = {}
+let g:compe.source.path = v:true
+let g:compe.source.buffer = v:true
+let g:compe.source.calc = v:true
+let g:compe.source.nvim_lsp = v:true
+let g:compe.source.nvim_lua = v:true
+let g:compe.source.omni = v:false
+"let g:compe.source.ultisnips = v:true
+let g:compe.source.vsnip = v:true
+highlight link CompeDocumentation NormalFloat

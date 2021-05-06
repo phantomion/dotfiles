@@ -9,8 +9,9 @@ Plug 'sheerun/vim-polyglot' " One for all
 " ------------QoL------------
 Plug 'tpope/vim-surround' " Surround everything
 Plug 'scrooloose/nerdcommenter' " Smart comments
-Plug 'honza/vim-snippets' " needed for C/C++ snippets for some reason
-Plug 'SirVer/ultisnips'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets'
 Plug 'jiangmiao/auto-pairs' " Auto pairs
 Plug 'vimwiki/vimwiki'
 Plug 'p00f/nvim-ts-rainbow', {'for': 'clojure'}
@@ -30,14 +31,13 @@ Plug 'tpope/vim-fugitive' " this should be illegal
 Plug 'mhinz/vim-signify'
 "-------nvim-lsp(now)---------
 Plug 'neovim/nvim-lspconfig' " Someday this will be the best
-Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/lsp_extensions.nvim'
-Plug 'steelsojka/completion-buffers'
+Plug 'hrsh7th/nvim-compe'  " Best completion sources
 Plug 'tjdevries/nlua.nvim'
 "-----------telescope---------
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
 Plug 'windwp/nvim-spectre'
 "------------lsputils---------
 Plug 'RishabhRD/popfix'

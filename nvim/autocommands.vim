@@ -84,9 +84,8 @@ augroup general
     autocmd FileType * nnoremap <silent><F8> :e %<CR>
     autocmd FocusGained * :checktime
     autocmd Filetype vim nnoremap <silent><leader>nv <cmd>lua require'telescope.builtin'.find_files{ cwd = "~/.config/nvim" }<CR>
-    autocmd BufEnter * lua require'completion'.on_attach()
     autocmd FileType * nnoremap <silent><leader>rr :w<CR>:e<CR>:TSBufEnable highlight<CR>
-    "autocmd BufWritePost plugins.lua PackerCompile
+    autocmd BufWritePost plugins.lua PackerCompile
 augroup END
 
 " ------------fugitive--------------

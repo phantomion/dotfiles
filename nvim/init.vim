@@ -107,8 +107,8 @@ set autoindent " Set code autoindentation
 set cursorline " Highlight current line
 set expandtab " don't use actual tab character (ctrl-v)
 set tabstop=4
+set softtabstop=4
 set shiftwidth=4 " indenting is 4 spaces
-set autoindent " turns it on
 set smartindent " does the right thing (mostly) in programs
 set cindent " stricter rules for C programs
 set splitbelow splitright " Splits open at the bottom and right
@@ -120,7 +120,7 @@ set clipboard=unnamed
 set nobackup
 set nowritebackup
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso,*.tar.gz,*.jpg,*.pdf,*.class,target/*
-set so=17
+set so=12
 set ttimeoutlen=0
 set signcolumn=yes
 set colorcolumn=80
@@ -187,10 +187,10 @@ highlight LspDiagnosticsDefaultWarning guifg=#ff922b
 highlight LspDiagnosticsDefaultError guifg=#C33027
 highlight LspDiagnosticsDefaultHint guifg=#15aabf
 highlight LspDiagnosticsDefaultInformation guifg=#fab005
-sign define LspDiagnosticsSignError text=⮾ texthl=LspDiagnosticsSignError linehl= numhl=
-sign define LspDiagnosticsSignWarning text=⚠ texthl=LspDiagnosticsSignWarning linehl= numhl=
+sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsSignError linehl= numhl=
+sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
 sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=
-sign define LspDiagnosticsSignHint text=H texthl=LspDiagnosticsSignHint linehl= numhl=
+sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=
 "highlight! link LspDiagnosticsUnderlineError CocErrorHighlight
 "highlight! link LspDiagnosticsUnderlineHint CocHintHighlight
 "highlight! link LspDiagnosticsUnderlineInformation CocInfoHighlight

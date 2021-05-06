@@ -1,32 +1,23 @@
 vim.api.nvim_command('packadd packer.nvim')
 
 return require('packer').startup(function()
-    use {'wbthomason/packer.nvim', opt = true}
-    --"use 'Erichain/vim-monokai-pro'
-    use 'srcery-colors/srcery-vim'
-    use 'dracula/vim'
-    --"use 'ayu-theme/ayu-vim'
-    --"use 'christianchiarulli/nvcode-color-schemes.vim'
-    --"use 'glepnir/zephyr-nvim'
+    use 'wbthomason/packer.nvim'
+    use 'christianchiarulli/nvcode-color-schemes.vim'
+    use 'glepnir/zephyr-nvim'
     -------------langs-----------
     use 'sheerun/vim-polyglot' -- One for all
     --------------QoL------------
     use 'tpope/vim-surround' -- Surround everything
     use 'scrooloose/nerdcommenter' -- Smart comments
-    use 'honza/vim-snippets'
-    use 'SirVer/ultisnips'
     use 'jiangmiao/auto-pairs' -- Auto pairs
+    use 'hrsh7th/vim-vsnip'
+    use 'hrsh7th/vim-vsnip-integ'
+    use 'rafamadriz/friendly-snippets'
     use 'vimwiki/vimwiki'
-    use {
-        'luochen1990/rainbow',
-        ft = {'clojure'},
-        --config = 'vim.cmd[[RainbowToggleOff]]',
-        --cmd = 'RainbowToggleOff'
-        setup = function() vim.g.rainbow_active = 1 end
-    }
+    use {'p00f/nvim-ts-rainbow', ft = 'clojure'}
     use {
         'Yggdroot/indentLine',
-        ft = {'nim'},
+        ft = {'nim', 'python'},
         setup = function() vim.g.indentLine_char = '|' end
     }
     use 'easymotion/vim-easymotion'
@@ -34,7 +25,7 @@ return require('packer').startup(function()
     use 'glepnir/galaxyline.nvim'
     use 'farmergreg/vim-lastplace'
     -------------dev tools---------
-    use 'majutsushi/tagbar' -- too good to be true
+    use 'liuchengxu/vista.vim'
     use {'jaxbot/browserlink.vim', ft = { 'html','css','javascript' }} -- preview
     use {'tpope/vim-fireplace', ft =  'clojure' } -- enables clojure development
     use 'kyazdani42/nvim-tree.lua'
@@ -42,31 +33,25 @@ return require('packer').startup(function()
     ---------------git------------
     use 'tpope/vim-fugitive' -- this should be illegal
     use 'mhinz/vim-signify'
-    use 'tpope/vim-rhubarb'
     --------nvim-lsp(now)---------
     use 'neovim/nvim-lspconfig' -- Someday this will be the best
-    use 'nvim-lua/diagnostic-nvim'
-    use 'nvim-lua/completion-nvim'
     use 'nvim-lua/lsp_extensions.nvim'
-    use 'steelsojka/completion-buffers'
+    use 'hrsh7th/nvim-compe'  -- Best completion sources
     use 'tjdevries/nlua.nvim'
     -------------telescope---------
-    use {
-        'nvim-lua/telescope.nvim',
-        requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'}
-    }
+    use 'nvim-lua/telescope.nvim'
+    use 'nvim-lua/popup.nvim'
+    use 'nvim-lua/plenary.nvim'
+    use 'windwp/nvim-spectre'
     -------------lsputils---------
-
     use {
         'RishabhRD/nvim-lsputils',
         requires = 'RishabhRD/popfix'
     }
-    --Debugger plugins
-    --use 'puremourning/vimspector'
-    --use 'szw/vim-maximizer'
     --------------misc------------
     use {'ron-rs/ron.vim', ft = 'ron'}
-    use 'nvim-treesitter/nvim-treesitter'
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
     use 'kyazdani42/nvim-web-devicons'
     use 'norcalli/nvim-colorizer.lua'
+    use 'akinsho/nvim-toggleterm.lua'
 end)
