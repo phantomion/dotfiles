@@ -16,6 +16,7 @@ nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim
 nnoremap <silent><leader>] :lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <silent><leader>[ :lua vim.lsp.diagnostic.goto_prev()<CR>
 nnoremap <silent><leader>dg :lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <silent><leader>fm :lua vim.lsp.buf.formatting()<CR>
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
         execute 'h '.expand('<cword>')

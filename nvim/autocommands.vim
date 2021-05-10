@@ -138,6 +138,7 @@ augroup cc
     autocmd FileType c,cpp nnoremap <F4> :w<CR> :16split term://make run<CR>
     autocmd FileType c,cpp nnoremap <F5> :w<CR> :16split term://make run ARGS=
     autocmd FileType c,cpp nnoremap <F6> :w<CR> :16split term://./%:r<CR>
+    autocmd Filetype c,cpp nnoremap <silent><leader>fm :!clang-format -style="{BasedOnStyle: google, IndentWidth: 4}" -i % <CR><CR>
 augroup END
 
 " --------------vim---------------

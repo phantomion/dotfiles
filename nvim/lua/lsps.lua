@@ -56,8 +56,7 @@ require'lspconfig'.texlab.setup{
     }
 }
 require'lspconfig'.tsserver.setup{on_attach=on_attach_vim}
---require'lspconfig'.pyls.setup{on_attach=on_attach_vim}
-require'lspconfig'.pyright.setup{
+require'lspconfig'.pyls.setup{
     capabilities = capabilities,
     on_attach = on_attach_vim,
 }
@@ -182,4 +181,5 @@ end
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<c-l>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
