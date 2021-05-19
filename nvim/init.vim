@@ -55,9 +55,8 @@ nmap <silent><leader>8 :BufferGoto 8<CR>
 nmap <silent><leader>9 :BufferGoto 9<CR>
 nmap <silent><leader>0 :BufferLast<CR>
 
-"----------tagbar------------
-nnoremap <C-b> :Vista!!<CR>
-nnoremap <silent><leader>b :Vista nvim_lsp<CR>
+"----------symbols outline------------
+nnoremap <C-b> :SymbolsOutline<CR>
 
 "--------vimspector----------
 source $HOME/.config/nvim/debugging.vim
