@@ -115,7 +115,7 @@ set noshowmode " Don't show the indicator in insert mode.
 set completeopt=noinsert,menuone,noselect " Improve completion menu
 set undofile
 set inccommand=split
-set clipboard=unnamed
+set clipboard=unnamedplus
 set nobackup
 set nowritebackup
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.d,*.o,*.bin,*.sh,*.svg,*.mkv,*.png,*.mkv,*.avi,*.mp4,*.iso,*.tar.gz,*.jpg,*.pdf,*.class,target/*
@@ -188,8 +188,8 @@ highlight LspDiagnosticsDefaultHint guifg=#15aabf
 highlight LspDiagnosticsDefaultInformation guifg=#fab005
 sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsSignError linehl= numhl=
 sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
-sign define LspDiagnosticsSignInformation text=I texthl=LspDiagnosticsSignInformation linehl= numhl=
-sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=
+sign define LspDiagnosticsSignInformation text= texthl=LspDiagnosticsSignInformation linehl= numhl=
+sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=
 "highlight! link LspDiagnosticsUnderlineError CocErrorHighlight
 "highlight! link LspDiagnosticsUnderlineHint CocHintHighlight
 "highlight! link LspDiagnosticsUnderlineInformation CocInfoHighlight
