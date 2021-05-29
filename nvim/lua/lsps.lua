@@ -7,6 +7,8 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+require'lspinstall'.setup() -- important
+
 --language servers
 require'lspconfig'.rust_analyzer.setup{
     on_attach = on_attach_vim,

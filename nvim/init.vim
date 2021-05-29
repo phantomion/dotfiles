@@ -4,6 +4,9 @@ source $HOME/.config/nvim/plugins.vim
 "lua require('plugins')
 
 colorscheme zephyr " Set the colorscheme
+"colorscheme neon " Set the colorscheme
+"let g:neon_style = "doom"
+
 let mapleader=" " " Set the map leader to <Space>
 if (has("termguicolors"))
     set termguicolors

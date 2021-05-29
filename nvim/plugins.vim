@@ -4,6 +4,7 @@ Plug 'srcery-colors/srcery-vim'
 Plug 'christianchiarulli/nvcode-color-schemes.vim'
 Plug 'glepnir/zephyr-nvim'
 Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+Plug 'rafamadriz/neon'
 " -----------langs-----------
 Plug 'sheerun/vim-polyglot' " One for all
 " ------------QoL------------
@@ -34,6 +35,7 @@ Plug 'glepnir/lspsaga.nvim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'hrsh7th/nvim-compe'  " Best completion sources
 Plug 'tjdevries/nlua.nvim'
+Plug 'kabouzeid/nvim-lspinstall'
 "-----------telescope---------
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/popup.nvim'
