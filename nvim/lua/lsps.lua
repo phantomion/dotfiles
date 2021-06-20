@@ -66,6 +66,14 @@ require'lspconfig'.intelephense.setup{
     capabilities = capabilities,
     on_attach = on_attach_vim,
 }
+require'lspconfig'.html.setup{
+    capabilities = capabilities,
+    on_attach = on_attach_vim,
+}
+require'lspconfig'.css.setup{
+    capabilities = capabilities,
+    on_attach = on_attach_vim,
+}
 require'lspconfig'.hls.setup{on_attach=on_attach_vim}
 
 local actions = require('telescope.actions')

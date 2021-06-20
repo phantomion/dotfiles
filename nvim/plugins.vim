@@ -50,4 +50,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'akinsho/nvim-toggleterm.lua'
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+"Plug 'theHamsta/nvim-dap-virtual-text'
 call plug#end()

@@ -145,6 +145,7 @@ augroup END
 augroup nvim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType vim setlocal foldlevel=0
     autocmd FileType vim nnoremap <F5> :source ~/.config/nvim/init.vim<CR>
 augroup END
 
@@ -200,4 +201,16 @@ augroup tex
     autocmd FileType tex nnoremap <leader>lor a$\lor$
     autocmd FileType tex nnoremap <leader>land a$\land$
     autocmd FileType tex nnoremap <leader>neg a$\neg$
+augroup END
+
+augroup NvimDap
+    autocmd!
+    au FileType dap-repl lua require('dap.ext.autocompl').attach()
+augroup END
+
+augroup php
+    autocmd!
+    autocmd BufRead *.php set indentexpr =
+    autocmd BufRead *.php set autoindent
+    autocmd BufRead *.php set smartindent
 augroup END

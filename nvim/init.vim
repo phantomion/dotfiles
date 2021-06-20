@@ -138,6 +138,8 @@ set smartcase " Smart Casing
 set hlsearch " Highlight search results
 set incsearch " Modern search
 set showmatch " Show matching brackets when text indicator is over them
+set foldmethod=indent
+set foldlevel=20
 
 " H and L navigate to start or end of line
 nnoremap H ^
