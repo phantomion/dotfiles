@@ -190,13 +190,3 @@ vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<c-l>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-
-local saga = require 'lspsaga'
-saga.init_lsp_saga{
-    code_action_prompt = {
-        enable = false,
-        sign = true,
-        sign_priority = 20,
-        virtual_text = true,
-    },
-}

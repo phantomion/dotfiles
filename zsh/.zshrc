@@ -3,13 +3,14 @@ iv() {
     vimiv $1 &>/dev/null & disown
 }
 
+alias j=z
 alias delroute='sudo ip route del default dev ppp0'
 alias xampp='sudo /opt/lampp/manager-linux-x64.run'
 alias neofetchl='neofetch | lolcat'
 alias v=nvim
 alias desktop='cd ~/Desktop'
 alias downloads='cd ~/Downloads'
-alias vconf='nvim ~/.config/nvim/init.vim'
+alias vconf='nvim ~/.config/nvim/init.lua'
 alias zshrc='nvim ~/.zshrc'
 alias soz='source ~/.zshrc'
 alias autoremove='sudo pacman -Rcns $(pacman -Qdtq)'
@@ -37,6 +38,12 @@ csdscp() {
     scp -r $2 csd3972@$1.csd.uoc.gr:$3
 }
 
+pgsql_start() {
+    sudo mkdir /run/postgresql
+    sudo chown postgres /run/postgresql
+    sudo su postgres -c 'pg_ctl start -D /usr/local/pgsql/data -l /var/lib/postgres/serverlog'
+}
+
 xdgopen() {
     xdg-open $* &>/dev/null & disown
 }
@@ -49,8 +56,7 @@ alias s=startAndDisown
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/oh-my-zsh"
-plugins=(vi-mode autojump cp extract zsh-syntax-highlighting)
-[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
+plugins=(vi-mode cp extract zsh-syntax-highlighting)
 autoload -U compinit && compinit -u
 
 source $ZSH/oh-my-zsh.sh
@@ -75,4 +81,5 @@ cdls() {
 alias cd=cdls
 source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
 [ -f "/home/kwstas/.ghcup/env" ] && source "/home/kwstas/.ghcup/env" # ghcup-env
