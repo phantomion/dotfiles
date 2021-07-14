@@ -3,13 +3,6 @@ local remap = vim.api.nvim_set_keymap
 
 remap('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
 
-vim.g.nvim_tree_width = 27
-vim.g.nvim_tree_indent_markers = 1
-vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', 'target', '.o', 'bin' }
-vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_disable_netrw = 0
-vim.g.nvim_tree_hijack_netrw = 0
-
 -- Vimwiki
 vim.g.vimwiki_text_ignore_newline = 0
 vim.g.vimwiki_table_mappings = 0
@@ -28,6 +21,9 @@ remap('n', '<leader>7', ':BufferGoto 7<CR>', {noremap = true, silent = true})
 remap('n', '<leader>8', ':BufferGoto 8<CR>', {noremap = true, silent = true})
 remap('n', '<leader>9', ':BufferGoto 9<CR>', {noremap = true, silent = true})
 remap('n', '<leader>0', ':BufferLast<CR>', {noremap = true, silent = true})
+remap("n", "<leader>cc", "<Plug>kommentary_line_default", {})
+remap("n", "<leader>c", "<Plug>kommentary_motion_default", {})
+remap("x", "<leader>c", "<Plug>kommentary_visual_default", {})
 
 -- Symbols outline
 remap('n', '<C-b>', ':SymbolsOutline<CR>', {noremap = true, silent = true})
@@ -38,7 +34,6 @@ remap('n', '<leader>ng', ':Neogit<CR>', {noremap = true, silent = true})
 remap('n', '<leader>rr', ':w<CR>:e<CR>:TSBufEnable highlight<CR>', {noremap = true, silent = true})
 
 vim.g.rainbow_active = 1
-vim.g.signify_sign_change = '~'
 
 -- lsp
 remap('n', '<leader>gd', ':lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})

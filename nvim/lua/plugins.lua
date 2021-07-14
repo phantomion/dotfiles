@@ -20,9 +20,34 @@ return require('packer').startup(function()
     -------------langs-----------
     use 'sheerun/vim-polyglot' -- One for all
     --------------QoL------------
-    use 'tpope/vim-surround' -- Surround everything
-    use 'scrooloose/nerdcommenter' -- Smart comments
-    use 'jiangmiao/auto-pairs' -- Auto pairs
+    use {
+        "blackCauldron7/surround.nvim",
+        config = function()
+            require "surround".setup {}
+            vim.g.surround_mappings_style = "surround"
+        end
+    }
+    use {
+        'b3nj5m1n/kommentary',
+        config = function()
+            require('kommentary.config').use_extended_mappings()
+            vim.g.kommentary_create_default_mappings = false
+        end
+    }
+    use {
+        'windwp/nvim-autopairs',
+        config = function()
+            require('nvim-autopairs').setup{
+                fast_wrap = {
+                          end_key = 'e',
+                },
+            }
+            require("nvim-autopairs.completion.compe").setup{
+                map_cr = true, --  map <CR> on insert mode
+                map_complete = true -- it will auto insert `(` after select function or method item
+            }
+        end
+    }
     use {
         'hrsh7th/vim-vsnip',
         config = function()
@@ -33,11 +58,6 @@ return require('packer').startup(function()
     use 'rafamadriz/friendly-snippets'
     use 'vimwiki/vimwiki'
     use {'p00f/nvim-ts-rainbow', ft = 'clojure'}
-    use {
-        'Yggdroot/indentLine',
-        ft = {'nim', 'python'},
-        setup = function() vim.g.indentLine_char = '|' end
-    }
     use 'romgrk/barbar.nvim' -- Best bufferline
     use {
         'glepnir/galaxyline.nvim',
@@ -48,24 +68,46 @@ return require('packer').startup(function()
     use 'farmergreg/vim-lastplace'
     -------------dev tools---------
     use 'simrat39/symbols-outline.nvim'
-    use {'jaxbot/browserlink.vim', ft = { 'html','css','javascript' }} -- preview
     use {'tpope/vim-fireplace', ft =  'clojure' } -- enables clojure development
-    use 'kyazdani42/nvim-tree.lua'
-    use {'slashmili/alchemist.vim', ft = 'elixir'}
+    use {
+        'kyazdani42/nvim-tree.lua',
+        config = function()
+            vim.g.nvim_tree_width = 27
+            vim.g.nvim_tree_indent_markers = 1
+            vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', 'target', '.o', 'bin' }
+            vim.g.nvim_tree_git_hl = 1
+            vim.g.nvim_tree_disable_netrw = 0
+            vim.g.nvim_tree_hijack_netrw = 0
+        end
+    }
     ---------------git------------
     use {
         'TimUntersberger/neogit',
         config = function()
-            local neogit = require('neogit')
-
-            neogit.setup {
+            require('neogit').setup {
                 integrations = {
                     diffview = true
                 },
             }
         end
     }
-    use 'mhinz/vim-signify'
+    use {
+        'lewis6991/gitsigns.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim'
+        },
+        config = function()
+            require('gitsigns').setup{
+                signs = {
+                    add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+                    change       = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+                    delete       = {hl = 'GitSignsDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+                    topdelete    = {hl = 'GitSignsDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+                    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+                },
+            }
+        end
+    }
     use 'sindrets/diffview.nvim'
     --------nvim-lsp(now)---------
     use {
@@ -117,7 +159,6 @@ return require('packer').startup(function()
             }
         end
     }  -- Best completion sources
-    use 'tjdevries/nlua.nvim'
     use 'kabouzeid/nvim-lspinstall'
     -------------telescope---------
     use {
@@ -132,7 +173,12 @@ return require('packer').startup(function()
     }
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
-    use 'windwp/nvim-spectre'
+    use {
+        'windwp/nvim-spectre',
+        config = function()
+            require('spectre').setup()
+        end
+    }
     -------------lsputils---------
     use {
         'RishabhRD/nvim-lsputils',
