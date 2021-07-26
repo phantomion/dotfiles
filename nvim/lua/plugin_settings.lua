@@ -21,7 +21,7 @@ remap('n', '<leader>7', ':BufferGoto 7<CR>', {noremap = true, silent = true})
 remap('n', '<leader>8', ':BufferGoto 8<CR>', {noremap = true, silent = true})
 remap('n', '<leader>9', ':BufferGoto 9<CR>', {noremap = true, silent = true})
 remap('n', '<leader>0', ':BufferLast<CR>', {noremap = true, silent = true})
-remap("n", "<leader>cc", "<Plug>kommentary_line_default", {})
+remap("n", "<leader>ci", "<Plug>kommentary_line_default", {})
 remap("n", "<leader>c", "<Plug>kommentary_motion_default", {})
 remap("x", "<leader>c", "<Plug>kommentary_visual_default", {})
 

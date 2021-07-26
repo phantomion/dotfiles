@@ -117,10 +117,6 @@ vim.cmd([[
     highlight LspDiagnosticsDefaultError guifg=#C33027
     highlight LspDiagnosticsDefaultHint guifg=#15aabf
     highlight LspDiagnosticsDefaultInformation guifg=#fab005
-    sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsSignError linehl= numhl=
-    sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
-    sign define LspDiagnosticsSignInformation text= texthl=LspDiagnosticsSignInformation linehl= numhl=
-    sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsSignHint linehl= numhl=
     ]])
 
 require('autocommands')

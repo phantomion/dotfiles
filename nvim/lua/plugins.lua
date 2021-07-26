@@ -30,7 +30,6 @@ return require('packer').startup(function()
     use {
         'b3nj5m1n/kommentary',
         config = function()
-            require('kommentary.config').use_extended_mappings()
             vim.g.kommentary_create_default_mappings = false
         end
     }
@@ -93,9 +92,6 @@ return require('packer').startup(function()
     }
     use {
         'lewis6991/gitsigns.nvim',
-        requires = {
-            'nvim-lua/plenary.nvim'
-        },
         config = function()
             require('gitsigns').setup{
                 signs = {
@@ -121,6 +117,10 @@ return require('packer').startup(function()
         config = function()
             local saga = require 'lspsaga'
             saga.init_lsp_saga{
+                error_sign = '',
+                warn_sign = '',
+                hint_sign = '',
+                infor_sign = '',
                 code_action_prompt = {
                     enable = false,
                     sign = true,
