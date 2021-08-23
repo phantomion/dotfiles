@@ -4,8 +4,6 @@ iv() {
 }
 
 alias j=z
-alias delroute='sudo ip route del default dev ppp0'
-alias xampp='sudo /opt/lampp/manager-linux-x64.run'
 alias neofetchl='neofetch | lolcat'
 alias v=nvim
 alias desktop='cd ~/Desktop'
@@ -21,7 +19,8 @@ alias pm='~/Documents/dotfiles/pm.sh'
 alias i3c='nvim ~/.config/i3/config'
 alias polc='nvim ~/.config/polybar/config'
 alias weather='curl wttr.in'
-alias xm='xmodmap ~/.Xmodmap'
+alias xm="xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
+alias langs="setxkbmap -model pc105 -layout us,gr -option grp:lalt_lshift_toggle"
 alias alc='nvim ~/.config/alacritty/alacritty.yml'
 alias rofic='nvim ~/.config/rofi/config'
 alias stars='nvim ~/.config/starship.toml'

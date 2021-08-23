@@ -16,11 +16,6 @@ local function make_config()
   }
 end
 
-require'lspconfig'.pyls.setup{
-    capabilities = capabilities,
-    on_attach = on_attach_vim,
-}
-
 local function setup_servers()
     require'lspinstall'.setup()
     local servers = require'lspinstall'.installed_servers()

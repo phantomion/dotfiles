@@ -1,6 +1,5 @@
 require('plugins')
 
-vim.g.colors_name = 'zephyr'
 vim.g.mapleader = ' '
 if (vim.fn.has('termguicolors')) then
     vim.o.termguicolors = true
@@ -86,6 +85,14 @@ remap('n', "'", ';', {noremap = true, silent = true})
 remap('n', 'Y', 'y$', {noremap = true, silent = true})
 remap('n', ';', ':', {noremap = true})
 remap('v', ';', ':', {noremap = true})
+remap('i', ',', ',<c-g>u', {noremap = true, silent = true})
+remap('i', '.', '.<c-g>u', {noremap = true, silent = true})
+remap('i', '!', '!<c-g>u', {noremap = true, silent = true})
+remap('i', '?', '?<c-g>u', {noremap = true, silent = true})
+remap('n', 'n', 'nzzzv', {noremap = true, silent = true})
+remap('n', 'N', 'Nzzzv', {noremap = true, silent = true})
+remap('n', '<leader>j', ':m .+1<CR>==', {noremap = true, silent = true})
+remap('n', '<leader>k', ':m .-2<CR>==', {noremap = true, silent = true})
 
 remap('n', '<A-h>', '5h', {noremap = true, silent = true})
 remap('n', '<A-j>', '5j', {noremap = true, silent = true})
@@ -95,8 +102,6 @@ remap('v', '<A-h>', '5h', {noremap = true, silent = true})
 remap('v', '<A-j>', '5j', {noremap = true, silent = true})
 remap('v', '<A-k>', '5k', {noremap = true, silent = true})
 remap('v', '<A-l>', '5l', {noremap = true, silent = true})
-remap('n', '<A-,>', ':1winc > <CR>', {noremap = true, silent = true})
-remap('n', '<A-.>', ':1winc < <CR>', {noremap = true, silent = true})
 
 remap('n', '<C-h>', '<C-w>h', {noremap = true, silent = true})
 remap('n', '<C-j>', '<C-w>j', {noremap = true, silent = true})
@@ -112,11 +117,11 @@ remap('n', '<leader>tt', ':<c-u>exe v:count1 . "ToggleTerm"<CR>', {noremap = tru
 remap('v', '<C-c>', '"+y', {noremap = true, silent = true})
 remap('n', '<A-v>', '"+p', {noremap = true, silent = true})
 vim.cmd([[
-    highlight LuaTreeFolderIcon guifg=#488847
-    highlight LspDiagnosticsDefaultWarning guifg=#ff922b
-    highlight LspDiagnosticsDefaultError guifg=#C33027
-    highlight LspDiagnosticsDefaultHint guifg=#15aabf
-    highlight LspDiagnosticsDefaultInformation guifg=#fab005
+    au ColorScheme * highlight NvimTreeFolderIcon guifg='#488847'
+    au ColorScheme * highlight DiagnosticWarning guifg='#ff922b'
+    au ColorScheme * highlight DiagnosticError guifg='#C33027'
+    au ColorScheme * highlight DiagnosticHint guifg='#15aabf'
+    au ColorScheme * highlight DiagnosticInformation guifg='#fab005'
     ]])
 
 require('autocommands')

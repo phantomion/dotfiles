@@ -49,7 +49,6 @@ for_window [class="qt5ct"] floating enable border normal
 for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
 for_window [class="Simple-scan"] floating enable border normal
 for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
@@ -59,6 +58,7 @@ for_window [title="Transmission"] floating enable border normal
 for_window [class="openssh-askpass"] floating enable
 for_window [title="About Mozilla Firefox"] floating enable
 for_window [title="Minesweeper"] floating enable
+for_window [title="gnome-calculator"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -96,7 +96,7 @@ bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b
 bindsym $mod+Shift+b exec firefox
 bindsym $mod+Shift+p exec firefox --private-window
-bindsym $mod+d exec rofi -show drun
+bindsym $mod+d exec ~/.config/rofi/bin/launcher_colorful
 bindsym $mod+Shift+f exec alacritty -e sh ~/.config/vifm/scripts/vifmrun
 bindsym $mod+Ctrl+b exec alacritty -e bmenu
 bindsym Mod1+Tab workspace back_and_forth
@@ -212,11 +212,10 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id flameshot
 exec --no-startup-id clipit -d
-exec --no-startup-id xautolock -time 20 -locker ~/Documents/glitchlock/glitchlock
+#exec --no-startup-id xautolock -time 20 -locker ~/Documents/glitchlock/glitchlock
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id sh $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id "xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
-exec_always --no-startup-id xmodmap ~/.Xmodmap &
 exec --no-startup-id autotiling
 
 #▄     ▄               █
@@ -282,7 +281,8 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
-#assign [class="TelegramDesktop"] $ws8
+assign [class="TelegramDesktop"] $ws7
+assign [class="Skype"] $ws8
 assign [class="transmission"] $ws5
 
 # Resize window (you can also use the mouse for that)

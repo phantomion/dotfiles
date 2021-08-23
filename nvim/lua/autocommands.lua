@@ -57,9 +57,7 @@ vim.cmd([[
 vim.cmd([[
     augroup nvim
     autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-    autocmd FileType vim setlocal foldlevel=0
-    autocmd FileType vim nnoremap <F5> :source ~/.config/nvim/init.vim<CR>
+    autocmd FileType lua nnoremap <F5> :source ~/.config/nvim/init.lua<CR>
     augroup END
     ]])
 

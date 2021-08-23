@@ -16,9 +16,23 @@ return require('packer').startup(function()
         opt = true,
         cond = function() return false end
     }
-    use 'glepnir/zephyr-nvim'
-    -------------langs-----------
-    use 'sheerun/vim-polyglot' -- One for all
+    use {
+        'glepnir/zephyr-nvim',
+        config = function()
+            require('zephyr')
+        end,
+        opt = true,
+        cond = function() return true end
+    }
+    use {
+        'EdenEast/nightfox.nvim',
+        config = function()
+            vim.g.nightfox_style = "palefox"
+            require('nightfox').set()
+        end,
+        opt = true,
+        cond = function() return false end
+    }
     --------------QoL------------
     use {
         "blackCauldron7/surround.nvim",
@@ -28,9 +42,27 @@ return require('packer').startup(function()
         end
     }
     use {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        config = function()
+            require'nvim-treesitter.configs'.setup {
+                context_commentstring = {
+                    enable = true,
+                    enable_autocmd = false,
+                }
+            }
+        end
+    }
+    use {
         'b3nj5m1n/kommentary',
         config = function()
             vim.g.kommentary_create_default_mappings = false
+            require('kommentary.config').configure_language('vue', {
+                single_line_comment_string = 'auto',
+                multi_line_comment_strings = 'auto',
+                hook_function = function()
+                    require('ts_context_commentstring.internal').update_commentstring()
+                end,
+            })
         end
     }
     use {
@@ -101,6 +133,7 @@ return require('packer').startup(function()
                     topdelete    = {hl = 'GitSignsDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
                     changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
                 },
+                current_line_blame_delay = 10,
             }
         end
     }
