@@ -42,7 +42,7 @@ remap('n', '<leader>gd', ':lua vim.lsp.buf.definition()<CR>', {noremap = true, s
 remap('n', '<leader>pd', ":lua require'lspsaga.provider'.preview_definition()<CR>", {noremap = true, silent = true})
 remap('n', '<leader>gi', ':lua vim.lsp.buf.implementation()<CR>', {noremap = true, silent = true})
 remap('n', '<leader>gh', ":lua require('lspsaga.signaturehelp').signature_help()<CR>", {noremap = true, silent = true})
-remap('n', '<leader>gr', ':lua vim.lsp.buf.references()<CR>', {noremap = true, silent = true})
+remap('n', '<leader>gr', ":lua require'lspsaga.provider'.lsp_finder()<CR>", {noremap = true, silent = true})
 remap('n', '<leader>rn', ":lua require('lspsaga.rename').rename()<CR>", {noremap = true, silent = true})
 remap('n', '<leader>prn', "viw:lua require('spectre').open_visual()<CR>", {noremap = true, silent = true})
 remap('n', '<leader>S', ":lua require('spectre').open()<CR>", {noremap = true, silent = true})

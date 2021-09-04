@@ -27,7 +27,6 @@ vim.cmd([[
     autocmd FileType rust nnoremap <leader><F4> :w<CR> :16split term://cargo run --target x86_64-unknown-linux-musl<CR>
     autocmd FileType rust nnoremap <leader>t :call Rust_toggle()<CR>
     autocmd FileType rust nnoremap <silent><leader>. a-><space>
-    autocmd InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', enabled = {"ChainingHint"} }
     augroup END
     ]])
 

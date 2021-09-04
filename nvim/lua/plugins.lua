@@ -133,7 +133,9 @@ return require('packer').startup(function()
                     topdelete    = {hl = 'GitSignsDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
                     changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
                 },
-                current_line_blame_delay = 10,
+                current_line_blame_opts = {
+                    delay = 10,
+                }
             }
         end
     }
@@ -146,7 +148,8 @@ return require('packer').startup(function()
         config = function() require('lsps') end
     }
     use {
-        'glepnir/lspsaga.nvim',
+        'jasonrhansen/lspsaga.nvim',
+        branch = 'finder-preview-fixes',
         config = function()
             local saga = require 'lspsaga'
             saga.init_lsp_saga{
@@ -160,10 +163,11 @@ return require('packer').startup(function()
                     sign_priority = 20,
                     virtual_text = true,
                 },
+                max_preview_lines = 20,
+                border_style = "round"
             }
         end
     }
-    use 'nvim-lua/lsp_extensions.nvim'
     use {
         'hrsh7th/nvim-compe',
         config = function()
@@ -212,11 +216,6 @@ return require('packer').startup(function()
             require('spectre').setup()
         end
     }
-    -------------lsputils---------
-    use {
-        'RishabhRD/nvim-lsputils',
-        requires = 'RishabhRD/popfix'
-    }
     --------------misc------------
     use {'ron-rs/ron.vim', ft = 'ron'}
     use {
@@ -232,4 +231,7 @@ return require('packer').startup(function()
     use 'akinsho/nvim-toggleterm.lua'
     use 'mfussenegger/nvim-dap'
     use 'rcarriga/nvim-dap-ui'
+    use {
+        'simrat39/rust-tools.nvim',
+    }
 end)
