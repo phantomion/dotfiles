@@ -216,8 +216,8 @@ return require('packer').startup(function()
                     ['<S-Tab>'] = cmp.mapping(function(fallback)
                         if vim.fn.pumvisible() == 1 then
                             vim.fn.feedkeys(t("<C-p>"), "n")
-                        elseif luasnip.jumpable(-1) then
-                            vim.fn.feedkeys(t("<Plug>vsnip-jump-prev"), "")
+                        elseif vim.fn['vsnip#jumpable'](-1) == 1 then
+                            vim.fn.feedkeys(t('<Plug>(vsnip-jump-prev)'), "")
                         else
                             fallback()
                         end
