@@ -58,11 +58,3 @@ remap('n', '<leader>dg', ":lua vim.lsp.diagnostic.set_loclist()<CR>", {noremap =
 remap('n', '<leader>fm', ":lua vim.lsp.buf.formatting()<CR>", {noremap = true, silent = true})
 remap('n', '<C-f>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>", {noremap = true, silent = true})
 remap('n', '<C-b>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>", {noremap = true, silent = true})
-
-remap('i', '<C-Space>', 'compe#complete()', {noremap = true, silent = true, expr = true})
-remap('i', '<CR>', "compe#confirm('<CR>')", {noremap = true, silent = true, expr = true})
-remap('i', '<C-e>', "compe#close('<C-e>')", {noremap = true, silent = true, expr = true})
-remap('i', '<C-f>', "compe#scroll({ 'delta': +4 })", {noremap = true, silent = true, expr = true})
-remap('i', '<C-d>', "compe#scroll({ 'delta': -4 })", {noremap = true, silent = true, expr = true})
-
-vim.cmd([[ highlight link CompeDocumentation NormalFloat ]])

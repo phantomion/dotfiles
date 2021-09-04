@@ -8,6 +8,10 @@ vim.cmd([[
     ]])
 
 vim.cmd([[
+    autocmd FileType lua lua require'cmp'.setup.buffer {sources = {{ name = 'nvim_lua' },{ name = 'buffer' }}}
+]])
+
+vim.cmd([[
     augroup web
     autocmd!
     autocmd InsertLeave *.css :BLReloadCSS

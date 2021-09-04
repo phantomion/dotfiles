@@ -34,7 +34,7 @@ vim.o.cindent = true -- stricter rules for C programs
 vim.o.splitbelow = true
 vim.o.splitright = true -- Splits open at the bottom and right
 vim.o.showmode = false -- Don't show the indicator in insert mode.
-vim.opt.completeopt:append({"noinsert", "menuone", "noselect"}) -- Improve completion menu
+vim.opt.completeopt = ({"noinsert", "menuone", "noselect"}) -- Improve completion menu
 vim.o.undofile = true
 vim.o.inccommand = "split"
 vim.o.clipboard = "unnamedplus"

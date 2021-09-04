@@ -70,13 +70,14 @@ return require('packer').startup(function()
         config = function()
             require('nvim-autopairs').setup{
                 fast_wrap = {
-                          end_key = 'e',
+                    end_key = 'e',
                 },
             }
-            require("nvim-autopairs.completion.compe").setup{
+            require("nvim-autopairs.completion.cmp").setup({
                 map_cr = true, --  map <CR> on insert mode
-                map_complete = true -- it will auto insert `(` after select function or method item
-            }
+                map_complete = true, -- it will auto insert `(` after select function or method item
+                auto_select = true -- automatically select the first item
+            })
         end
     }
     use {
@@ -168,35 +169,83 @@ return require('packer').startup(function()
             }
         end
     }
-    use {
-        'hrsh7th/nvim-compe',
-        config = function()
-            require'compe'.setup{
-                enabled = true;
-                autocomplete = true;
-                debug = false;
-                min_length = 1;
-                preselect = 'enable';
-                throttle_time = 80;
-                source_timeout = 200;
-                incomplete_delay = 400;
-                max_abbr_width = 1000;
-                max_kind_width = 1000;
-                max_menu_width = 1000000;
-                documentation = true;
-                source = {
-                    path = true;
-                    buffer = true;
-                    calc = true;
-                    nvim_lsp = true;
-                    nvim_lua = true;
-                    vsnip = true;
-                    omni = false;
-                }
-            }
-        end
-    }  -- Best completion sources
     use 'kabouzeid/nvim-lspinstall'
+    use {
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-vsnip"
+        },
+        config = function()
+            local check_back_space = function()
+                local col = vim.fn.col('.') - 1
+                return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
+            end
+
+            local t = function(str)
+                return vim.api.nvim_replace_termcodes(str, true, true, true)
+            end
+
+            local cmp = require'cmp'
+            cmp.setup({
+                snippet = {
+                    expand = function(args)
+                        vim.fn["vsnip#anonymous"](args.body)
+                    end,
+                },
+                mapping = {
+                    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+                    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+                    ['<C-Space>'] = cmp.mapping.complete(),
+                    ['<C-e>'] = cmp.mapping.close(),
+                    ['<CR>'] = cmp.mapping.confirm(),
+                    ['<Tab>'] = cmp.mapping(function(fallback)
+                        if vim.fn.pumvisible() == 1 then
+                            vim.fn.feedkeys(t('<C-n>'), 'n')
+                        elseif check_back_space() then
+                            vim.fn.feedkeys(t('<Tab>'), 'n')
+                        elseif vim.fn['vsnip#available']() == 1 then
+                            vim.fn.feedkeys(t('<Plug>(vsnip-expand-or-jump)'), '')
+                        else
+                            fallback()
+                        end
+                    end, {'i', 's'}),
+                    ['<S-Tab>'] = cmp.mapping(function(fallback)
+                        if vim.fn.pumvisible() == 1 then
+                            vim.fn.feedkeys(t("<C-p>"), "n")
+                        elseif luasnip.jumpable(-1) then
+                            vim.fn.feedkeys(t("<Plug>vsnip-jump-prev"), "")
+                        else
+                            fallback()
+                        end
+                    end, { 'i', 's' }),
+                },
+                sources = {
+                    { name = 'nvim_lua' },
+                    { name = 'buffer' },
+                    { name = 'nvim_lsp' },
+                    { name = 'path' },
+                    { name = 'vsnip' }
+                },
+                formatting = {
+                    format = function(entry, vim_item)
+                        -- set a name for each source
+                        vim_item.menu = ({
+                            buffer = "[Buffer]",
+                            nvim_lsp = "[LSP]",
+                            nvim_lua = "[Lua]",
+                            path = "[Path]",
+                            vsnip = "[Vsnip]"
+                        })[entry.source.name]
+                        return vim_item
+                    end,
+                },
+            })
+        end
+    }
     -------------telescope---------
     use {
         'nvim-lua/telescope.nvim',
