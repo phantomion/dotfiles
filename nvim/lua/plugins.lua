@@ -80,14 +80,6 @@ return require('packer').startup(function()
             })
         end
     }
-    use {
-        'hrsh7th/vim-vsnip',
-        config = function()
-            vim.g.vsnip_snippet_dir = vim.fn.expand('~/.config/nvim/vsnip')
-        end
-    }
-    use 'hrsh7th/vim-vsnip-integ'
-    use 'rafamadriz/friendly-snippets'
     use 'vimwiki/vimwiki'
     use {'p00f/nvim-ts-rainbow', ft = 'clojure'}
     use 'romgrk/barbar.nvim' -- Best bufferline
@@ -173,13 +165,19 @@ return require('packer').startup(function()
     use {
         "hrsh7th/nvim-cmp",
         requires = {
+            "L3MON4D3/LuaSnip",
+            "rafamadriz/friendly-snippets",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-path",
-            "hrsh7th/cmp-vsnip"
+            "onsails/lspkind-nvim",
+            "saadparwaiz1/cmp_luasnip"
         },
         config = function()
+            local luasnip = require('luasnip')
+            require("luasnip.loaders.from_vscode").lazy_load()
+
             local check_back_space = function()
                 local col = vim.fn.col('.') - 1
                 return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
@@ -193,7 +191,7 @@ return require('packer').startup(function()
             cmp.setup({
                 snippet = {
                     expand = function(args)
-                        vim.fn["vsnip#anonymous"](args.body)
+                        require'luasnip'.lsp_expand(args.body)
                     end,
                 },
                 mapping = {
@@ -207,8 +205,8 @@ return require('packer').startup(function()
                             vim.fn.feedkeys(t('<C-n>'), 'n')
                         elseif check_back_space() then
                             vim.fn.feedkeys(t('<Tab>'), 'n')
-                        elseif vim.fn['vsnip#available']() == 1 then
-                            vim.fn.feedkeys(t('<Plug>(vsnip-expand-or-jump)'), '')
+                        elseif luasnip and luasnip.expand_or_jumpable() then
+                            vim.fn.feedkeys(t('<Plug>luasnip-expand-or-jump'), '')
                         else
                             fallback()
                         end
@@ -216,29 +214,30 @@ return require('packer').startup(function()
                     ['<S-Tab>'] = cmp.mapping(function(fallback)
                         if vim.fn.pumvisible() == 1 then
                             vim.fn.feedkeys(t("<C-p>"), "n")
-                        elseif vim.fn['vsnip#jumpable'](-1) == 1 then
-                            vim.fn.feedkeys(t('<Plug>(vsnip-jump-prev)'), "")
+                        elseif luasnip and luasnip.jumpable(-1) then
+                            vim.fn.feedkeys(t('<Plug>luasnip-jump-prev'), "")
                         else
                             fallback()
                         end
                     end, { 'i', 's' }),
                 },
                 sources = {
-                    { name = 'nvim_lua' },
-                    { name = 'buffer' },
                     { name = 'nvim_lsp' },
+                    { name = 'nvim_lua' },
                     { name = 'path' },
-                    { name = 'vsnip' }
+                    { name = 'buffer' },
+                    { name = 'luasnip' }
                 },
                 formatting = {
                     format = function(entry, vim_item)
+                        vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
                         -- set a name for each source
                         vim_item.menu = ({
                             buffer = "[Buffer]",
                             nvim_lsp = "[LSP]",
                             nvim_lua = "[Lua]",
                             path = "[Path]",
-                            vsnip = "[Vsnip]"
+                            luasnip = "[LuaSnip]"
                         })[entry.source.name]
                         return vim_item
                     end,
