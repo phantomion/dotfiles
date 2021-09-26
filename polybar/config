@@ -9,12 +9,12 @@ black      = #0a0f14
 red        = #c33027
 green      = #26a98b
 yellow     = #edb54b
-blue       = #195465
+purple     = #5e35b1
 magenta    = #e91e63
 cyan       = #33859d
 white      = #98d1ce
 foreground = #98d1ce
-background = #0a0f14
+background = #141C21
 
 [global/wm]
 margin-top = 0
@@ -23,13 +23,13 @@ margin-bottom = 0
 [settings]
 throttle-output = 5
 throttle-output-for = 10
-throttle-input-for = 30
 screenchange-reload = true
-compositing-background = over
+compositing-background = source
 compositing-foreground = over
 compositing-overline = over
 compositing-underline = over
 compositing-border = over
+pseudo-transparency = false
 
 ;                 "           #
 ; mmmmm   mmm   mmm    m mm   #mmm    mmm    m mm
@@ -55,10 +55,11 @@ offset-y = 0
 background = ${colors.background}
 foreground = ${colors.foreground}
 radius = 3
-line-size = 2
-line-color = #f00
 padding-left = 1
 padding-right = 1
+underline-size = 2
+border-bottom-size = 2
+border-bottom-color = ${colors.purple}
 
 font-0 = Fantasque Sans Mono:style=Regular:pixelsize=12;2
 font-1 = Ubuntu Nerd Font:pixelsize=12;2
@@ -87,11 +88,20 @@ tray-padding = 1
 tray-scale = 1.0
 enable-ipc = false
 
+[bar/bottom]
+inherit = bar/mainbar
+bottom = true
+border-top-size = 10
+border-top-color = ${colors.purple}
+background = ${colors.purple}
+foreground = ${colors.purple}
+enable-ipc = true
+
 [bar/mainbar2]
 ;=== MONITOR AND WM ===================================
 monitor = HDMI-0
-monitor-fallback =
-monitor-strict = false
+monitor-fallback = VGA1
+monitor-strict = true
 override-redirect = false
 wm-restack = i3
 
@@ -105,10 +115,11 @@ offset-y = 0
 background = ${colors.background}
 foreground = ${colors.foreground}
 radius = 3
-line-size = 2
-line-color = #f00
 padding-left = 1
 padding-right = 1
+underline-size = 2
+border-bottom-size = 2
+border-bottom-color = ${colors.purple}
 
 font-0 = Fantasque Sans Mono:style=Regular:pixelsize=12;2
 font-1 = Ubuntu Nerd Font:pixelsize=12;2
@@ -173,9 +184,8 @@ label-mode-padding = 2
 label-mode-background = ${colors.cyan}
 
 label-focused = %icon%
-label-focused-foreground = ${colors.red}
+label-focused-foreground = ${colors.purple}
 label-focused-background = ${colors.background}
-label-focused-underline = ${colors.red}
 label-focused-padding = 2
 
 label-unfocused = %icon%
@@ -184,7 +194,7 @@ label-unfocused-background = ${colors.background}
 label-unfocused-padding = 2
 
 label-visible = %icon%
-label-visible-underline = #555555
+label-visible-foreground = #555555
 label-visible-padding = 2
 
 label-urgent = %icon%
@@ -252,13 +262,6 @@ click-left = alacritty -e sh -c 'echo "Updating pacman" && sudo pacman -Syu' &
 click-right = alacritty -e sh -c 'echo "Updating AUR" && yay -Syu' &
 
 ;=======================================================
-[module/info-hackspeed]
-type = custom/script
-exec = ~/.config/polybar/info-hackspeed.sh
-tail = true
-label-font = 3
-
-;=======================================================
 [module/memory]
 type = internal/memory
 interval = 1
@@ -278,27 +281,6 @@ format-foreground = ${colors.green}
 label = %percentage%%
 label-foreground = ${colors.foreground}
 
-;=======================================================
-[module/pulseaudio]
-type = internal/pulseaudio
-
-; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
-; If not, uses default sink
-sink = alsa_output.pci-0000_12_00.3.analog-stereo
-
-; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
-; Default: true
-use-ui-max = true
-
-; Interval for volume increase/decrease (in percent points)
-; Default: 5
-interval = 5
-format-volume = <ramp-volume> <label-volume>
-label-volume = %percentage%%
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-
 ;======================================================
 [module/keyboard]
 type = internal/xkeyboard
@@ -314,31 +296,6 @@ label-indicator = %name%
 label-indicator-padding = 2
 label-indicator-background = ${colors.background}
 label-indicator-foreground = ${colors.magenta}
-
-;=======================================================
-[module/wireless-network]
-type = internal/network
-interface = wlp3s0
-interval = 3.0
-ping-interval = 10
-
-format-connected = <ramp-signal> <label-connected>
-label-connected = %{A1:nm-connection-editor:}%essid%%{A}
-label-disconnected = 🛇
-label-disconnected-foreground = #66
-
-ramp-signal-0 = 0:
-ramp-signal-1 = 1:
-ramp-signal-2 = 2:
-ramp-signal-3 = 3:
-ramp-signal-4 = 4:
-ramp-signal-5 = 5:
-
-animation-packetloss-0 = 
-animation-packetloss-0-foreground = #ffa64c
-animation-packetloss-1 =
-animation-packetloss-1-foreground = ${bar/top.foreground}
-animation-packetloss-framerate = 500
 
 ;======================================================
 [module/battery]
