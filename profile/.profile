@@ -25,3 +25,24 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export PATH=$HOME/.config/rofi/bin:$PATH
+
+update-docker-hosts(){
+        # clear existing *.docker.local entries from /etc/hosts
+
+        os=`uname -s`
+        case $os in
+          Darwin)
+            sudo sed -i -e '/^127\.0\.0\.1/s/ bo-egov2\.dev\.edu\.uoc\.gr\.local//;/^127\.0\.0\.1/s/ egov2\.dev\.edu\.uoc\.gr\.local//;;/^127\.0\.0\.1/s/$/#/;/^127\.0\.0\.1/s/#.*/ bo-egov.dev.edu.uoc.gr.local &/;/^127\.0\.0\.1/s/#.*/ egov.dev.edu.uoc.gr.local &/;/^127\.0\.0\.1/s/#$//' /etc/hosts
+            ;;
+          *)
+            sudo sed -i -e '/dev\.edu\.uoc\.gr\.local$/d' /etc/hosts
+
+            # get ip of running machine
+            export DOCKER_IP="$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' egov2)"
+
+            # update /etc/hosts with docker machine ip
+            [[ -n $DOCKER_IP ]] && sudo /bin/bash -c "echo \"${DOCKER_IP}       egov2.dev.edu.uoc.gr.local\" >> /etc/hosts"
+            [[ -n $DOCKER_IP ]] && sudo /bin/bash -c "echo \"${DOCKER_IP}       bo-egov2.dev.edu.uoc.gr.local\" >> /etc/hosts"
+            ;;
+        esac
+}

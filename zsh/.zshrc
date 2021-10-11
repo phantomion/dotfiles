@@ -28,6 +28,7 @@ alias muttc='nvim ~/.config/neomutt/neomuttrc'
 alias vifm='sh ~/.config/vifm/scripts/vifmrun'
 alias nem='neomutt'
 alias ytmp3='youtube-dl -x --audio-format mp3'
+alias gimme_mirrors='sudo pacman-mirrors --fasttrack 20'
 
 csd3972() {
     ssh csd3972@$1.csd.uoc.gr
@@ -73,12 +74,15 @@ alias gch='git checkout'
 alias gcb='git checkout -b'
 alias ls='exa --color=always --group-directories-first --icons'
 alias la='ls -a'
-cdls() {
-    cd $1;
-    ls -a;
+function list_all() {
+    emulate -L zsh
+    ls -a
 }
-alias cd=cdls
+chpwd_functions=(${chpwd_functions[@]} "list_all")
 source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 [ -f "/home/kwstas/.ghcup/env" ] && source "/home/kwstas/.ghcup/env" # ghcup-env
+
+export PNPM_HOME="/home/kwstas/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"

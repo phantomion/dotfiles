@@ -19,7 +19,7 @@ return require('packer').startup(function()
     use {
         'glepnir/zephyr-nvim',
         config = function()
-            require('zephyr')
+            vim.cmd[[colorscheme zephyr]]
         end,
         opt = true,
         cond = function() return true end
@@ -96,12 +96,25 @@ return require('packer').startup(function()
     use {
         'kyazdani42/nvim-tree.lua',
         config = function()
-            vim.g.nvim_tree_width = 27
-            vim.g.nvim_tree_indent_markers = 1
+            local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+            require'nvim-tree'.setup {
+                view = {
+                    width = 27,
+                    mappings = {
+                        list = {
+                            {key = { "h", "l" }, cb = tree_cb("edit")},
+                            {key = {"<CR>"}, cb = tree_cb("cd")}
+                        }
+                    }
+                },
+                indent_markers = 1,
+                disable_netrw = false,
+                hijack_netrw = false,
+            }
             vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', 'target', '.o', 'bin' }
             vim.g.nvim_tree_git_hl = 1
-            vim.g.nvim_tree_disable_netrw = 0
-            vim.g.nvim_tree_hijack_netrw = 0
+            vim.g.nvim_tree_gitignore = 1
+            vim.g.nvim_tree_highlight_opened_files = 1
         end
     }
     ---------------git------------
@@ -132,7 +145,48 @@ return require('packer').startup(function()
             }
         end
     }
-    use 'sindrets/diffview.nvim'
+    use {
+        'sindrets/diffview.nvim',
+        config = function()
+            local cb = require'diffview.config'.diffview_callback
+
+            require'diffview'.setup {
+                diff_binaries = false,    -- Show diffs for binaries
+                use_icons = true,        -- Requires nvim-web-devicons
+                file_panel = {
+                    width = 35,
+                },
+                key_bindings = {
+                    disable_defaults = false,                   -- Disable the default key bindings
+                    -- The `view` bindings are active in the diff buffers, only when the current
+                    -- tabpage is a Diffview.
+                    view = {
+                        ["<tab>"]     = cb("select_next_entry"),  -- Open the diff for the next file
+                        ["<s-tab>"]   = cb("select_prev_entry"),  -- Open the diff for the previous file
+                        ["<leader>e"] = cb("focus_files"),        -- Bring focus to the files panel
+                        ["<leader>b"] = cb("toggle_files"),       -- Toggle the files panel.
+                    },
+                    file_panel = {
+                        ["j"]             = cb("next_entry"),         -- Bring the cursor to the next file entry
+                        ["<down>"]        = cb("next_entry"),
+                        ["k"]             = cb("prev_entry"),         -- Bring the cursor to the previous file entry.
+                        ["<up>"]          = cb("prev_entry"),
+                        ["<cr>"]          = cb("select_entry"),       -- Open the diff for the selected entry.
+                        ["o"]             = cb("select_entry"),
+                        ["<2-LeftMouse>"] = cb("select_entry"),
+                        ["-"]             = cb("toggle_stage_entry"), -- Stage / unstage the selected entry.
+                        ["S"]             = cb("stage_all"),          -- Stage all entries.
+                        ["U"]             = cb("unstage_all"),        -- Unstage all entries.
+                        ["R"]             = cb("refresh_files"),      -- Update stats and entries in the file list.
+                        ["<tab>"]         = cb("select_next_entry"),
+                        ["<s-tab>"]       = cb("select_prev_entry"),
+                        ["<leader>e"]     = cb("focus_files"),
+                        ["<leader>b"]     = cb("toggle_files"),
+                    }
+                }
+            }
+        end
+    }
     --------nvim-lsp(now)---------
     use {
         'neovim/nvim-lspconfig',
@@ -141,8 +195,8 @@ return require('packer').startup(function()
         config = function() require('lsps') end
     }
     use {
-        'jasonrhansen/lspsaga.nvim',
-        branch = 'finder-preview-fixes',
+        'tami5/lspsaga.nvim',
+        commit = "373bc031b39730cbfe492533c3acfac36007899a",
         config = function()
             local saga = require 'lspsaga'
             saga.init_lsp_saga{
@@ -184,9 +238,7 @@ return require('packer').startup(function()
                 local line, col = unpack(vim.api.nvim_win_get_cursor(0))
                 return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
             end
-            local feedkey = function(key)
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
-            end
+            vim.cmd[[highlight! link CmpItemMenu CmpItemKind]]
 
             local luasnip = require("luasnip")
 
@@ -204,8 +256,8 @@ return require('packer').startup(function()
                     ['<C-e>'] = cmp.mapping.close(),
                     ['<CR>'] = cmp.mapping.confirm(),
                     ['<Tab>'] = cmp.mapping(function(fallback)
-                        if vim.fn.pumvisible() == 1 then
-                            feedkey("<C-n>")
+                        if cmp.visible() then
+                            cmp.select_next_item()
                         elseif luasnip.expand_or_jumpable() then
                             luasnip.expand_or_jump()
                         elseif has_words_before() then
@@ -215,8 +267,8 @@ return require('packer').startup(function()
                         end
                     end, {'i', 's'}),
                     ['<S-Tab>'] = cmp.mapping(function(fallback)
-                        if vim.fn.pumvisible() == 1 then
-                            feedkey("<C-p>")
+                        if cmp.visible() then
+                            cmp.select_prev_item()
                         elseif luasnip.jumpable(-1) then
                             luasnip.jump(-1)
                         else
@@ -232,18 +284,13 @@ return require('packer').startup(function()
                     { name = 'luasnip' }
                 },
                 formatting = {
-                    format = function(entry, vim_item)
-                        vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
-                        -- set a name for each source
-                        vim_item.menu = ({
+                    format = require("lspkind").cmp_format({with_text = true, menu = ({
                             buffer = "[Buffer]",
                             nvim_lsp = "[LSP]",
                             nvim_lua = "[Lua]",
                             path = "[Path]",
                             luasnip = "[LuaSnip]"
-                        })[entry.source.name]
-                        return vim_item
-                    end,
+                        })}),
                 },
             })
         end

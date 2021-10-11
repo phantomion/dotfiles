@@ -117,7 +117,6 @@ remap('n', '<leader>tt', ':<c-u>exe v:count1 . "ToggleTerm"<CR>', {noremap = tru
 remap('v', '<C-c>', '"+y', {noremap = true, silent = true})
 remap('n', '<A-v>', '"+p', {noremap = true, silent = true})
 vim.cmd([[
-    au ColorScheme * highlight NvimTreeFolderIcon guifg='#488847'
     au ColorScheme * highlight DiagnosticWarning guifg='#ff922b'
     au ColorScheme * highlight DiagnosticError guifg='#C33027'
     au ColorScheme * highlight DiagnosticHint guifg='#15aabf'

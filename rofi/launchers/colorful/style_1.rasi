@@ -28,7 +28,7 @@ window {
 	border:							0px;
 	border-color:					@ac;
     border-radius:                  12px;
-	width:							35%;
+	width:							40%;
     location:                       center;
     x-offset:                       0;
     y-offset:                       0;
@@ -95,8 +95,10 @@ element {
 }
 
 element-icon {
-    size:                           64px;
+    size:                           49px;
     border:                         0px;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
 }
 
 element-text {
@@ -104,6 +106,11 @@ element-text {
     horizontal-align:               0.5;
     vertical-align:                 0.5;
     margin:                         0.5% 0.5% -0.5% 0.5%;
+}
+
+element-text, element-icon {
+    background-color: transparent;
+    text-color:       inherit;
 }
 
 element selected {
