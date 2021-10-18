@@ -1,7 +1,7 @@
 local nvim_command = vim.api.nvim_command
 
 local on_attach_vim = function(client)
-    nvim_command("autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()")
+    nvim_command("autocmd CursorHold * Lspsaga show_cursor_diagnostics")
 end
 
 require'rust-tools'.setup({
@@ -22,52 +22,41 @@ local function make_config()
     }
 end
 
-local function setup_servers()
-    require'lspinstall'.setup()
-    local servers = require'lspinstall'.installed_servers()
+local lsp_installer = require("nvim-lsp-installer")
 
-    for _, server in pairs(servers) do
-        --print(server)
-        local config = make_config()
-        if server == "clangd" then
-            config.cmd = { "clangd", "--background-index", "--suggest-missing-includes",
-            "--all-scopes-completion", "--completion-style=detailed" }
-        end
-        if server == "vuels" then
-            config.settings = {
-                vetur = {
-                    completion = {
-                        autoImport = true;
-                        useScaffoldSnippets = true;
-                    }
-                }
-            }
-        end
-        if server == "texlab" then
-            config.settings = {
-                latex = {
-                    build = {
-                        args = { "-lualatex", "-interaction=nonstopmode", "-synctex=1", "%f" };
-                        executable = "latexmk";
-                        onSave = true;
-                    },
-                    lint = {
-                        onChange = true
-                    }
-                }
-            }
-        end
-        require'lspconfig'[server].setup(config)
+lsp_installer.on_server_ready(function(server)
+    local opts = make_config()
+    if server.name == "clangd" then
+        opts.cmd = { "clangd", "--background-index", "--suggest-missing-includes",
+        "--all-scopes-completion", "--completion-style=detailed" }
     end
-end
-
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-    setup_servers() -- reload installed servers
-    vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
+    if server.name == "vuels" then
+        opts.settings = {
+            vetur = {
+                completion = {
+                    autoImport = true;
+                    useScaffoldSnippets = true;
+                }
+            }
+        }
+    end
+    if server.name == "texlab" then
+        opts.settings = {
+            latex = {
+                build = {
+                    args = { "-lualatex", "-interaction=nonstopmode", "-synctex=1", "%f" };
+                    executable = "latexmk";
+                    onSave = true;
+                },
+                lint = {
+                    onChange = true
+                }
+            }
+        }
+    end
+    server:setup(opts)
+    vim.cmd [[ do User LspAttachBuffers ]]
+end)
 
 
 local actions = require('telescope.actions')

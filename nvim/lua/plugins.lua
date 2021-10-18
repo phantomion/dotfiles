@@ -108,8 +108,6 @@ return require('packer').startup(function()
                     }
                 },
                 indent_markers = 1,
-                disable_netrw = false,
-                hijack_netrw = false,
             }
             vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', 'target', '.o', 'bin' }
             vim.g.nvim_tree_git_hl = 1
@@ -196,7 +194,7 @@ return require('packer').startup(function()
     }
     use {
         'tami5/lspsaga.nvim',
-        commit = "373bc031b39730cbfe492533c3acfac36007899a",
+        branch = 'nvim51',
         config = function()
             local saga = require 'lspsaga'
             saga.init_lsp_saga{
@@ -215,7 +213,7 @@ return require('packer').startup(function()
             }
         end
     }
-    use 'kabouzeid/nvim-lspinstall'
+    use 'williamboman/nvim-lsp-installer'
     use {
         "hrsh7th/nvim-cmp",
         requires = {
