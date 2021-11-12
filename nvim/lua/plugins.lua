@@ -68,16 +68,7 @@ return require('packer').startup(function()
     use {
         'windwp/nvim-autopairs',
         config = function()
-            require('nvim-autopairs').setup{
-                fast_wrap = {
-                    end_key = 'e',
-                },
-            }
-            require("nvim-autopairs.completion.cmp").setup({
-                map_cr = true, --  map <CR> on insert mode
-                map_complete = true, -- it will auto insert `(` after select function or method item
-                auto_select = true -- automatically select the first item
-            })
+            require('nvim-autopairs').setup{}
         end
     }
     use 'vimwiki/vimwiki'
@@ -99,6 +90,9 @@ return require('packer').startup(function()
             local tree_cb = require'nvim-tree.config'.nvim_tree_callback
             require'nvim-tree'.setup {
                 view = {
+                    filters = {
+                        custom = { '.git', 'node_modules', '.cache', 'target', '.o', 'bin' },
+                    },
                     width = 27,
                     mappings = {
                         list = {
@@ -109,7 +103,6 @@ return require('packer').startup(function()
                 },
                 indent_markers = 1,
             }
-            vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache', 'target', '.o', 'bin' }
             vim.g.nvim_tree_git_hl = 1
             vim.g.nvim_tree_gitignore = 1
             vim.g.nvim_tree_highlight_opened_files = 1
@@ -227,6 +220,7 @@ return require('packer').startup(function()
             "saadparwaiz1/cmp_luasnip"
         },
         config = function()
+
             local luasnip = require('luasnip')
             require("luasnip.loaders.from_vscode").lazy_load()
             local has_words_before = function()
@@ -241,6 +235,10 @@ return require('packer').startup(function()
             local luasnip = require("luasnip")
 
             local cmp = require'cmp'
+            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+            cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+            cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"
+
             cmp.setup({
                 snippet = {
                     expand = function(args)
@@ -252,7 +250,10 @@ return require('packer').startup(function()
                     ['<C-f>'] = cmp.mapping.scroll_docs(4),
                     ['<C-Space>'] = cmp.mapping.complete(),
                     ['<C-e>'] = cmp.mapping.close(),
-                    ['<CR>'] = cmp.mapping.confirm(),
+                    ['<CR>']  = cmp.mapping.confirm {
+                        behavior = cmp.ConfirmBehavior.Replace,
+                        select = true,
+                    },
                     ['<Tab>'] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()

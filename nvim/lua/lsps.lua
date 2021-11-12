@@ -2,6 +2,7 @@ local nvim_command = vim.api.nvim_command
 
 local on_attach_vim = function(client)
     nvim_command("autocmd CursorHold * Lspsaga show_cursor_diagnostics")
+    client.resolved_capabilities.document_formatting = true
 end
 
 require'rust-tools'.setup({
@@ -36,6 +37,19 @@ lsp_installer.on_server_ready(function(server)
                 completion = {
                     autoImport = true;
                     useScaffoldSnippets = true;
+                },
+                format = {
+                    enable = true,
+                    options = {
+                        tabSize = 4
+                    },
+                    defaultFormatter = {
+                        js = "prettier",
+                        html = "prettier",
+                        css = "prettier",
+                        scss = "prettier",
+                        ts = "prettier"
+                    },
                 }
             }
         }
