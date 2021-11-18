@@ -29,8 +29,15 @@ vim.cmd([[
     autocmd FileType rust nnoremap <F4> :w<CR> :16split term://cargo run<CR>
     autocmd FileType rust nnoremap <F5> :w<CR> :16split term://cargo run --<Space>
     autocmd FileType rust nnoremap <leader><F4> :w<CR> :16split term://cargo run --target x86_64-unknown-linux-musl<CR>
-    autocmd FileType rust nnoremap <leader>t :call Rust_toggle()<CR>
     autocmd FileType rust nnoremap <silent><leader>. a-><space>
+    augroup END
+    ]])
+
+vim.cmd([[
+    augroup gogo
+    autocmd!
+    autocmd FileType rust nnoremap <F3> :w<CR> :16split term://go run %<CR>
+    autocmd FileType rust nnoremap <F4> :w<CR> :16split term://go run % -<Space>
     augroup END
     ]])
 
@@ -41,7 +48,6 @@ vim.cmd([[
     autocmd FileType nim nnoremap <F3> :w<CR> :16split term://nim c -r %<CR>
     autocmd FileType nim nnoremap <F4> :w<CR> :16split term://nimble run *.nimble<CR>
     autocmd FileType nim nnoremap <F5> :w<CR> :16split term://nimble run *.nimble
-    autocmd FileType nim nnoremap <leader>t :call Nim_toggle()<CR>
     augroup END
     ]])
 
