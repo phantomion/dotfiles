@@ -132,3 +132,8 @@ vim.cmd([[
     augroup END
     ]])
 
+vim.cmd[[
+    augroup pypy
+    autocmd Filetype python nnoremap <silent><leader>fm :!autopep8 -i % <CR><CR>:e %<CR>
+    augroup END
+]]
