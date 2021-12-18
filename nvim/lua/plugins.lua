@@ -71,7 +71,6 @@ return require('packer').startup(function()
             require('nvim-autopairs').setup{}
         end
     }
-    use 'vimwiki/vimwiki'
     use {'p00f/nvim-ts-rainbow', ft = 'clojure'}
     use 'romgrk/barbar.nvim' -- Best bufferline
     use {
@@ -87,9 +86,13 @@ return require('packer').startup(function()
     use {
         'kyazdani42/nvim-tree.lua',
         config = function()
+            vim.g.nvim_tree_git_hl = 1
+            vim.g.nvim_tree_highlight_opened_files = 1
             local tree_cb = require'nvim-tree.config'.nvim_tree_callback
             require'nvim-tree'.setup {
+                update_cwd = true,
                 view = {
+                    auto_resize = true,
                     filters = {
                         custom = { '.git', 'node_modules', '.cache', 'target', '.o', 'bin' },
                     },
@@ -101,11 +104,11 @@ return require('packer').startup(function()
                         }
                     }
                 },
+                diagnostics = {
+                    enable = true
+                },
                 indent_markers = 1,
             }
-            vim.g.nvim_tree_git_hl = 1
-            vim.g.nvim_tree_gitignore = 1
-            vim.g.nvim_tree_highlight_opened_files = 1
         end
     }
     ---------------git------------
@@ -178,7 +181,7 @@ return require('packer').startup(function()
             }
         end
     }
-    --------nvim-lsp(now)---------
+    --------nvim-lsp---------
     use {
         'neovim/nvim-lspconfig',
         opt = true,
@@ -187,7 +190,6 @@ return require('packer').startup(function()
     }
     use {
         'tami5/lspsaga.nvim',
-        branch = 'nvim51',
         config = function()
             local saga = require 'lspsaga'
             saga.init_lsp_saga{
@@ -217,6 +219,7 @@ return require('packer').startup(function()
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-path",
             "onsails/lspkind-nvim",
+            'hrsh7th/cmp-cmdline',
             "saadparwaiz1/cmp_luasnip"
         },
         config = function()
@@ -292,6 +295,28 @@ return require('packer').startup(function()
                         })}),
                 },
             })
+
+            -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+            cmp.setup.cmdline('/', {
+                sources = {
+                    { name = 'buffer' }
+                }
+            })
+
+            -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+            cmp.setup.cmdline(':', {
+                sources = cmp.config.sources({
+                    { name = 'path' }
+                }, {
+                    { name = 'cmdline' }
+                })
+            })
+        end
+    }
+    use {
+        "ray-x/lsp_signature.nvim",
+        config = function()
+            require "lsp_signature".setup()
         end
     }
     -------------telescope---------

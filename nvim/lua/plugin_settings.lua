@@ -3,10 +3,6 @@ local remap = vim.api.nvim_set_keymap
 
 remap('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
 
--- Vimwiki
-vim.g.vimwiki_text_ignore_newline = 0
-vim.g.vimwiki_table_mappings = 0
-
 -- Barbar
 remap('n', '<C-s>', ':BufferClose<CR>', {noremap = true, silent = true})
 remap('n', '<C-e>', ':BufferNext<CR>', {noremap = true, silent = true})
@@ -52,8 +48,8 @@ remap('n', '<C-p>', ":lua require'telescope.builtin'.git_files{}<CR>", {noremap 
 remap('n', '<leader>pp', ":lua require'telescope.builtin'.find_files{}<CR>", {noremap = true, silent = true})
 remap('n', '<leader>pw', ":lua require'telescope.builtin'.grep_string { search = vim.fn.expand('<cword>') }<CR><CR>", {noremap = true, silent = true})
 remap('n', '<leader>ps', ":lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For > ')})<CR>", {noremap = true, silent = true})
-remap('n', '<leader>]', ":lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", {noremap = true, silent = true})
-remap('n', '<leader>[', ":lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", {noremap = true, silent = true})
+remap('n', '<leader>]', ":Lspsaga diagnostic_jump_next<CR>", {noremap = true, silent = true})
+remap('n', '<leader>[', ":Lspsaga diagnostic_jump_prev<CR>", {noremap = true, silent = true})
 remap('n', '<leader>dg', ":Telescope lsp_workspace_diagnostics<CR>", {noremap = true, silent = true})
 remap('n', '<leader>cs', ":Telescope colorscheme<CR>", {noremap = true, silent = true})
 remap('n', '<leader>nn', ":Telescope file_browser<CR>", {noremap = true, silent = true})
