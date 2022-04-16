@@ -108,7 +108,6 @@ vim.cmd([[
 vim.cmd([[
     augroup tex
     autocmd!
-    autocmd FileType tex let b:AutoPairs = AutoPairsDefine({"$": "$"})
     autocmd FileType tex nnoremap <F3> :!setsid zathura %:r.pdf<CR><CR>
     autocmd FileType tex nnoremap <leader>lor a$\lor$
     autocmd FileType tex nnoremap <leader>land a$\land$

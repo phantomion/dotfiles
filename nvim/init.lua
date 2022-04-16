@@ -112,7 +112,6 @@ remap('n', '<leader>vw', 'v%', {noremap = true, silent = true})
 vim.cmd([[autocmd BufWritePre * %s/\s\+$//e]])
 remap('t', '<ESC>', '<C-\\><C-n>', {noremap = true, silent = true})
 remap('i', '<C-l>', '<Right>', {noremap = true, silent = true})
-remap('n', '<leader>tt', ':<c-u>exe v:count1 . "ToggleTerm"<CR>', {noremap = true, silent = true})
 
 remap('v', '<C-c>', '"+y', {noremap = true, silent = true})
 remap('n', '<A-v>', '"+p', {noremap = true, silent = true})
@@ -121,6 +120,22 @@ vim.cmd([[
     au ColorScheme * highlight DiagnosticError guifg='#C33027'
     au ColorScheme * highlight DiagnosticHint guifg='#15aabf'
     au ColorScheme * highlight DiagnosticInformation guifg='#fab005'
+    " gray
+    au ColorScheme * highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+    " blue
+    au ColorScheme * highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+    au ColorScheme * highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+    " light blue
+    au ColorScheme * highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+    au ColorScheme * highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
+    au ColorScheme * highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
+    " pink
+    au ColorScheme * highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+    au ColorScheme * highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
+    " front
+    au ColorScheme * highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+    au ColorScheme * highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
+    au ColorScheme * highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
     ]])
 
 require('autocommands')

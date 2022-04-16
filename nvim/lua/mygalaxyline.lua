@@ -55,7 +55,7 @@ gls.left[3] ={
     FileIcon = {
         provider = 'FileIcon',
         condition = buffer_not_empty,
-        highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
+        highlight = {require('galaxyline.providers.fileinfo').get_file_icon_color,colors.line_bg},
     },
 }
 gls.left[4] = {
@@ -68,7 +68,7 @@ gls.left[4] = {
 
 local function find_git_root()
     local path = vim.fn.expand('%:p:h')
-    local get_git_dir = require('galaxyline.provider_vcs').get_git_dir
+    local get_git_dir = require('galaxyline.providers.vcs').get_git_dir
     return get_git_dir(path)
 end
 
@@ -99,7 +99,7 @@ gls.left[7] = {
     DiffAdd = {
         provider = 'DiffAdd',
         condition = checkwidth,
-        icon = '  ',
+        icon = '   ',
         highlight = {colors.green,colors.line_bg},
     }
 }
@@ -107,7 +107,7 @@ gls.left[8] = {
     DiffModified = {
         provider = 'DiffModified',
         condition = checkwidth,
-        icon = ' ',
+        icon = '   ',
         highlight = {colors.orange,colors.line_bg},
     }
 }
@@ -115,7 +115,7 @@ gls.left[9] = {
     DiffRemove = {
         provider = 'DiffRemove',
         condition = checkwidth,
-        icon = ' ',
+        icon = '   ',
         highlight = {colors.red,colors.line_bg},
     }
 }

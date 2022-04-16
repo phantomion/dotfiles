@@ -27,6 +27,9 @@ local lsp_installer = require("nvim-lsp-installer")
 
 lsp_installer.on_server_ready(function(server)
     local opts = make_config()
+    local runtime_path = vim.split(package.path, ';')
+    table.insert(runtime_path, "lua/?.lua")
+    table.insert(runtime_path, "lua/?/init.lua")
     if server.name == "clangd" then
         opts.cmd = { "clangd", "--background-index", "--suggest-missing-includes",
         "--all-scopes-completion", "--completion-style=detailed" }
@@ -58,13 +61,44 @@ lsp_installer.on_server_ready(function(server)
         opts.settings = {
             latex = {
                 build = {
-                    args = { "-lualatex", "-interaction=nonstopmode", "-synctex=1", "%f" };
-                    executable = "latexmk";
-                    onSave = true;
+                    args = { "-lualatex", "-pvc", "-view=pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+                    executable = "latexmk",
+                    onSave = true,
+                    isContinuous = true,
                 },
                 lint = {
                     onChange = true
                 }
+            }
+        }
+    end
+    if server.name == "sumneko_lua" then
+        opts.settings = {
+            Lua = {
+                runtime = {
+                    path = runtime_path,
+                },
+                diagnostics = {
+                    globals = {'vim', 'capabilities', 'use'},
+                },
+                workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    library = vim.api.nvim_get_runtime_file("", true),
+                },
+                telemetry = {
+                    enable = false,
+                },
+            },
+        }
+    end
+    if server.name == "gopls" then
+        opts.settings = {
+            gopls = {
+                experimentalPostfixCompletions = true,
+                analyses = {
+                    unusedparams = true,
+                },
+                staticcheck = true
             }
         }
     end

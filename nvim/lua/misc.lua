@@ -1,5 +1,31 @@
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = "maintained",  -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    ensure_installed = {
+        "bash",
+        "c",
+        "css",
+        "dockerfile",
+        "go",
+        "gomod",
+        "html",
+        "javascript",
+        "json",
+        "json5",
+        "jsonc",
+        "latex",
+        "lua",
+        "php",
+        "python",
+        "rust",
+        "r",
+        "regex",
+        "scss",
+        "svelte",
+        "toml",
+        "typescript",
+        "vim",
+        "vue",
+        "yaml"
+    },  -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     highlight = {
         enable = true,              -- false will disable the whole extension
         disable = { "html"},
@@ -8,17 +34,29 @@ require'nvim-treesitter.configs'.setup {
         enable = false
     },
     rainbow = {
-        enable = true
-    }
-}
-
-require"toggleterm".setup{
-    size = 16,
-    open_mapping = [[<C-t>]],
-    shade_filetypes = {},
-    shade_terminals = true,
-    persist_size = true,
-    direction = 'horizontal'
+        enable = true,
+        extended_mode = false
+    },
+    textobjects = {
+        swap = {
+            enable = true,
+            swap_next = {
+                ["<leader>e"] = "@parameter.inner",
+            },
+            swap_previous = {
+                ["<leader>w"] = "@parameter.inner",
+            },
+        },
+    },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "gnn",
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+        },
+    },
 }
 
 vim.g.symbols_outline = {

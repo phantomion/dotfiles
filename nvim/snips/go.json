@@ -1,0 +1,41 @@
+{
+    "iferr": {
+        "prefix": "iferr",
+        "body": [
+            "if err != nil {",
+            "\treturn $1",
+            "}"
+        ]
+    },
+    "dotenv": {
+        "prefix": "dotenv",
+        "body": [
+            "err := godotenv.Load()",
+            "if err != nil {",
+            "\tlog.Fatal(\"Error loading .env file\")",
+            "}"
+        ]
+    },
+    "rmq": {
+        "prefix": "rmq",
+        "body": [
+            "conn, err := amqp.Dial(${1:os.Getenv(\"RABBITMQ_DIAL\")})",
+            "failOnError(err, \"Failed to connect to RabbitMQ\")",
+            "defer conn.Close()",
+            "",
+            "ch, err := conn.Channel()",
+            "failOnError(err, \"Failed to open a channel\")",
+            "defer ch.Close()"
+        ]
+    },
+    "onerror": {
+        "prefix": "onerror",
+        "body": [
+            "func failOnError(err error, msg string) {",
+            "\tif err != nil {",
+            "\t\tlog.Panicf(\"%s: %s\", msg, err)",
+            "\t}",
+            "}"
+        ]
+    }
+}

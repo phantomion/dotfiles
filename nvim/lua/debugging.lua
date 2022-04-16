@@ -5,5 +5,7 @@ vim.api.nvim_set_keymap('n', '<leader>so', ":lua require'dap'.step_out()<CR>", {
 vim.api.nvim_set_keymap('n', '<leader>db', ":lua require'dap'.toggle_breakpoint()<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>dB', ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>lp', ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>dr', ":lua require'dap'.repl.open()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>dr', ":lua require'dap'.repl.toggle()<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>dl', ":lua require'dap'.run_last()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>du', ":lua require'dapui'.toggle()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>ds', ":lua require'dap'.terminate()<CR>", {noremap = true, silent = true})
