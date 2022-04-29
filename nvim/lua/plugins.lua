@@ -1,4 +1,7 @@
-vim.cmd([[autocmd BufWritePost plugins.lua source % | PackerCompile]])
+vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = "plugins.lua",
+    command = 'source % | PackerCompile',
+})
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
@@ -112,10 +115,6 @@ return require('packer').startup(function()
             require 'nvim-tree'.setup {
                 update_cwd = true,
                 view = {
-                    auto_resize = true,
-                    filters = {
-                        custom = { '.git', 'node_modules', '.cache', 'target', '.o', 'bin' },
-                    },
                     width = 27,
                     mappings = {
                         list = {
@@ -124,10 +123,17 @@ return require('packer').startup(function()
                         }
                     }
                 },
+                filters = {
+                    exclude = { '.git', 'node_modules', '.cache', 'target', '.o', 'bin' },
+                },
                 diagnostics = {
                     enable = true
                 },
-                indent_markers = 1,
+                renderer = {
+                    indent_markers = {
+                        enable = true,
+                    },
+                },
             }
         end
     }
@@ -329,7 +335,8 @@ return require('packer').startup(function()
                     { name = 'path' }
                 }, {
                     { name = 'cmdline' }
-                })
+                }),
+                mapping = cmp.mapping.preset.cmdline({}), -- This line
             })
         end
     }
@@ -390,17 +397,6 @@ return require('packer').startup(function()
         'rcarriga/nvim-dap-ui',
         config = function()
             require("dapui").setup()
-        end
-    }
-    use {
-        'Pocco81/DAPInstall.nvim',
-        config = function()
-            local dap_install = require("dap-install")
-            local dbg_list = require("dap-install.api.debuggers").get_installed_debuggers()
-
-            for _, debugger in ipairs(dbg_list) do
-                dap_install.config(debugger)
-            end
         end
     }
     use {

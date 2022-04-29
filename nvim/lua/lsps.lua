@@ -1,11 +1,13 @@
-local nvim_command = vim.api.nvim_command
-
 local on_attach_vim = function(client)
-    nvim_command("autocmd CursorHold * Lspsaga show_cursor_diagnostics")
+    vim.api.nvim_create_autocmd("CursorHold", {
+        group = general,
+        pattern = "*",
+        command = 'Lspsaga show_cursor_diagnostics',
+    })
     client.resolved_capabilities.document_formatting = true
 end
 
-require'rust-tools'.setup({
+require 'rust-tools'.setup({
     server = {
         capabilities = capabilities,
         on_attach = on_attach_vim
@@ -32,7 +34,7 @@ lsp_installer.on_server_ready(function(server)
     table.insert(runtime_path, "lua/?/init.lua")
     if server.name == "clangd" then
         opts.cmd = { "clangd", "--background-index", "--suggest-missing-includes",
-        "--all-scopes-completion", "--completion-style=detailed" }
+            "--all-scopes-completion", "--completion-style=detailed" }
     end
     if server.name == "vuels" then
         opts.settings = {
@@ -79,7 +81,7 @@ lsp_installer.on_server_ready(function(server)
                     path = runtime_path,
                 },
                 diagnostics = {
-                    globals = {'vim', 'capabilities', 'use'},
+                    globals = { 'vim', 'capabilities', 'use' },
                 },
                 workspace = {
                     -- Make the server aware of Neovim runtime files
@@ -108,7 +110,7 @@ end)
 
 
 local actions = require('telescope.actions')
-require'telescope'.setup{
+require 'telescope'.setup {
     defaults = {
         mappings = {
             i = {
@@ -167,11 +169,11 @@ require'telescope'.setup{
 --new diagnostic
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false,
-        underline = true,
+    virtual_text = false,
+    underline = true,
 
-        signs = true,
+    signs = true,
 
-        update_in_insert = false,
-    }
+    update_in_insert = false,
+}
 )

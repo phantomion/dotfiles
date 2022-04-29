@@ -1,5 +1,5 @@
 -- Nvim tree
-local remap = vim.api.nvim_set_keymap
+local remap = vim.keymap.set
 
 remap('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
 

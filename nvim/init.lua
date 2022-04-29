@@ -14,14 +14,14 @@ require('plugin_settings')
 --
 vim.o.hidden = true
 vim.o.updatetime = 50
-vim.opt.shortmess:append({c = true})
+vim.opt.shortmess:append({ c = true })
 vim.opt.mouse:append({ a = true })
 vim.o.nu = true -- Enable line numbers
 vim.o.modifiable = true
 vim.o.autoread = true
 vim.o.relativenumber = true -- Enable relative line numbers
 vim.o.wrap = false
-vim.o.syntax =  "on" -- Enable syntax highlighting
+vim.o.syntax = "on" -- Enable syntax highlighting
 vim.cmd('filetype plugin indent on')
 vim.o.autoindent = true -- Set code autoindentation
 vim.o.cursorline = true -- Highlight current line
@@ -34,18 +34,18 @@ vim.o.cindent = true -- stricter rules for C programs
 vim.o.splitbelow = true
 vim.o.splitright = true -- Splits open at the bottom and right
 vim.o.showmode = false -- Don't show the indicator in insert mode.
-vim.opt.completeopt = ({"noinsert", "menuone", "noselect"}) -- Improve completion menu
+vim.opt.completeopt = ({ "noinsert", "menuone", "noselect" }) -- Improve completion menu
 vim.o.undofile = true
 vim.o.inccommand = "split"
 vim.o.clipboard = "unnamedplus"
 vim.o.backup = false
 vim.o.writebackup = false
 vim.opt.wildignore:append({
-        "*/tmp/*", "*.so", "*.swp", "*.zip", "*.d", "*.o",
-        "*.bin", "*.sh", "*.svg", "*.mkv", "*.png", "*.mkv",
-        "*.avi", "*.mp4", "*.iso", "*.tar.gz", "*.jpg", "*.pdf",
-        "*.class", "target/*"
-    })
+    "*/tmp/*", "*.so", "*.swp", "*.zip", "*.d", "*.o",
+    "*.bin", "*.sh", "*.svg", "*.mkv", "*.png", "*.mkv",
+    "*.avi", "*.mp4", "*.iso", "*.tar.gz", "*.jpg", "*.pdf",
+    "*.class", "target/*"
+})
 vim.o.so = 12
 vim.o.ttimeoutlen = 0
 vim.o.signcolumn = "yes"
@@ -66,55 +66,47 @@ vim.o.foldmethod = "indent"
 vim.o.foldlevel = 20
 
 
-local remap = vim.api.nvim_set_keymap
-remap('n', '<leader>o', 'o<ESC>k', {noremap = true, silent = true})
-remap('n', '<leader>O', 'O<ESC>j', {noremap = true, silent = true})
-remap('n', '<F8>', ':e %<CR>', {noremap = true, silent = true})
+local remap = vim.keymap.set
+remap('n', '<leader>o', 'o<ESC>k', { noremap = true, silent = true })
+remap('n', '<leader>O', 'O<ESC>j', { noremap = true, silent = true })
+remap('n', '<F8>', ':e %<CR>', { noremap = true, silent = true })
 
-remap('n', 'H', '^', {noremap = true, silent = true})
-remap('v', 'H', '^', {noremap = true, silent = true})
-remap('n', 'L', '$', {noremap = true, silent = true})
-remap('v', 'L', '$', {noremap = true, silent = true})
-remap('n', 'w', 'W', {noremap = true, silent = true})
-remap('n', 'W', 'w', {noremap = true, silent = true})
-remap('n', 'e', 'E', {noremap = true, silent = true})
-remap('n', 'E', 'e', {noremap = true, silent = true})
-remap('n', 'b', 'B', {noremap = true, silent = true})
-remap('n', 'B', 'b', {noremap = true, silent = true})
-remap('n', "'", ';', {noremap = true, silent = true})
-remap('n', 'Y', 'y$', {noremap = true, silent = true})
-remap('n', ';', ':', {noremap = true})
-remap('v', ';', ':', {noremap = true})
-remap('i', ',', ',<c-g>u', {noremap = true, silent = true})
-remap('i', '.', '.<c-g>u', {noremap = true, silent = true})
-remap('i', '!', '!<c-g>u', {noremap = true, silent = true})
-remap('i', '?', '?<c-g>u', {noremap = true, silent = true})
-remap('n', 'n', 'nzzzv', {noremap = true, silent = true})
-remap('n', 'N', 'Nzzzv', {noremap = true, silent = true})
-remap('n', '<leader>j', ':m .+1<CR>==', {noremap = true, silent = true})
-remap('n', '<leader>k', ':m .-2<CR>==', {noremap = true, silent = true})
+remap({ 'n', 'v' }, 'H', '^', { noremap = true, silent = true })
+remap({ 'n', 'v' }, 'L', '$', { noremap = true, silent = true })
+remap({ 'n', 'v' }, 'w', 'W', { noremap = true, silent = true })
+remap({ 'n', 'v' }, 'W', 'w', { noremap = true, silent = true })
+remap({ 'n', 'v' }, 'e', 'E', { noremap = true, silent = true })
+remap({ 'n', 'v' }, 'E', 'e', { noremap = true, silent = true })
+remap({ 'n', 'v' }, 'b', 'B', { noremap = true, silent = true })
+remap({ 'n', 'v' }, 'B', 'b', { noremap = true, silent = true })
+remap({ 'n', 'v' }, "'", ';', { noremap = true, silent = true })
+remap('n', 'Y', 'y$', { noremap = true, silent = true })
+remap({ 'n', 'v' }, ';', ':', { noremap = true })
+remap('i', ',', ',<c-g>u', { noremap = true, silent = true })
+remap('i', '.', '.<c-g>u', { noremap = true, silent = true })
+remap('i', '!', '!<c-g>u', { noremap = true, silent = true })
+remap('i', '?', '?<c-g>u', { noremap = true, silent = true })
+remap('n', 'n', 'nzzzv', { noremap = true, silent = true })
+remap('n', 'N', 'Nzzzv', { noremap = true, silent = true })
+remap('n', '<leader>j', ':m .+1<CR>==', { noremap = true, silent = true })
+remap('n', '<leader>k', ':m .-2<CR>==', { noremap = true, silent = true })
 
-remap('n', '<A-h>', '5h', {noremap = true, silent = true})
-remap('n', '<A-j>', '5j', {noremap = true, silent = true})
-remap('n', '<A-k>', '5k', {noremap = true, silent = true})
-remap('n', '<A-l>', '5l', {noremap = true, silent = true})
-remap('v', '<A-h>', '5h', {noremap = true, silent = true})
-remap('v', '<A-j>', '5j', {noremap = true, silent = true})
-remap('v', '<A-k>', '5k', {noremap = true, silent = true})
-remap('v', '<A-l>', '5l', {noremap = true, silent = true})
+remap({ 'n', 'v' }, '<A-h>', '5h', { noremap = true, silent = true })
+remap({ 'n', 'v' }, '<A-j>', '5j', { noremap = true, silent = true })
+remap({ 'n', 'v' }, '<A-k>', '5k', { noremap = true, silent = true })
+remap({ 'n', 'v' }, '<A-l>', '5l', { noremap = true, silent = true })
 
-remap('n', '<C-h>', '<C-w>h', {noremap = true, silent = true})
-remap('n', '<C-j>', '<C-w>j', {noremap = true, silent = true})
-remap('n', '<C-k>', '<C-w>k', {noremap = true, silent = true})
-remap('n', '<C-l>', '<C-w>l', {noremap = true, silent = true})
-remap('n', '<leader>q', '%', {noremap = true, silent = true})
-remap('n', '<leader>vw', 'v%', {noremap = true, silent = true})
-vim.cmd([[autocmd BufWritePre * %s/\s\+$//e]])
-remap('t', '<ESC>', '<C-\\><C-n>', {noremap = true, silent = true})
-remap('i', '<C-l>', '<Right>', {noremap = true, silent = true})
+remap('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
+remap('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
+remap('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
+remap('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+remap('n', '<leader>q', '%', { noremap = true, silent = true })
+remap('n', '<leader>vw', 'v%', { noremap = true, silent = true })
+remap('t', '<ESC>', '<C-\\><C-n>', { noremap = true, silent = true })
+remap('i', '<C-l>', '<Right>', { noremap = true, silent = true })
 
-remap('v', '<C-c>', '"+y', {noremap = true, silent = true})
-remap('n', '<A-v>', '"+p', {noremap = true, silent = true})
+remap('v', '<C-c>', '"+y', { noremap = true, silent = true })
+remap('n', '<A-v>', '"+p', { noremap = true, silent = true })
 vim.cmd([[
     au ColorScheme * highlight DiagnosticWarning guifg='#ff922b'
     au ColorScheme * highlight DiagnosticError guifg='#C33027'
