@@ -96,6 +96,7 @@ lsp_installer.on_server_ready(function(server)
     if server.name == "gopls" then
         opts.settings = {
             gopls = {
+                gofumpt = true,
                 experimentalPostfixCompletions = true,
                 analyses = {
                     unusedparams = true,

@@ -108,18 +108,14 @@ return require('packer').startup(function()
     use {
         'kyazdani42/nvim-tree.lua',
         config = function()
-            vim.g.nvim_tree_git_hl = 1
-            vim.g.nvim_tree_highlight_opened_files = 1
-            vim.g.nvim_tree_respect_buf_cwd = 1
-            local tree_cb = require 'nvim-tree.config'.nvim_tree_callback
             require 'nvim-tree'.setup {
                 update_cwd = true,
                 view = {
                     width = 27,
                     mappings = {
                         list = {
-                            { key = { "h", "l" }, cb = tree_cb("edit") },
-                            { key = { "<CR>" }, cb = tree_cb("cd") }
+                            { key = { "h", "l" }, action = "edit" },
+                            { key = { "<CR>" }, action = "cd" }
                         }
                     }
                 },
@@ -130,6 +126,7 @@ return require('packer').startup(function()
                     enable = true
                 },
                 renderer = {
+                    highlight_git = true,
                     indent_markers = {
                         enable = true,
                     },
@@ -141,11 +138,7 @@ return require('packer').startup(function()
     use {
         'TimUntersberger/neogit',
         config = function()
-            require('neogit').setup {
-                integrations = {
-                    diffview = true
-                },
-            }
+            require('neogit').setup {}
         end
     }
     use {
@@ -161,48 +154,6 @@ return require('packer').startup(function()
                 },
                 current_line_blame_opts = {
                     delay = 10,
-                }
-            }
-        end
-    }
-    use {
-        'sindrets/diffview.nvim',
-        config = function()
-            local cb = require 'diffview.config'.diffview_callback
-
-            require 'diffview'.setup {
-                diff_binaries = false, -- Show diffs for binaries
-                use_icons = true, -- Requires nvim-web-devicons
-                file_panel = {
-                    width = 35,
-                },
-                key_bindings = {
-                    disable_defaults = false, -- Disable the default key bindings
-                    -- The `view` bindings are active in the diff buffers, only when the current
-                    -- tabpage is a Diffview.
-                    view = {
-                        ["<tab>"]     = cb("select_next_entry"), -- Open the diff for the next file
-                        ["<s-tab>"]   = cb("select_prev_entry"), -- Open the diff for the previous file
-                        ["<leader>e"] = cb("focus_files"), -- Bring focus to the files panel
-                        ["<leader>b"] = cb("toggle_files"), -- Toggle the files panel.
-                    },
-                    file_panel = {
-                        ["j"]             = cb("next_entry"), -- Bring the cursor to the next file entry
-                        ["<down>"]        = cb("next_entry"),
-                        ["k"]             = cb("prev_entry"), -- Bring the cursor to the previous file entry.
-                        ["<up>"]          = cb("prev_entry"),
-                        ["<cr>"]          = cb("select_entry"), -- Open the diff for the selected entry.
-                        ["o"]             = cb("select_entry"),
-                        ["<2-LeftMouse>"] = cb("select_entry"),
-                        ["-"]             = cb("toggle_stage_entry"), -- Stage / unstage the selected entry.
-                        ["S"]             = cb("stage_all"), -- Stage all entries.
-                        ["U"]             = cb("unstage_all"), -- Unstage all entries.
-                        ["R"]             = cb("refresh_files"), -- Update stats and entries in the file list.
-                        ["<tab>"]         = cb("select_next_entry"),
-                        ["<s-tab>"]       = cb("select_prev_entry"),
-                        ["<leader>e"]     = cb("focus_files"),
-                        ["<leader>b"]     = cb("toggle_files"),
-                    }
                 }
             }
         end
@@ -264,7 +215,6 @@ return require('packer').startup(function()
             local cmp = require 'cmp'
             local cmp_autopairs = require('nvim-autopairs.completion.cmp')
             cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-            cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
 
             cmp.setup {
                 snippet = {
