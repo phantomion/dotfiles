@@ -21,7 +21,7 @@ remap('n', '<A-,>', ':BufferMovePrevious<CR>', {noremap = true, silent = true})
 remap('n', '<A-.>', ' :BufferMoveNext<CR>', {noremap = true, silent = true})
 
 -- Symbols outline
-remap('n', '<C-b>', ':SymbolsOutline<CR>', {noremap = true, silent = true})
+remap('n', '<C-b>', ':LSoutlineToggle<CR>', {noremap = true, silent = true})
 
 -- Neogit
 remap('n', '<leader>ng', ':Neogit<CR>', {noremap = true, silent = true})

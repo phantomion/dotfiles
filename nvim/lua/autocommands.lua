@@ -82,6 +82,16 @@ autocmd("Filetype", {
     end,
 })
 
+golang = augroup("golang", {clear = true})
+
+autocmd("Filetype", {
+    group = golang,
+    pattern = "go",
+    callback = function()
+        vim.keymap.set('n', '<leader>fm', ':GoFmt<CR>', {silent = true})
+    end
+})
+
 --[[ vim.cmd([[
     augroup rust
     autocmd!

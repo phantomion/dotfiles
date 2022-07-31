@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
     ensure_installed = {
         "bash",
         "c",
@@ -25,10 +25,11 @@ require'nvim-treesitter.configs'.setup {
         "vim",
         "vue",
         "yaml"
-    },  -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    auto_install = true,
     highlight = {
-        enable = true,              -- false will disable the whole extension
-        disable = { "html"},
+        enable = true, -- false will disable the whole extension
+        disable = { "html" },
     },
     indent = {
         enable = false
@@ -57,25 +58,12 @@ require'nvim-treesitter.configs'.setup {
             node_decremental = "grm",
         },
     },
+    context_commentstring = {
+        enable = true,
+        enable_autocmd = false,
+    }
 }
 
-vim.g.symbols_outline = {
-    highlight_hovered_item = true,
-    show_guides = true,
-    auto_preview = false, -- experimental
-    position = 'right',
-    keymaps = {
-        close = "<Esc>",
-        goto_location = "<Cr>",
-        focus_location = "o",
-        hover_symbol = "<C-space>",
-        rename_symbol = "r",
-        code_actions = "a",
-    },
-    lsp_blacklist = {},
-}
-
-require("dapui").setup()
 vim.g.dap_virtual_text = true
 
 local dap = require('dap')

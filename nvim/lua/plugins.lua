@@ -47,14 +47,6 @@ return require('packer').startup(function()
     --------------QoL------------
     use {
         'JoosepAlviste/nvim-ts-context-commentstring',
-        config = function()
-            require 'nvim-treesitter.configs'.setup {
-                context_commentstring = {
-                    enable = true,
-                    enable_autocmd = false,
-                }
-            }
-        end
     }
     use {
         'numToStr/Comment.nvim',
@@ -103,8 +95,6 @@ return require('packer').startup(function()
     }
     use 'farmergreg/vim-lastplace'
     -------------dev tools---------
-    use 'simrat39/symbols-outline.nvim'
-    use { 'tpope/vim-fireplace', ft = 'clojure' } -- enables clojure development
     use {
         'kyazdani42/nvim-tree.lua',
         config = function()
@@ -147,10 +137,14 @@ return require('packer').startup(function()
             require('gitsigns').setup {
                 signs = {
                     add          = { hl = 'GitSignsAdd', text = '+', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
-                    change       = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
-                    delete       = { hl = 'GitSignsDelete', text = '-', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-                    topdelete    = { hl = 'GitSignsDelete', text = '-', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-                    changedelete = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
+                    change       = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr',
+                        linehl = 'GitSignsChangeLn' },
+                    delete       = { hl = 'GitSignsDelete', text = '-', numhl = 'GitSignsDeleteNr',
+                        linehl = 'GitSignsDeleteLn' },
+                    topdelete    = { hl = 'GitSignsDelete', text = '-', numhl = 'GitSignsDeleteNr',
+                        linehl = 'GitSignsDeleteLn' },
+                    changedelete = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr',
+                        linehl = 'GitSignsChangeLn' },
                 },
                 current_line_blame_opts = {
                     delay = 10,
@@ -160,9 +154,12 @@ return require('packer').startup(function()
     }
     --------nvim-lsp---------
     use {
-        'neovim/nvim-lspconfig',
-        opt = true,
-        cond = function() return true end,
+        'junnplus/nvim-lsp-setup',
+        requires = {
+            'neovim/nvim-lspconfig',
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
+        },
         config = function() require('lsps') end
     }
     use {
@@ -185,7 +182,24 @@ return require('packer').startup(function()
             }
         end
     }
-    use 'williamboman/nvim-lsp-installer'
+    --[[ use {
+        'glepnir/lspsaga.nvim',
+        branch = "main",
+        config = function()
+            local saga = require 'lspsaga'
+            saga.init_lsp_saga({
+                diagnostic_header = { "", "", "", "" },
+                code_action_lightbulb = {
+                    enable = false,
+                    sign = true,
+                    sign_priority = 20,
+                    virtual_text = true,
+                },
+                max_preview_lines = 20,
+                border_style = "rounded"
+            })
+        end
+    } ]]
     use {
         "hrsh7th/nvim-cmp",
         requires = {
@@ -209,7 +223,8 @@ return require('packer').startup(function()
                     return false
                 end
                 local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+                return col ~= 0 and
+                    vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
             end
 
             local cmp = require 'cmp'
@@ -300,13 +315,6 @@ return require('packer').startup(function()
     -------------telescope---------
     use {
         'nvim-lua/telescope.nvim',
-        config = function()
-            require('telescope').setup({
-                defaults = {
-                    file_sorter = require('telescope.sorters').get_fzy_sorter
-                }
-            })
-        end
     }
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
@@ -320,7 +328,6 @@ return require('packer').startup(function()
     use { 'ron-rs/ron.vim', ft = 'ron' }
     use {
         'nvim-treesitter/nvim-treesitter',
-        -- commit = '668de0951a36ef17016074f1120b6aacbe6c4515',
         run = ':TSUpdate',
         config = function() require('misc') end
     }
@@ -351,5 +358,14 @@ return require('packer').startup(function()
     }
     use {
         'simrat39/rust-tools.nvim',
+    }
+    use {
+        'ray-x/go.nvim',
+        ft = { 'go' },
+        config = function()
+            require('go').setup({
+                gopls_cmd = { vim.fn.stdpath 'data' .. '/mason/packages/gopls/gopls' },
+            })
+        end,
     }
 end)
