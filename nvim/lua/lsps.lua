@@ -1,4 +1,4 @@
-require('nvim-lsp-setup').setup({
+require('lsp-setup').setup({
     installer = {},
     default_mappings = false,
     mappings = {},
@@ -95,6 +95,20 @@ require('nvim-lsp-setup').setup({
         dockerls = {},
         golangci_lint_ls = {},
         jsonls = {},
+        rust_analyzer = require('lsp-setup.rust-tools').setup({
+            server = {
+                settings = {
+                    ['rust-analyzer'] = {
+                        cargo = {
+                            loadOutDirsFromCheck = true,
+                        },
+                        procMacro = {
+                            enable = true,
+                        },
+                    },
+                },
+            },
+        })
     },
 })
 

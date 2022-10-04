@@ -31,9 +31,9 @@ remap('n', '<leader>rr', ':w<CR>:e<CR>:TSBufEnable highlight<CR>', {noremap = tr
 vim.g.rainbow_active = 1
 
 -- lsp
-remap('n', '<leader>gd', ':lua vim.lsp.buf.definition()<CR>', {noremap = true, silent = true})
+remap('n', '<leader>gd', ':Telescope lsp_definitions<CR>', {noremap = true, silent = true})
 remap('n', '<leader>pd', ":lua require'lspsaga.provider'.preview_definition()<CR>", {noremap = true, silent = true})
-remap('n', '<leader>gi', ':lua vim.lsp.buf.implementation()<CR>', {noremap = true, silent = true})
+remap('n', '<leader>gi', ':Telescope lsp_implementations<CR>', {noremap = true, silent = true})
 remap('n', '<leader>gh', ":lua require('lspsaga.signaturehelp').signature_help()<CR>", {noremap = true, silent = true})
 remap('n', '<leader>gr', ":Telescope lsp_references<CR>", {noremap = true, silent = true})
 remap('n', '<leader>rn', ":lua require('lspsaga.rename').rename()<CR>", {noremap = true, silent = true})

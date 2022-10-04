@@ -2,16 +2,19 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     pattern = "plugins.lua",
     command = 'source % | PackerCompile',
 })
-local execute = vim.api.nvim_command
-local fn = vim.fn
 
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
-    execute 'packadd packer.nvim'
+local ensure_packer = function()
+    local fn = vim.fn
+    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
 end
-vim.api.nvim_command('packadd packer.nvim')
+
+local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
@@ -154,7 +157,7 @@ return require('packer').startup(function()
     }
     --------nvim-lsp---------
     use {
-        'junnplus/nvim-lsp-setup',
+        'junnplus/lsp-setup.nvim',
         requires = {
             'neovim/nvim-lspconfig',
             'williamboman/mason.nvim',
@@ -180,6 +183,26 @@ return require('packer').startup(function()
                 max_preview_lines = 20,
                 border_style = "round"
             }
+        end
+    }
+    --[[ use {
+        "github/copilot.vim",
+        branch = 'release',
+    } ]]
+    use {
+        "zbirenbaum/copilot.lua",
+        event = { "VimEnter" },
+        config = function()
+            vim.defer_fn(function()
+                require("copilot").setup()
+            end, 100)
+        end,
+    }
+    use {
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua" },
+        config = function()
+            require("copilot_cmp").setup()
         end
     }
     --[[ use {
@@ -272,6 +295,7 @@ return require('packer').startup(function()
                     { name = 'nvim_lua' },
                     { name = 'luasnip' },
                     { name = 'cmp_tabnine' },
+                    { name = 'copilot' },
                     { name = 'path' },
                     { name = 'buffer' }
                 },
@@ -282,7 +306,8 @@ return require('packer').startup(function()
                         nvim_lua = "[Lua]",
                         path = "[Path]",
                         cmp_tabnine = "[TabNine]",
-                        luasnip = "[LuaSnip]"
+                        luasnip = "[LuaSnip]",
+                        copilot = "[Copilot]"
                     }) }),
                 },
             }
@@ -327,6 +352,10 @@ return require('packer').startup(function()
     --------------misc------------
     use { 'ron-rs/ron.vim', ft = 'ron' }
     use {
+        'rcarriga/nvim-notify',
+        config = function() vim.notify = require("notify") end
+    }
+    use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         config = function() require('misc') end
@@ -362,10 +391,16 @@ return require('packer').startup(function()
     use {
         'ray-x/go.nvim',
         ft = { 'go' },
+        requires = {
+            'ray-x/guihua.lua'
+        },
         config = function()
             require('go').setup({
                 gopls_cmd = { vim.fn.stdpath 'data' .. '/mason/packages/gopls/gopls' },
             })
         end,
     }
+    if packer_bootstrap then
+        require('packer').sync()
+    end
 end)
