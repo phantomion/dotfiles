@@ -56,7 +56,7 @@ alias s=startAndDisown
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/oh-my-zsh"
-plugins=(vi-mode cp extract zsh-syntax-highlighting)
+plugins=(vi-mode cp extract)
 autoload -U compinit && compinit -u
 
 source $ZSH/oh-my-zsh.sh
@@ -79,7 +79,7 @@ function list_all() {
     ls -a
 }
 chpwd_functions=(${chpwd_functions[@]} "list_all")
-source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 [ -f "/home/kwstas/.ghcup/env" ] && source "/home/kwstas/.ghcup/env" # ghcup-env

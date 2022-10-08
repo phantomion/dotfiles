@@ -166,29 +166,19 @@ return require('packer').startup(function()
         config = function() require('lsps') end
     }
     use {
-        'tami5/lspsaga.nvim',
+        'glepnir/lspsaga.nvim',
+        branch = "main",
         config = function()
             local saga = require 'lspsaga'
-            saga.init_lsp_saga {
-                error_sign = '',
-                warn_sign = '',
-                hint_sign = '',
-                infor_sign = '',
-                code_action_prompt = {
+            saga.init_lsp_saga({
+                code_action_lightbulb = {
                     enable = false,
-                    sign = true,
-                    sign_priority = 20,
-                    virtual_text = true,
                 },
                 max_preview_lines = 20,
-                border_style = "round"
-            }
+                border_style = "rounded"
+            })
         end
     }
-    --[[ use {
-        "github/copilot.vim",
-        branch = 'release',
-    } ]]
     use {
         "zbirenbaum/copilot.lua",
         event = { "VimEnter" },
@@ -205,24 +195,6 @@ return require('packer').startup(function()
             require("copilot_cmp").setup()
         end
     }
-    --[[ use {
-        'glepnir/lspsaga.nvim',
-        branch = "main",
-        config = function()
-            local saga = require 'lspsaga'
-            saga.init_lsp_saga({
-                diagnostic_header = { "", "", "", "" },
-                code_action_lightbulb = {
-                    enable = false,
-                    sign = true,
-                    sign_priority = 20,
-                    virtual_text = true,
-                },
-                max_preview_lines = 20,
-                border_style = "rounded"
-            })
-        end
-    } ]]
     use {
         "hrsh7th/nvim-cmp",
         requires = {
@@ -361,7 +333,13 @@ return require('packer').startup(function()
         config = function() require('misc') end
     }
     use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use 'kyazdani42/nvim-web-devicons'
+    use {
+        'kyazdani42/nvim-web-devicons',
+        config = function() require('nvim-web-devicons').setup{
+            default = true
+        }
+        end
+    }
     use {
         'norcalli/nvim-colorizer.lua',
         config = function() require('colorizer').setup() end

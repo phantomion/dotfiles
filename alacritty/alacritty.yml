@@ -57,7 +57,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  decorations: full
+  decorations: none
 
   # Startup Mode (changes require restart)
   #
@@ -107,7 +107,7 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-      family: JetBrains Mono Nerd Font
+      family: JetBrains Mono
       style: Regular
 
   # Bold font face

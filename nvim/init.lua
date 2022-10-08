@@ -108,10 +108,10 @@ remap('i', '<C-l>', '<Right>', { noremap = true, silent = true })
 remap('v', '<C-c>', '"+y', { noremap = true, silent = true })
 remap('n', '<A-v>', '"+p', { noremap = true, silent = true })
 vim.cmd([[
-    au ColorScheme * highlight DiagnosticWarning guifg='#ff922b'
-    au ColorScheme * highlight DiagnosticError guifg='#C33027'
-    au ColorScheme * highlight DiagnosticHint guifg='#15aabf'
-    au ColorScheme * highlight DiagnosticInformation guifg='#fab005'
+    au ColorScheme * highlight LspSagaDiagnosticWarning guifg='#ff922b'
+    au ColorScheme * highlight LspSagaDiagnosticError guifg='#C33027'
+    au ColorScheme * highlight LspSagaDiagnosticHint guifg='#15aabf'
+    au ColorScheme * highlight LspSagaDiagnosticInformation guifg='#fab005'
     " gray
     au ColorScheme * highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
     " blue
