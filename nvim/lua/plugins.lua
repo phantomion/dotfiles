@@ -335,9 +335,9 @@ return require('packer').startup(function()
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use {
         'kyazdani42/nvim-web-devicons',
-        config = function() require('nvim-web-devicons').setup{
-            default = true
-        }
+        config = function() require('nvim-web-devicons').setup {
+                default = true
+            }
         end
     }
     use {

@@ -8,7 +8,7 @@ require('lsp-setup').setup({
             pattern = "*",
             command = 'Lspsaga show_cursor_diagnostics',
         })
-        client.resolved_capabilities.document_formatting = true
+        client.server_capabilities.document_formatting = true
     end,
     -- Global capabilities
     capabilities = vim.lsp.protocol.make_client_capabilities(),
