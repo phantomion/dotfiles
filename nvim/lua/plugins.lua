@@ -18,10 +18,7 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
-    use { 'christianchiarulli/nvcode-color-schemes.vim',
-        opt = true,
-        cond = function() return false end
-    }
+    use 'lewis6991/impatient.nvim'
     use {
         'titanzero/zephyrium',
         config = function()
@@ -29,23 +26,6 @@ return require('packer').startup(function()
         end,
         opt = true,
         cond = function() return true end
-    }
-    use {
-        'rebelot/kanagawa.nvim',
-        config = function()
-            vim.cmd [[colorscheme kanagawa]]
-        end,
-        opt = true,
-        cond = function() return false end
-    }
-    use {
-        'EdenEast/nightfox.nvim',
-        config = function()
-            vim.g.nightfox_style = "palefox"
-            require('nightfox').set()
-        end,
-        opt = true,
-        cond = function() return false end
     }
     --------------QoL------------
     use {
@@ -91,7 +71,7 @@ return require('packer').startup(function()
     use { 'p00f/nvim-ts-rainbow', ft = { 'clojure', 'html', 'vue' } }
     use 'romgrk/barbar.nvim' -- Best bufferline
     use {
-        'NTBBloodbath/galaxyline.nvim',
+        'glepnir/galaxyline.nvim',
         opt = true,
         cond = function() return true end,
         config = function() require('mygalaxyline') end

@@ -55,7 +55,7 @@ gls.left[3] ={
     FileIcon = {
         provider = 'FileIcon',
         condition = buffer_not_empty,
-        highlight = {require('galaxyline.providers.fileinfo').get_file_icon_color,colors.line_bg},
+        highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
     },
 }
 gls.left[4] = {
@@ -68,7 +68,7 @@ gls.left[4] = {
 
 local function find_git_root()
     local path = vim.fn.expand('%:p:h')
-    local get_git_dir = require('galaxyline.providers.vcs').get_git_dir
+    local get_git_dir = require('galaxyline.provider_vcs').get_git_dir
     return get_git_dir(path)
 end
 
@@ -134,37 +134,21 @@ gls.left[11] = {
   }
 }
 gls.left[12] = {
-  LeftEnd = {
-    provider = function() return '' end,
-    separator = '',
-    separator_highlight = {colors.bg,colors.line_bg},
-    highlight = {colors.bg,colors.line_bg}
-  }
-}
-gls.left[13] = {
   Space = {
     provider = function () return ' ' end,
     highlight = {colors.fg,colors.bg},
   }
 }
 
-gls.right[1]= {
-    FileFormat = {
-        provider = 'FileFormat',
-        separator = ' ',
-        separator_highlight = {colors.bg,colors.line_bg},
-        highlight = {colors.fg,colors.line_bg},
-    }
-}
-gls.right[2] = {
+gls.right[1] = {
     FileEncode = {
         provider = 'FileEncode',
-        separator = ' |',
+        separator = ' ',
         separator_highlight = {colors.blue,colors.line_bg},
         highlight = {colors.fg,colors.line_bg},
     },
 }
-gls.right[3] = {
+gls.right[2] = {
     FileTypeName = {
         provider = 'FileTypeName',
         separator = ' | ',
@@ -172,7 +156,7 @@ gls.right[3] = {
         highlight = {colors.fg,colors.line_bg},
     },
 }
-gls.right[4] = {
+gls.right[3] = {
     LineInfo = {
         provider = 'LineColumn',
         separator = ' | ',
@@ -180,7 +164,7 @@ gls.right[4] = {
         highlight = {colors.fg,colors.line_bg},
     },
 }
-gls.right[5] = {
+gls.right[4] = {
     PerCent = {
         provider = 'LinePercent',
         separator = ' ',
