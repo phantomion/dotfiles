@@ -6,5 +6,6 @@
         "use",
         "general",
         "runtime_path"
-    ]
+    ],
+    "Lua.workspace.checkThirdParty": false
 }

@@ -20,9 +20,9 @@ return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
     use 'lewis6991/impatient.nvim'
     use {
-        'titanzero/zephyrium',
+        'glepnir/zephyr-nvim',
         config = function()
-            vim.cmd [[colorscheme zephyrium]]
+            vim.cmd [[colorscheme zephyr]]
         end,
         opt = true,
         cond = function() return true end
@@ -39,24 +39,9 @@ return require('packer').startup(function()
                     line = '<leader>cl',
                 },
                 opleader = {
-                    ---Block-comment keymap
                     block = '<leader>ci',
                 },
-                pre_hook = function(ctx)
-                    local U = require 'Comment.utils'
-
-                    local location = nil
-                    if ctx.ctype == U.ctype.block then
-                        location = require('ts_context_commentstring.utils').get_cursor_location()
-                    elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-                        location = require('ts_context_commentstring.utils').get_visual_start_location()
-                    end
-
-                    return require('ts_context_commentstring.internal').calculate_commentstring {
-                        key = ctx.ctype == U.ctype.line and '__default' or '__multiline',
-                        location = location,
-                    }
-                end,
+                pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
             })
         end
     }
@@ -246,7 +231,6 @@ return require('packer').startup(function()
                     { name = 'nvim_lsp' },
                     { name = 'nvim_lua' },
                     { name = 'luasnip' },
-                    { name = 'cmp_tabnine' },
                     { name = 'copilot' },
                     { name = 'path' },
                     { name = 'buffer' }
@@ -257,32 +241,26 @@ return require('packer').startup(function()
                         nvim_lsp = "[LSP]",
                         nvim_lua = "[Lua]",
                         path = "[Path]",
-                        cmp_tabnine = "[TabNine]",
                         luasnip = "[LuaSnip]",
                         copilot = "[Copilot]"
                     }) }),
                 },
             }
-
-            -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline('/', {
                 sources = {
                     { name = 'buffer' }
                 }
             })
-
-            -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline(':', {
                 sources = cmp.config.sources({
                     { name = 'path' }
                 }, {
                     { name = 'cmdline' }
                 }),
-                mapping = cmp.mapping.preset.cmdline({}), -- This line
+                mapping = cmp.mapping.preset.cmdline({}),
             })
         end
     }
-    use { 'tzachar/cmp-tabnine', run = './install.sh' }
     use {
         "ray-x/lsp_signature.nvim",
         config = function()
@@ -302,11 +280,21 @@ return require('packer').startup(function()
         end
     }
     --------------misc------------
-    use { 'ron-rs/ron.vim', ft = 'ron' }
-    use {
-        'rcarriga/nvim-notify',
-        config = function() vim.notify = require("notify") end
-    }
+    use({
+        "folke/noice.nvim",
+        event = "VimEnter",
+        config = function()
+            require("noice").setup({
+                popupmenu = {
+                    backend = "cmp", -- backend to use to show regular cmdline completions
+                },
+            })
+        end,
+        requires = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        }
+    })
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',

@@ -66,6 +66,7 @@ vim.o.incsearch = true -- Modern search
 vim.o.showmatch = true -- Show matching brackets when text indicator is over them
 vim.o.foldmethod = "indent"
 vim.o.foldlevel = 20
+vim.o.lz = false
 
 
 local remap = vim.keymap.set
