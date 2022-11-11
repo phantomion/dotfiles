@@ -63,3 +63,7 @@ require 'nvim-treesitter.configs'.setup {
         enable_autocmd = false,
     }
 }
+
+local remap = vim.keymap.set
+-- Treesitter
+remap('n', '<leader>rr', ':w<CR>:e<CR>:TSBufEnable highlight<CR>', { noremap = true, silent = true })

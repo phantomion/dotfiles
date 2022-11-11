@@ -1,3 +1,4 @@
+require("dapui").setup()
 vim.api.nvim_set_keymap('n', '<leader>dc', ":lua require'dap'.continue()<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>ss', ":lua require'dap'.step_over()<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>si', ":lua require'dap'.step_into()<CR>", {noremap = true, silent = true})

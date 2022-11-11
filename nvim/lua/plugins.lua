@@ -34,90 +34,47 @@ return require('packer').startup(function()
     use {
         'numToStr/Comment.nvim',
         config = function()
-            require('Comment').setup({
-                toggler = {
-                    line = '<leader>cl',
-                },
-                opleader = {
-                    block = '<leader>ci',
-                },
-                pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-            })
+            require('plugins.comment')
         end
     }
     use {
         'windwp/nvim-autopairs',
         config = function()
-            require('nvim-autopairs').setup {
-                fast_wrap = {},
-            }
+            require('plugins.autopairs')
         end
     }
     use { 'p00f/nvim-ts-rainbow', ft = { 'clojure', 'html', 'vue' } }
-    use 'romgrk/barbar.nvim' -- Best bufferline
+    use {
+        'romgrk/barbar.nvim',
+        config = function()
+            require('plugins.bufferline')
+        end
+    } -- Best bufferline
     use {
         'glepnir/galaxyline.nvim',
         opt = true,
         cond = function() return true end,
-        config = function() require('mygalaxyline') end
+        config = function() require('plugins.statusline') end
     }
     use 'farmergreg/vim-lastplace'
     -------------dev tools---------
     use {
         'kyazdani42/nvim-tree.lua',
         config = function()
-            require 'nvim-tree'.setup {
-                update_cwd = true,
-                view = {
-                    width = 27,
-                    mappings = {
-                        list = {
-                            { key = { "h", "l" }, action = "edit" },
-                            { key = { "<CR>" }, action = "cd" }
-                        }
-                    }
-                },
-                filters = {
-                    exclude = { '.git', 'node_modules', '.cache', 'target', '.o', 'bin' },
-                },
-                diagnostics = {
-                    enable = true
-                },
-                renderer = {
-                    highlight_git = true,
-                    indent_markers = {
-                        enable = true,
-                    },
-                },
-            }
+            require('plugins.explorer')
         end
     }
     ---------------git------------
     use {
         'TimUntersberger/neogit',
         config = function()
-            require('neogit').setup {}
+            require('plugins.neogit')
         end
     }
     use {
         'lewis6991/gitsigns.nvim',
         config = function()
-            require('gitsigns').setup {
-                signs = {
-                    add          = { hl = 'GitSignsAdd', text = '+', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
-                    change       = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr',
-                        linehl = 'GitSignsChangeLn' },
-                    delete       = { hl = 'GitSignsDelete', text = '-', numhl = 'GitSignsDeleteNr',
-                        linehl = 'GitSignsDeleteLn' },
-                    topdelete    = { hl = 'GitSignsDelete', text = '-', numhl = 'GitSignsDeleteNr',
-                        linehl = 'GitSignsDeleteLn' },
-                    changedelete = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr',
-                        linehl = 'GitSignsChangeLn' },
-                },
-                current_line_blame_opts = {
-                    delay = 10,
-                }
-            }
+            require('plugins.gitsigns')
         end
     }
     --------nvim-lsp---------
@@ -128,20 +85,13 @@ return require('packer').startup(function()
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
         },
-        config = function() require('lsps') end
+        config = function() require('plugins.lsps') end
     }
     use {
         'glepnir/lspsaga.nvim',
         branch = "main",
         config = function()
-            local saga = require 'lspsaga'
-            saga.init_lsp_saga({
-                code_action_lightbulb = {
-                    enable = false,
-                },
-                max_preview_lines = 20,
-                border_style = "rounded"
-            })
+            require('plugins.lspsaga')
         end
     }
     use {
@@ -174,91 +124,7 @@ return require('packer').startup(function()
             "saadparwaiz1/cmp_luasnip"
         },
         config = function()
-
-            local luasnip = require('luasnip')
-            require("luasnip.loaders.from_vscode").lazy_load()
-            require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snips" } })
-            local has_words_before = function()
-                if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
-                    return false
-                end
-                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0 and
-                    vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-            end
-
-            local cmp = require 'cmp'
-            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-            cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-
-            cmp.setup {
-                snippet = {
-                    expand = function(args)
-                        require 'luasnip'.lsp_expand(args.body)
-                    end,
-                },
-                mapping = {
-                    ['<C-b>']     = cmp.mapping.scroll_docs(-4),
-                    ['<C-f>']     = cmp.mapping.scroll_docs(4),
-                    ['<C-Space>'] = cmp.mapping.complete(),
-                    ['<C-e>']     = cmp.mapping.close(),
-                    ['<CR>']      = cmp.mapping.confirm {
-                        behavior = cmp.ConfirmBehavior.Replace,
-                        select = true,
-                    },
-                    ['<Tab>']     = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
-                        elseif has_words_before() then
-                            cmp.complete()
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
-                    ['<S-Tab>']   = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
-                },
-                sources = {
-                    { name = 'nvim_lsp' },
-                    { name = 'nvim_lua' },
-                    { name = 'luasnip' },
-                    { name = 'copilot' },
-                    { name = 'path' },
-                    { name = 'buffer' }
-                },
-                formatting = {
-                    format = require("lspkind").cmp_format({ with_text = true, menu = ({
-                        buffer = "[Buffer]",
-                        nvim_lsp = "[LSP]",
-                        nvim_lua = "[Lua]",
-                        path = "[Path]",
-                        luasnip = "[LuaSnip]",
-                        copilot = "[Copilot]"
-                    }) }),
-                },
-            }
-            cmp.setup.cmdline('/', {
-                sources = {
-                    { name = 'buffer' }
-                }
-            })
-            cmp.setup.cmdline(':', {
-                sources = cmp.config.sources({
-                    { name = 'path' }
-                }, {
-                    { name = 'cmdline' }
-                }),
-                mapping = cmp.mapping.preset.cmdline({}),
-            })
+            require('plugins.cmp')
         end
     }
     use {
@@ -270,13 +136,16 @@ return require('packer').startup(function()
     -------------telescope---------
     use {
         'nvim-lua/telescope.nvim',
+        config = function()
+            require('plugins.telescope')
+        end
     }
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
     use {
         'windwp/nvim-spectre',
         config = function()
-            require('spectre').setup()
+            require('plugins.spectre')
         end
     }
     --------------misc------------
@@ -284,11 +153,7 @@ return require('packer').startup(function()
         "folke/noice.nvim",
         event = "VimEnter",
         config = function()
-            require("noice").setup({
-                popupmenu = {
-                    backend = "cmp", -- backend to use to show regular cmdline completions
-                },
-            })
+            require('plugins.noice')
         end,
         requires = {
             "MunifTanjim/nui.nvim",
@@ -298,7 +163,7 @@ return require('packer').startup(function()
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        config = function() require('misc') end
+        config = function() require('plugins.treesitter') end
     }
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use {
@@ -315,20 +180,14 @@ return require('packer').startup(function()
     use {
         'akinsho/nvim-toggleterm.lua',
         config = function()
-            require("toggleterm").setup {
-                open_mapping = [[<A-d>]],
-                direction = 'float',
-                float_opts = {
-                    border = 'curved',
-                },
-            }
+            require('plugins.toggleterm')
         end
     }
     use 'mfussenegger/nvim-dap'
     use {
         'rcarriga/nvim-dap-ui',
         config = function()
-            require("dapui").setup()
+            require('plugins.dap')
         end
     }
     use {

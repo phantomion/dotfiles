@@ -11,12 +11,12 @@ require('lsp-setup').setup({
         client.server_capabilities.document_formatting = true
     end,
     -- Global capabilities
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
     -- Configuration of LSP servers
     servers = {
         html = {},
         clangd = {
-            cmd = { "clangd", "--background-index", "--suggest-missing-includes",
+            cmd = { "clangd", "--offset-encoding=utf-16", "--background-index", "--suggest-missing-includes",
                 "--all-scopes-completion", "--completion-style=detailed" },
         },
         pylsp = {},
@@ -99,11 +99,19 @@ require('lsp-setup').setup({
             server = {
                 settings = {
                     ['rust-analyzer'] = {
+                        imports = {
+                            granularity = {
+                                group = "module",
+                            },
+                            prefix = "self",
+                        },
                         cargo = {
-                            loadOutDirsFromCheck = true,
+                            buildScripts = {
+                                enable = true,
+                            },
                         },
                         procMacro = {
-                            enable = true,
+                            enable = true
                         },
                     },
                 },
@@ -112,79 +120,5 @@ require('lsp-setup').setup({
     },
 })
 
-local actions = require('telescope.actions')
-require 'telescope'.setup {
-    defaults = {
-        file_sorter = require('telescope.sorters').get_fzy_sorter,
-        mappings = {
-            i = {
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-
-                ["<C-c>"] = actions.close,
-
-                ["<Down>"] = actions.move_selection_next,
-                ["<Up>"] = actions.move_selection_previous,
-
-                ["<CR>"] = actions.select_default + actions.center,
-                ["<C-x>"] = actions.select_horizontal,
-                ["<C-v>"] = actions.select_vertical,
-                ["<C-t>"] = actions.select_tab,
-
-                ["<C-u>"] = actions.preview_scrolling_up,
-                ["<C-d>"] = actions.preview_scrolling_down,
-
-                ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-                ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-                ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-                ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-                ["<C-l>"] = actions.complete_tag
-            },
-
-            n = {
-                ["<esc>"] = actions.close,
-                ["<CR>"] = actions.select_default + actions.center,
-                ["<C-x>"] = actions.select_horizontal,
-                ["<C-v>"] = actions.select_vertical,
-                ["<C-t>"] = actions.select_tab,
-
-                ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
-                ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
-                ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-                ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-
-                -- TODO: This would be weird if we switch the ordering.
-                ["j"] = actions.move_selection_next,
-                ["k"] = actions.move_selection_previous,
-                ["H"] = actions.move_to_top,
-                ["M"] = actions.move_to_middle,
-                ["L"] = actions.move_to_bottom,
-
-                ["<Down>"] = actions.move_selection_next,
-                ["<Up>"] = actions.move_selection_previous,
-
-                ["<C-u>"] = actions.preview_scrolling_up,
-                ["<C-d>"] = actions.preview_scrolling_down,
-            },
-        }
-    }
-}
-
-local signs = {
-    Error = ' ',
-    Warn = ' ',
-    Info = ' ',
-    Hint = 'ﴞ ',
-}
-for type, icon in pairs(signs) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
-vim.diagnostic.config({
-    signs = true,
-    update_in_insert = false,
-    underline = true,
-    severity_sort = true,
-    virtual_text = false,
-})
+local remap = vim.keymap.set
+remap('n', '<leader>fm', ":lua vim.lsp.buf.format({ async = true })<CR>", { noremap = true, silent = true })
