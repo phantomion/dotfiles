@@ -18,6 +18,7 @@ local remap = vim.keymap.set
 remap('n', '<leader>gd', ':Telescope lsp_definitions<CR>', { noremap = true, silent = true })
 remap('n', '<leader>gi', ':Telescope lsp_implementations<CR>', { noremap = true, silent = true })
 remap('n', '<leader>gr', ":Telescope lsp_references<CR>", { noremap = true, silent = true })
+remap('n', '<leader>gt', ":Telescope lsp_type_definitions<CR>", { noremap = true, silent = true })
 remap('n', '<leader>pd', ":Lspsaga peek_definition<CR>", { noremap = true, silent = true })
 remap('n', '<leader>gh', ":Lspsaga lsp_finder<CR>", { noremap = true, silent = true })
 remap('n', '<leader>rn', ":Lspsaga rename<CR>", { noremap = true, silent = true })

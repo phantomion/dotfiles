@@ -165,7 +165,7 @@ return require('packer').startup(function()
         run = ':TSUpdate',
         config = function() require('plugins.treesitter') end
     }
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
+    -- use 'nvim-treesitter/nvim-treesitter-textobjects'
     use {
         'kyazdani42/nvim-web-devicons',
         config = function() require('nvim-web-devicons').setup {
