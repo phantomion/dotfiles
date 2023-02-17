@@ -3,11 +3,6 @@ require('lsp-setup').setup({
     default_mappings = false,
     mappings = {},
     on_attach = function(client)
-        vim.api.nvim_create_autocmd("CursorHold", {
-            group = general,
-            pattern = "*",
-            command = 'Lspsaga show_cursor_diagnostics',
-        })
         client.server_capabilities.document_formatting = true
     end,
     -- Global capabilities
@@ -70,7 +65,7 @@ require('lsp-setup').setup({
                 },
             },
         },
-        sumneko_lua = {
+        lua_ls = {
             settings = {
                 Lua = {
                     runtime = {

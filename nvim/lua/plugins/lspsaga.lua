@@ -1,18 +1,15 @@
 local saga = require 'lspsaga'
-saga.init_lsp_saga({
-    code_action_lightbulb = {
-        enable = false,
+saga.setup({
+    lightbulb = {
+        sign = false,
     },
     max_preview_lines = 20,
-    border_style = "rounded"
+    border_style = "rounded",
+    code_action = {
+        show_server_name = true,
+        extend_gitsigns = false,
+    },
 })
-
-vim.cmd([[
-    au ColorScheme * highlight LspSagaDiagnosticWarning guifg='#ff922b'
-    au ColorScheme * highlight LspSagaDiagnosticError guifg='#C33027'
-    au ColorScheme * highlight LspSagaDiagnosticHint guifg='#15aabf'
-    au ColorScheme * highlight LspSagaDiagnosticInformation guifg='#fab005'
-    ]])
 
 local remap = vim.keymap.set
 remap('n', '<leader>gd', ':Telescope lsp_definitions<CR>', { noremap = true, silent = true })
@@ -46,4 +43,10 @@ vim.diagnostic.config({
     underline = true,
     severity_sort = true,
     virtual_text = false,
+})
+
+vim.api.nvim_create_autocmd("CursorHold", {
+    group = general,
+    pattern = "*",
+    command = 'Lspsaga show_cursor_diagnostics ++unfocus',
 })

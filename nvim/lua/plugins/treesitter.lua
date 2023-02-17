@@ -24,6 +24,8 @@ require 'nvim-treesitter.configs'.setup {
         "typescript",
         "vim",
         "vue",
+        "markdown",
+        "markdown_inline",
         "yaml"
     }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     auto_install = true,
