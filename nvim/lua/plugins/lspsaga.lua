@@ -48,5 +48,5 @@ vim.diagnostic.config({
 vim.api.nvim_create_autocmd("CursorHold", {
     group = general,
     pattern = "*",
-    command = 'Lspsaga show_cursor_diagnostics ++unfocus',
+    command = 'Lspsaga show_cursor_diagnostics',
 })
