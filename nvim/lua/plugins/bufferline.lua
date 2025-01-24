@@ -1,4 +1,5 @@
 local remap = vim.keymap.set
+require('barbar').setup()
 
 -- Barbar
 remap('n', '<C-s>', ':BufferClose<CR>', { noremap = true, silent = true })
@@ -16,3 +17,8 @@ remap('n', '<leader>9', ':BufferGoto 9<CR>', { noremap = true, silent = true })
 remap('n', '<leader>0', ':BufferLast<CR>', { noremap = true, silent = true })
 remap('n', '<A-,>', ':BufferMovePrevious<CR>', { noremap = true, silent = true })
 remap('n', '<A-.>', ' :BufferMoveNext<CR>', { noremap = true, silent = true })
+
+vim.cmd([[
+    au ColorScheme * highlight! BufferDefaultTabpageFill guibg=NONE
+    ]])
+

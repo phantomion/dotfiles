@@ -23,8 +23,9 @@ remap('n', '<A-m>', ":Lspsaga hover_doc<CR>", { noremap = true, silent = true })
 remap('n', '<leader>ga', ":Lspsaga code_action<CR>", { noremap = true, silent = true })
 remap('n', '<leader>]', ":Lspsaga diagnostic_jump_next<CR>", { noremap = true, silent = true })
 remap('n', '<leader>[', ":Lspsaga diagnostic_jump_prev<CR>", { noremap = true, silent = true })
+remap('n', '<leader>fd', ":Lspsaga finder<CR>", { noremap = true, silent = true })
 -- Symbols outline
-remap('n', '<C-b>', ':LSoutlineToggle<CR>', { noremap = true, silent = true })
+remap('n', '<C-b>', ':Lspsaga outline<CR>', { noremap = true, silent = true })
 
 local signs = {
     Error = ' ',
@@ -42,11 +43,11 @@ vim.diagnostic.config({
     update_in_insert = false,
     underline = true,
     severity_sort = true,
-    virtual_text = false,
+    virtual_text = false
 })
 
 vim.api.nvim_create_autocmd("CursorHold", {
     group = general,
     pattern = "*",
-    command = 'Lspsaga show_cursor_diagnostics',
+    command = 'Lspsaga show_cursor_diagnostics ++unfocus',
 })

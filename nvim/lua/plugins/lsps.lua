@@ -1,4 +1,8 @@
 require('lsp-setup').setup({
+    inlay_hints = {
+        enabled = true,
+        highlight = 'Comment',
+    },
     installer = {},
     default_mappings = false,
     mappings = {},
@@ -9,6 +13,7 @@ require('lsp-setup').setup({
     capabilities = require('cmp_nvim_lsp').default_capabilities(),
     -- Configuration of LSP servers
     servers = {
+        psalm = {},
         html = {},
         clangd = {
             cmd = { "clangd", "--offset-encoding=utf-16", "--background-index", "--suggest-missing-includes",
@@ -18,6 +23,15 @@ require('lsp-setup').setup({
         gopls = {
             settings = {
                 gopls = {
+                    hints = {
+                        rangeVariableTypes = true,
+                        parameterNames = true,
+                        constantValues = true,
+                        -- assignVariableTypes = true,
+                        compositeLiteralFields = true,
+                        compositeLiteralTypes = true,
+                        functionTypeParameters = true,
+                    },
                     gofumpt = true,
                     experimentalPostfixCompletions = true,
                     analyses = {
@@ -42,26 +56,10 @@ require('lsp-setup').setup({
                 }
             }
         },
-        vuels = {
-            settings = {
-                vetur = {
-                    completion = {
-                        autoImport = true;
-                        useScaffoldSnippets = true;
-                    },
-                    format = {
-                        enable = true,
-                        options = {
-                            tabSize = 4
-                        },
-                        defaultFormatter = {
-                            js = "prettier",
-                            html = "prettier",
-                            css = "prettier",
-                            scss = "prettier",
-                            ts = "prettier"
-                        },
-                    },
+        volar = {
+            init_options = {
+                vue = {
+                    hybridMode = false,
                 },
             },
         },
@@ -84,34 +82,53 @@ require('lsp-setup').setup({
                 },
             },
         },
-        tsserver = {},
+        ts_ls = {
+            init_options = {
+                plugins = {
+                    {
+                        name = "@vue/typescript-plugin",
+                        location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+                        languages = { "javascript", "typescript", "vue" },
+                    },
+                },
+                preferences = {
+                    disableSuggestions = true,
+                }
+            },
+            filetypes = {
+                "javascript",
+                "typescript",
+                "vue",
+            },
+        },
         angularls = {},
         cssls = {},
         dockerls = {},
-        golangci_lint_ls = {},
         jsonls = {},
-        rust_analyzer = require('lsp-setup.rust-tools').setup({
-            server = {
-                settings = {
-                    ['rust-analyzer'] = {
-                        imports = {
-                            granularity = {
-                                group = "module",
-                            },
-                            prefix = "self",
-                        },
-                        cargo = {
-                            buildScripts = {
-                                enable = true,
-                            },
-                        },
-                        procMacro = {
-                            enable = true
-                        },
+        bashls = {},
+    },
+})
+
+require('rust-tools').setup({
+    server = {
+        settings = {
+            ['rust-analyzer'] = {
+                imports = {
+                    granularity = {
+                        group = "module",
+                    },
+                    prefix = "self",
+                },
+                cargo = {
+                    buildScripts = {
+                        enable = true,
                     },
                 },
+                procMacro = {
+                    enable = true
+                },
             },
-        })
+        },
     },
 })
 

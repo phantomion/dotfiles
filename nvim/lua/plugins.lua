@@ -49,7 +49,7 @@ return require('packer').startup(function()
         config = function()
             require('plugins.bufferline')
         end
-    } -- Best bufferline
+    }
     use {
         'glepnir/galaxyline.nvim',
         opt = true,
@@ -88,13 +88,13 @@ return require('packer').startup(function()
         config = function() require('plugins.lsps') end
     }
     use {
-        'glepnir/lspsaga.nvim',
-        branch = "main",
+        'nvimdev/lspsaga.nvim',
+        after = 'nvim-lspconfig',
         config = function()
             require('plugins.lspsaga')
         end
     }
-    use {
+    --[[ use {
         "zbirenbaum/copilot.lua",
         event = { "VimEnter" },
         config = function()
@@ -109,7 +109,7 @@ return require('packer').startup(function()
         config = function()
             require("copilot_cmp").setup()
         end
-    }
+    } ]]
     use {
         "hrsh7th/nvim-cmp",
         requires = {
@@ -143,7 +143,7 @@ return require('packer').startup(function()
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
     use {
-        'windwp/nvim-spectre',
+        'nvim-pack/nvim-spectre',
         config = function()
             require('plugins.spectre')
         end
@@ -168,7 +168,8 @@ return require('packer').startup(function()
     -- use 'nvim-treesitter/nvim-treesitter-textobjects'
     use {
         'kyazdani42/nvim-web-devicons',
-        config = function() require('nvim-web-devicons').setup {
+        config = function()
+            require('nvim-web-devicons').setup {
                 default = true
             }
         end
@@ -186,6 +187,9 @@ return require('packer').startup(function()
     use 'mfussenegger/nvim-dap'
     use {
         'rcarriga/nvim-dap-ui',
+        requires = {
+            'nvim-neotest/nvim-nio'
+        },
         config = function()
             require('plugins.dap')
         end

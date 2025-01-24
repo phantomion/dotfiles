@@ -59,11 +59,11 @@ require 'nvim-treesitter.configs'.setup {
             scope_incremental = "grc",
             node_decremental = "grm",
         },
-    },
-    context_commentstring = {
-        enable = true,
-        enable_autocmd = false,
     }
+}
+
+require('ts_context_commentstring').setup{
+    enable_autocmd = false
 }
 
 local remap = vim.keymap.set

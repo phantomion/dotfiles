@@ -59,7 +59,7 @@ cmp.setup {
         { name = 'buffer' }
     },
     formatting = {
-        format = require("lspkind").cmp_format({ with_text = true, menu = ({
+        format = require("lspkind").cmp_format({ mode = "symbol_text", menu = ({
             buffer = "[Buffer]",
             nvim_lsp = "[LSP]",
             nvim_lua = "[Lua]",

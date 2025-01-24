@@ -22,6 +22,12 @@ autocmd("FocusGained", {
 
 autocmd("Filetype", {
     group = general,
+    pattern = "*",
+    command = 'hi LspInlayHint guifg=none',
+})
+
+autocmd("Filetype", {
+    group = general,
     pattern = "lua",
     callback = function()
         vim.keymap.set('n', '<leader>nv', ':lua require(\'telescope.builtin\').find_files{ cwd = "~/.config/nvim" }<CR>', { silent = true })
@@ -74,20 +80,10 @@ autocmd("Filetype", {
     end,
 })
 
-autocmd("Filetype", {
+--[[ autocmd("Filetype", {
     group = pypy,
     pattern = "python",
     callback = function()
         vim.keymap.set('n', '<leader>fm', ':!autopep8 -i % <CR><CR>:e %<CR>', { silent = true })
     end,
-})
-
-local golang = augroup("golang", {clear = true})
-
-autocmd("Filetype", {
-    group = golang,
-    pattern = "go",
-    callback = function()
-        vim.keymap.set('n', '<leader>fm', ':GoFmt<CR>', {silent = true})
-    end
-})
+}) ]]

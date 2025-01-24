@@ -72,7 +72,7 @@ alias gpl='git pull'
 alias gcm='git checkout master'
 alias gch='git checkout'
 alias gcb='git checkout -b'
-alias ls='exa --color=always --group-directories-first --icons'
+alias ls='eza --color=always --group-directories-first --icons'
 alias la='ls -a'
 function list_all() {
     emulate -L zsh
@@ -86,3 +86,8 @@ eval "$(zoxide init zsh)"
 
 export PNPM_HOME="/home/kwstas/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
+export PATH=$PATH:/usr/local/go/bin
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
