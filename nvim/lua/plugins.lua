@@ -94,7 +94,7 @@ return require('packer').startup(function()
             require('plugins.lspsaga')
         end
     }
-    --[[ use {
+    use {
         "zbirenbaum/copilot.lua",
         event = { "VimEnter" },
         config = function()
@@ -109,7 +109,7 @@ return require('packer').startup(function()
         config = function()
             require("copilot_cmp").setup()
         end
-    } ]]
+    }
     use {
         "hrsh7th/nvim-cmp",
         requires = {
@@ -165,7 +165,6 @@ return require('packer').startup(function()
         run = ':TSUpdate',
         config = function() require('plugins.treesitter') end
     }
-    -- use 'nvim-treesitter/nvim-treesitter-textobjects'
     use {
         'kyazdani42/nvim-web-devicons',
         config = function()
@@ -195,9 +194,6 @@ return require('packer').startup(function()
         end
     }
     use {
-        'simrat39/rust-tools.nvim',
-    }
-    use {
         'ray-x/go.nvim',
         ft = { 'go' },
         requires = {
@@ -208,6 +204,63 @@ return require('packer').startup(function()
                 gopls_cmd = { vim.fn.stdpath 'data' .. '/mason/packages/gopls/gopls' },
             })
         end,
+    }
+    use {
+        "OXY2DEV/markview.nvim",
+        lazy = false,
+        opts = {
+            preview = {
+                filetypes = { "markdown", "codecompanion" },
+                ignore_buftypes = {},
+            },
+        },
+        ft = { 'markdown', 'codecompanion' }
+    }
+    use {
+        "olimorris/codecompanion.nvim",
+        config = function()
+            require("codecompanion").setup({
+                extensions = {
+                    mcphub = {
+                        callback = "mcphub.extensions.codecompanion",
+                        opts = {
+                            make_vars = true,
+                            make_slash_commands = true,
+                            show_result_in_chat = true
+                        }
+                    },
+                    history = {
+                        enabled = true, -- defaults to true
+                        opts = {
+                            history_file = vim.fn.stdpath("data") .. "/codecompanion_chats.json",
+                            continue_last_chat = true,
+                        }
+                    },
+                },
+                strategies = {
+                    chat = {
+                        name = "copilot",
+                        model = "claude_code",
+                        variables = {
+                            ["buffer"] = {
+                                opts = {
+                                    default_params = 'pin', -- or 'pin'
+                                },
+                            },
+                        },
+                    },
+                    inline = {
+                        adapter = "copilot",
+                    },
+                },
+            })
+            vim.keymap.set({ "n", "v" }, "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>",
+                { noremap = true, silent = true })
+        end,
+        requires = {
+            "ravitemer/mcphub.nvim",
+            "ravitemer/codecompanion-history.nvim"
+        }
     }
     if packer_bootstrap then
         require('packer').sync()

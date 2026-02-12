@@ -55,8 +55,9 @@ cmp.setup {
         { name = 'nvim_lua' },
         { name = 'luasnip' },
         { name = 'copilot' },
+        { name = 'codecompanion' },
         { name = 'path' },
-        { name = 'buffer' }
+        { name = 'buffer' },
     },
     formatting = {
         format = require("lspkind").cmp_format({ mode = "symbol_text", menu = ({
@@ -65,7 +66,8 @@ cmp.setup {
             nvim_lua = "[Lua]",
             path = "[Path]",
             luasnip = "[LuaSnip]",
-            copilot = "[Copilot]"
+            copilot = "[Copilot]",
+            codecompanion = "[Codecompanion]"
         }) }),
     },
 }

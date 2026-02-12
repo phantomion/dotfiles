@@ -24,6 +24,7 @@ require 'nvim-treesitter.configs'.setup {
         "typescript",
         "vim",
         "vue",
+        "pug",
         "markdown",
         "markdown_inline",
         "yaml"

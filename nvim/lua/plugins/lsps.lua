@@ -13,13 +13,17 @@ require('lsp-setup').setup({
     capabilities = require('cmp_nvim_lsp').default_capabilities(),
     -- Configuration of LSP servers
     servers = {
-        psalm = {},
         html = {},
         clangd = {
             cmd = { "clangd", "--offset-encoding=utf-16", "--background-index", "--suggest-missing-includes",
                 "--all-scopes-completion", "--completion-style=detailed" },
         },
         pylsp = {},
+        golangci_lint_ls = {
+            init_options = {
+                command = { "golangci-lint", "run", "--show-stats=false" }
+            },
+        },
         gopls = {
             settings = {
                 gopls = {
@@ -56,13 +60,27 @@ require('lsp-setup').setup({
                 }
             }
         },
-        volar = {
+        --[[ vtsls = {
+            tsserver = {
+                globalPlugins = {
+                    {
+                        name = '@vue/typescript-plugin',
+                        location = vim.fn.expand '$MASON/packages' ..
+                        '/vue-language-server' .. '/node_modules/@vue/language-server',
+                        languages = { 'vue' },
+                        configNamespace = 'typescript',
+                    },
+                },
+            },
+            filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+        },
+        vue_ls = {
             init_options = {
                 vue = {
                     hybridMode = false,
                 },
             },
-        },
+        }, ]]
         lua_ls = {
             settings = {
                 Lua = {
@@ -106,29 +124,7 @@ require('lsp-setup').setup({
         dockerls = {},
         jsonls = {},
         bashls = {},
-    },
-})
-
-require('rust-tools').setup({
-    server = {
-        settings = {
-            ['rust-analyzer'] = {
-                imports = {
-                    granularity = {
-                        group = "module",
-                    },
-                    prefix = "self",
-                },
-                cargo = {
-                    buildScripts = {
-                        enable = true,
-                    },
-                },
-                procMacro = {
-                    enable = true
-                },
-            },
-        },
+        terraformls = {},
     },
 })
 
